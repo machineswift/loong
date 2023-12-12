@@ -1,0 +1,11 @@
+server:
+  port: 8801
+  servlet:
+    context-path: /${spring.application.name}
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: DEV
+  application:
+    name: dragon-app-manage
