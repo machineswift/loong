@@ -13,6 +13,7 @@
     <description>app 服务集合</description>
 
     <modules>
+        <module>dragon-app-iam</module>
         <module>dragon-app-manage</module>
     </modules>
 
