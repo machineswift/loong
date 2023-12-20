@@ -1,11 +1,11 @@
-#server:
-#  port: 8800
-#  servlet:
-#    context-path: /${spring.application.name}
-#spring:
-#  main:
-#    allow-bean-definition-overriding: true
-#  profiles:
-#    active: DEV
-#  application:
-#    name: dragon-app-iam
+server:
+  port: 8800
+  servlet:
+    context-path: /${spring.application.name}
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: DEV
+  application:
+    name: dragon-app-iam

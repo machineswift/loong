@@ -20,7 +20,7 @@ public class SpringSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.
                 authorizeHttpRequests(authorize ->
-                        authorize.requestMatchers("/public/**")
+                        authorize.requestMatchers("/public/")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated())
