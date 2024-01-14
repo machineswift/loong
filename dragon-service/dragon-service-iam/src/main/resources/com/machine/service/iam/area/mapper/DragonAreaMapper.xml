@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.machine.service.iam.area.mapper.DragonAreaMapper">
+
+    <sql id="DragonAreaColumn">
+            `id`,
+            `level`,
+            `parent_code`,
+            `code`,
+            `category_code`,
+            `name`,
+            `has_child`,
+            `create_user`,
+            `create_time`,
+            `update_user`,
+            `update_time`,
+            `is_deleted`
+    </sql>
+
+    <resultMap id="DragonAreaEntityMap" type="com.machine.service.iam.area.mapper.entity.DragonAreaEntity">
+        <id column="id" property="id"/>
+        <result column="parent_code" property="parentCode"/>
+        <result column="code" property="code"/>
+        <result column="category_code" property="categoryCode"/>
+        <result column="name" property="name"/>
+        <result column="has_child" property="hasChild"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_user" property="updateUser"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="is_deleted" property="deleted"/>
+    </resultMap>
+
+    <insert id="insertBatch" parameterType="list">
+        INSERT INTO t_dragon_data_area (
+        `id`,
+        `level`,
+        `parent_code`,
+        `code`,
+        `category_code`,
+        `name`,
+        `has_child`,
+        `create_user`,
+        `create_time`,
+        `update_user`,
+        `update_time`)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.level},#{item.parentCode}, #{item.code},#{item.categoryCode},
+            #{item.name},#{item.hasChild}, #{item.createUser},#{item.createTime}, #{item.updateUser},
+            #{item.updateTime})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        level = VALUES(level),
+        parent_code = VALUES(parent_code),
+        category_code = VALUES(category_code),
+        name = VALUES(name),
+        has_child = VALUES(has_child),
+        create_user = VALUES(create_user),
+        create_time = VALUES(create_time),
+        update_user = VALUES(update_user),
+        update_time = VALUES(update_time)
+    </insert>
+
+
+    <select id="selectByLevel" resultMap="DragonAreaEntityMap">
+        SELECT
+        <include refid="DragonAreaColumn"/>
+        FROM t_dragon_data_area
+        WHERE level = #{level}
+        ORDER BY code
+    </select>
+
+
+    <select id="selectByParentCode" resultMap="DragonAreaEntityMap">
+        SELECT
+        <include refid="DragonAreaColumn"/>
+        FROM t_dragon_data_area
+        WHERE parent_code = #{parentCode}
+        ORDER BY code
+    </select>
+
+</mapper>
