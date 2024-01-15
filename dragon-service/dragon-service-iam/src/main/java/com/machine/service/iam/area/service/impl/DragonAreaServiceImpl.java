@@ -77,7 +77,7 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
                             processVillage(areaTown.getCode(), true);
                         }
                     }
-
+                    continue;
                 }
                 if (CollectionUtil.isEmpty(areaCountryList)) {
                     processCountry(areaCity.getCode());
@@ -161,6 +161,7 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
             for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
                 processVillage(insertInDTO.getCode(), true);
             }
+            return;
         }
 
         List<DragonAreaReptileBO> areaCountryList = getCountry(ctyCode);
@@ -184,7 +185,7 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
         }
         dragonAreaDao.insertBatch(insertInDTOS);
         for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
-            processVillage(insertInDTO.getCode(), false);
+            processVillage(insertInDTO.getCode(), shortUrl);
         }
     }
 
