@@ -160,9 +160,11 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
 
     @SneakyThrows
     private List<DragonAreaReptileBO> getProvince() {
-        log.info("爬虫省信息");
+        String url = URL_PREFIX + "index.html";
+        log.info("爬虫省信息 url:{}", url);
+
         List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
-        Document doc = Jsoup.connect(URL_PREFIX + "index.html").get();
+        Document doc = Jsoup.connect(url).get();
         Elements provinceTableList = doc.getElementsByClass("provincetable");
         for (Element provinceTable : provinceTableList) {
             Elements provinceTrList = provinceTable.getElementsByClass("provincetr");
@@ -184,9 +186,10 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
 
     @SneakyThrows
     private List<DragonAreaReptileBO> getCity(String provinceCode) {
-        log.info("爬虫市信息 provinceCode：{}", provinceCode);
-        List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
         String url = URL_PREFIX + provinceCode.substring(0, 2) + ".html";
+        log.info("爬虫市信息 provinceCode:{} url:{}", provinceCode, url);
+
+        List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
         Elements cityTrList = Jsoup.connect(url).get().getElementsByClass("citytr");
         for (Element cityTr : cityTrList) {
             Elements elementList = cityTr.select("a[href]");
@@ -213,10 +216,10 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
 
     @SneakyThrows
     private List<DragonAreaReptileBO> getCountry(String ctyCode) {
-        log.info("爬虫区信息 ctyCode：{}", ctyCode);
+        String url = URL_PREFIX + ctyCode.substring(0, 2) + "/" + ctyCode.substring(0, 4) + ".html";
+        log.info("爬虫区信息 ctyCode:{} url:{}", ctyCode, url);
+
         List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
-        String url = URL_PREFIX + ctyCode.substring(0, 2) + "/" +
-                ctyCode.substring(0, 4) + ".html";
         Elements countryTrList = Jsoup.connect(url).get().getElementsByClass("countytr");
         for (Element countryTr : countryTrList) {
             Elements elementList = countryTr.select("a[href]");
@@ -243,11 +246,12 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
 
     @SneakyThrows
     private List<DragonAreaReptileBO> getTown(String countyCode) {
-        log.info("爬虫镇信息 countyCode：{}", countyCode);
-        List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
         String url = URL_PREFIX + countyCode.substring(0, 2) + "/" +
                 countyCode.substring(2, 4) + "/" +
                 countyCode.substring(0, 6) + ".html";
+        log.info("爬虫镇信息 countyCode:{} url:{}", countyCode, url);
+
+        List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
         Elements townTrList = Jsoup.connect(url).get().getElementsByClass("towntr");
         for (Element townTr : townTrList) {
             Elements elementList = townTr.select("a[href]");
@@ -265,12 +269,13 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
 
     @SneakyThrows
     private List<DragonAreaReptileBO> getVillage(String townCode) {
-        log.info("爬虫村信息 townCode：{}", townCode);
-        List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
         String url = URL_PREFIX + townCode.substring(0, 2) + "/" +
                 townCode.substring(2, 4) + "/" +
                 townCode.substring(4, 6) + "/" +
                 townCode.substring(0, 9) + ".html";
+        log.info("爬虫村信息 townCode:{} url:{}", townCode, url);
+
+        List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
         Elements villageTrList = Jsoup.connect(url).get().getElementsByClass("villagetr");
         for (Element villageTr : villageTrList) {
             Elements elementList = villageTr.select("td");
