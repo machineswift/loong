@@ -141,6 +141,9 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
         }
         dragonAreaDao.insertBatch(insertInDTOS);
         for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
+            if (!insertInDTO.getHasChild()) {
+                continue;
+            }
             processCountry(insertInDTO.getCode());
         }
     }
@@ -159,6 +162,9 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
             }
             dragonAreaDao.insertBatch(insertInDTOS);
             for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
+                if (!insertInDTO.getHasChild()) {
+                    continue;
+                }
                 processVillage(insertInDTO.getCode(), true);
             }
             return;
@@ -172,6 +178,9 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
         }
         dragonAreaDao.insertBatch(insertInDTOS);
         for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
+            if (!insertInDTO.getHasChild()) {
+                continue;
+            }
             processTown(insertInDTO.getCode(), false);
         }
     }
@@ -185,6 +194,9 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
         }
         dragonAreaDao.insertBatch(insertInDTOS);
         for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
+            if (!insertInDTO.getHasChild()) {
+                continue;
+            }
             processVillage(insertInDTO.getCode(), shortUrl);
         }
     }
