@@ -58,7 +58,10 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
                 List<DragonAreaListOutDTO> areaCountryList = dragonAreaDao.selectByParentCode(areaCity.getCode());
 
                 //广东省-东完市、中山市（没有县级数据）
-                if ("441900000000".equals(areaCity.getCode()) || "442000000000".equals(areaCity.getCode())) {
+                //海南省-儋州市（没有县级数据）
+                if ("441900000000".equals(areaCity.getCode()) ||
+                        "442000000000".equals(areaCity.getCode()) ||
+                        "460400000000".equals(areaCity.getCode())) {
                     if (CollectionUtil.isEmpty(areaCountryList)) {
                         processTown(areaCity.getCode(), true);
                     }
@@ -144,8 +147,10 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
 
     private void processCountry(String ctyCode) {
         //广东省-东完市、中山市（没有县级数据）
-        //
-        if ("441900000000".equals(ctyCode) || "442000000000".equals(ctyCode)) {
+        //海南省-儋州市（没有县级数据）
+        if ("441900000000".equals(ctyCode) ||
+                "442000000000".equals(ctyCode) ||
+                "460400000000".equals(ctyCode)) {
             List<DragonAreaReptileBO> areaTownList = getTown(ctyCode, true);
 
             List<DragonAreaInsertInDTO> insertInDTOS = JSONUtil.toList(JSONUtil.toJsonStr(areaTownList), DragonAreaInsertInDTO.class);
