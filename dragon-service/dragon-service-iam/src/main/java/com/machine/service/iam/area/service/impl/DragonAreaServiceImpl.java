@@ -56,6 +56,26 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
                     continue;
                 }
                 List<DragonAreaListOutDTO> areaCountryList = dragonAreaDao.selectByParentCode(areaCity.getCode());
+
+                //广东省-东完市、中山市（没有县级数据）
+                if ("441900000000".equals(areaCity.getCode()) || "442000000000".equals(areaCity.getCode())) {
+                    if (CollectionUtil.isEmpty(areaCountryList)) {
+                        processTown(areaCity.getCode(), true);
+                    }
+
+                    List<DragonAreaListOutDTO> areaTownList = dragonAreaDao.selectByParentCode(areaCity.getCode());
+                    for (DragonAreaListOutDTO areaTown : areaTownList) {
+                        if (!areaTown.getHasChild()) {
+                            continue;
+                        }
+
+                        List<DragonAreaListOutDTO> areaVillageList = dragonAreaDao.selectByParentCode(areaTown.getCode());
+                        if (CollectionUtil.isEmpty(areaVillageList)) {
+                            processVillage(areaTown.getCode(), true);
+                        }
+                    }
+
+                }
                 if (CollectionUtil.isEmpty(areaCountryList)) {
                     processCountry(areaCity.getCode());
                 }
@@ -64,10 +84,9 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
                     if (!areaCountry.getHasChild()) {
                         continue;
                     }
-
                     List<DragonAreaListOutDTO> areaTownList = dragonAreaDao.selectByParentCode(areaCountry.getCode());
                     if (CollectionUtil.isEmpty(areaTownList)) {
-                        processTown(areaCountry.getCode());
+                        processTown(areaCountry.getCode(), false);
                     }
 
                     for (DragonAreaListOutDTO areaTown : areaTownList) {
@@ -77,7 +96,7 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
 
                         List<DragonAreaListOutDTO> areaVillageList = dragonAreaDao.selectByParentCode(areaTown.getCode());
                         if (CollectionUtil.isEmpty(areaVillageList)) {
-                            processVillage(areaTown.getCode());
+                            processVillage(areaTown.getCode(), false);
                         }
                     }
                 }
@@ -124,6 +143,21 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
     }
 
     private void processCountry(String ctyCode) {
+        //广东省-东完市、中山市（没有县级数据）
+        //
+        if ("441900000000".equals(ctyCode) || "442000000000".equals(ctyCode)) {
+            List<DragonAreaReptileBO> areaTownList = getTown(ctyCode, true);
+
+            List<DragonAreaInsertInDTO> insertInDTOS = JSONUtil.toList(JSONUtil.toJsonStr(areaTownList), DragonAreaInsertInDTO.class);
+            for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
+                insertInDTO.setLevel(4);
+            }
+            dragonAreaDao.insertBatch(insertInDTOS);
+            for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
+                processVillage(insertInDTO.getCode(), true);
+            }
+        }
+
         List<DragonAreaReptileBO> areaCountryList = getCountry(ctyCode);
 
         List<DragonAreaInsertInDTO> insertInDTOS = JSONUtil.toList(JSONUtil.toJsonStr(areaCountryList), DragonAreaInsertInDTO.class);
@@ -132,12 +166,12 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
         }
         dragonAreaDao.insertBatch(insertInDTOS);
         for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
-            processTown(insertInDTO.getCode());
+            processTown(insertInDTO.getCode(), false);
         }
     }
 
-    private void processTown(String countryCode) {
-        List<DragonAreaReptileBO> areaTownList = getTown(countryCode);
+    private void processTown(String countryCode, boolean shortUrl) {
+        List<DragonAreaReptileBO> areaTownList = getTown(countryCode, shortUrl);
 
         List<DragonAreaInsertInDTO> insertInDTOS = JSONUtil.toList(JSONUtil.toJsonStr(areaTownList), DragonAreaInsertInDTO.class);
         for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
@@ -145,12 +179,12 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
         }
         dragonAreaDao.insertBatch(insertInDTOS);
         for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
-            processVillage(insertInDTO.getCode());
+            processVillage(insertInDTO.getCode(), false);
         }
     }
 
-    private void processVillage(String townCode) {
-        List<DragonAreaReptileBO> areaVillageList = getVillage(townCode);
+    private void processVillage(String townCode, boolean shortUrl) {
+        List<DragonAreaReptileBO> areaVillageList = getVillage(townCode, shortUrl);
         List<DragonAreaInsertInDTO> insertInDTOS = JSONUtil.toList(JSONUtil.toJsonStr(areaVillageList), DragonAreaInsertInDTO.class);
         for (DragonAreaInsertInDTO insertInDTO : insertInDTOS) {
             insertInDTO.setLevel(5);
@@ -191,6 +225,10 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
 
         List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
         Elements cityTrList = Jsoup.connect(url).get().getElementsByClass("citytr");
+        if (cityTrList.size() == 0) {
+            log.error("爬虫市信息有误 provinceCode:{} url:{}", provinceCode, url);
+            throw new RuntimeException("爬虫市信息有误");
+        }
         for (Element cityTr : cityTrList) {
             Elements elementList = cityTr.select("a[href]");
             DragonAreaReptileBO entity = new DragonAreaReptileBO();
@@ -221,6 +259,10 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
 
         List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
         Elements countryTrList = Jsoup.connect(url).get().getElementsByClass("countytr");
+        if (countryTrList.size() == 0) {
+            log.error("爬虫区信息有误 ctyCode:{} url:{}", ctyCode, url);
+            throw new RuntimeException("爬虫区信息有误");
+        }
         for (Element countryTr : countryTrList) {
             Elements elementList = countryTr.select("a[href]");
             DragonAreaReptileBO entity = new DragonAreaReptileBO();
@@ -245,14 +287,21 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
 
 
     @SneakyThrows
-    private List<DragonAreaReptileBO> getTown(String countyCode) {
+    private List<DragonAreaReptileBO> getTown(String countyCode, boolean shortUrl) {
         String url = URL_PREFIX + countyCode.substring(0, 2) + "/" +
                 countyCode.substring(2, 4) + "/" +
                 countyCode.substring(0, 6) + ".html";
-        log.info("爬虫镇信息 countyCode:{} url:{}", countyCode, url);
+        if (shortUrl) {
+            url = URL_PREFIX + countyCode.substring(0, 2) + "/" + countyCode.substring(0, 4) + ".html";
+        }
+        log.info("爬虫镇信息 shortUrl:{} countyCode:{} url:{}", shortUrl, countyCode, url);
 
         List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
         Elements townTrList = Jsoup.connect(url).get().getElementsByClass("towntr");
+        if (townTrList.size() == 0) {
+            log.error("爬虫镇信息有误 shortUrl:{} ctyCode:{} url:{}", shortUrl, countyCode, url);
+            throw new RuntimeException("爬虫镇信息有误");
+        }
         for (Element townTr : townTrList) {
             Elements elementList = townTr.select("a[href]");
             DragonAreaReptileBO entity = new DragonAreaReptileBO();
@@ -268,15 +317,24 @@ public class DragonAreaServiceImpl implements IDragonAreaService {
     }
 
     @SneakyThrows
-    private List<DragonAreaReptileBO> getVillage(String townCode) {
+    private List<DragonAreaReptileBO> getVillage(String townCode, boolean shortUrl) {
         String url = URL_PREFIX + townCode.substring(0, 2) + "/" +
                 townCode.substring(2, 4) + "/" +
                 townCode.substring(4, 6) + "/" +
                 townCode.substring(0, 9) + ".html";
-        log.info("爬虫村信息 townCode:{} url:{}", townCode, url);
+        if (shortUrl) {
+            url = URL_PREFIX + townCode.substring(0, 2) + "/" +
+                    townCode.substring(2, 4) + "/" +
+                    townCode.substring(0, 9) + ".html";
+        }
+        log.info("爬虫村信息 shortUrl:{} townCode:{} url:{}", shortUrl, townCode, url);
 
         List<DragonAreaReptileBO> areaReptileBOList = new ArrayList<>();
         Elements villageTrList = Jsoup.connect(url).get().getElementsByClass("villagetr");
+        if (villageTrList.size() == 0) {
+            log.error("爬虫村信息有误 shortUrl:{} shortUrl:{} ctyCode:{} url:{}", shortUrl, shortUrl, townCode, url);
+            throw new RuntimeException("爬虫村信息有误");
+        }
         for (Element villageTr : villageTrList) {
             Elements elementList = villageTr.select("td");
             DragonAreaReptileBO entity = new DragonAreaReptileBO();
