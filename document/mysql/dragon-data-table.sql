@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `t_dragon_data_area`;
-CREATE TABLE `t_dragon_data_area` (
+DROP TABLE IF EXISTS `t_dragon_area`;
+CREATE TABLE `t_dragon_area` (
 	`id` VARCHAR ( 32 ) NOT NULL COMMENT 'id',
 	`level` TINYINT NOT NULL COMMENT '层级',
 	`parent_code` VARCHAR ( 12 ) NOT NULL COMMENT '父编码',
@@ -15,4 +15,4 @@ CREATE TABLE `t_dragon_data_area` (
 	PRIMARY KEY ( `id` ) USING BTREE,
 	UNIQUE KEY `uk_01` ( `code` ) USING BTREE,
 	KEY `idx_01` ( `parent_code` ) USING BTREE
-) COMMENT = '租户表';
+) COMMENT = '地区表';
