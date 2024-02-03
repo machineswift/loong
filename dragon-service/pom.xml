@@ -13,8 +13,8 @@
 	<description>service 服务集合</description>
 
 	<modules>
-		<module>dragon-service-data</module>
-		<module>dragon-service-iam</module>
+		<module>dragon-data-service</module>
+		<module>dragon-iam-service</module>
 	</modules>
 
 	<dependencyManagement>

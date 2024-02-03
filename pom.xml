@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>dragon-app</module>
+        <module>dragon-application</module>
         <module>dragon-service</module>
     </modules>
 
