@@ -3,18 +3,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.machine</groupId>
-    <artifactId>dragon</artifactId>
+    <artifactId>loong</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>dragon-applications</module>
-        <module>dragon-generals</module>
-        <module>dragon-services</module>
+        <module>loong-applications</module>
+        <module>loong-generals</module>
+        <module>loong-services</module>
+        <module>loong-starters</module>
     </modules>
 
-    <name>dragon</name>
+    <name>loong</name>
     <packaging>pom</packaging>
-    <description>dragon</description>
+    <description>loong</description>
 
     <properties>
         <java.version>17</java.version>

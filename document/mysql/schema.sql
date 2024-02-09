@@ -1,4 +1,3 @@
-CREATE DATABASE dragon CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
-CREATE DATABASE dragon_data CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
+CREATE DATABASE loong_data CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 
 
