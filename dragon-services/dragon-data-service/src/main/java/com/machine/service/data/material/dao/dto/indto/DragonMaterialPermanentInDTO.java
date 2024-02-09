@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DragonMaterialPermanentInDTO {
 
+    private String id;
+
     /**
      * 类型
      */

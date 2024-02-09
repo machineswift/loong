@@ -28,4 +28,15 @@
         <result column="is_deleted" property="deleted"/>
     </resultMap>
 
+
+    <select id="selectMaterialTemporaryPage" resultMap="DragonMaterialTemporaryEntityMap">
+        select
+        <include refid="DragonMaterialPermanentColumn"/>
+        from t_dragon_material_temporary
+        <where>
+            <if test="select.materIalType != null ">
+                AND type = #{select.materIalType}
+            </if>
+        </where>
+    </select>
 </mapper>

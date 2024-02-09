@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("material/permanent")
 public class DragonMaterialPermanentRest {
 
-
     @Autowired
     private IDragonMaterialPermanentService dragonMaterialPermanentService;
 

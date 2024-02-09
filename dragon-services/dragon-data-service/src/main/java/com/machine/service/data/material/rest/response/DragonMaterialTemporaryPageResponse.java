@@ -1,4 +1,4 @@
-package com.machine.service.data.material.service.bo.outbo;
+package com.machine.service.data.material.rest.response;
 
 import com.machine.common.envm.crm.customer.DragonCustomerGenderEnum;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class DragonMaterialTemporaryOutBO {
+public class DragonMaterialTemporaryPageResponse {
     private String id;
     /**
      * 类型

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DragonMaterialTemporaryInBO {
+    private String id;
 
     /**
      * 类型
