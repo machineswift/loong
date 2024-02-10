@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableTransactionManagement
 @SpringBootApplication(scanBasePackages = {
+        "com.machine.starter",
         "com.machine.service"
 })
 public class LoongDataServiceApp {

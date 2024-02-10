@@ -1,13 +1,15 @@
 package com.machine.starter.minio;
 
+import com.machine.common.tool.yaml.YamlPropertySourceFactory;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
 @Data
-@Component
-@PropertySource("classpath:loong-minio.yml")
+@Configuration
+@PropertySource(value = "classpath:loong-minio.yml", factory = YamlPropertySourceFactory.class)
 @ConfigurationProperties(prefix = "loong.minio")
 public class LoongMinioProperties {
 

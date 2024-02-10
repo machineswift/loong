@@ -33,13 +33,6 @@ mybatis-plus:
     # 关闭MP3.0自带的banner
     banner: false
 
-
-loong:
-  minio:
-    url: http://localhost:9000
-    accessKey: root
-    secretKey: root1234
-
 logging:
   level:
     root: DEBUG
