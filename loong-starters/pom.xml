@@ -13,5 +13,6 @@
     <description>loong starter 集合</description>
 
     <modules>
+        <module>loong-minio-boot-starter</module>
     </modules>
 </project>

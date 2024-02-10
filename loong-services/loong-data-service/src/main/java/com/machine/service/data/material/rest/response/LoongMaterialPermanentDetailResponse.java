@@ -1,4 +1,4 @@
-package com.machine.service.data.material.dao.dto.outdto;
+package com.machine.service.data.material.rest.response;
 
 import com.machine.common.envm.data.material.DataMaterIalTypeEnum;
 import lombok.Data;
@@ -6,9 +6,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class LoongMaterialPermanentOutDTO {
+public class LoongMaterialPermanentDetailResponse {
     private String id;
-
     /**
      * 类型
      */

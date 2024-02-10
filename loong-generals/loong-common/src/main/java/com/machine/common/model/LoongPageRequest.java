@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 public class LoongPageRequest {
 
     //当前页
-    private long current;
+    private long current = 1;
 
     //每页的数量
-    private int size;
+    private int size = 2;
 }

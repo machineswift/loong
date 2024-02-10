@@ -1,18 +1,18 @@
 package com.machine.service.data.material.service.bo.outbo;
 
-import com.machine.common.envm.crm.customer.CustomerGenderEnum;
+import com.machine.common.envm.data.material.DataMaterIalTypeEnum;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class LoongMaterialPermanentOutBO {
+public class LoongMaterialPermanentDetailOutBO {
     private String id;
 
     /**
      * 类型
      */
-    private CustomerGenderEnum type;
+    private DataMaterIalTypeEnum type;
 
     /**
      * 大小（字节）

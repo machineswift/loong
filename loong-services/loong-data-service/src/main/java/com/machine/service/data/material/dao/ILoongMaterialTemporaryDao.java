@@ -8,7 +8,7 @@ import com.machine.service.data.material.rest.request.LoongMaterialTemporarySele
 
 public interface ILoongMaterialTemporaryDao {
 
-    String insert(LoongMaterialTemporaryInsertInDTO insertInDTO);
+    String insert(LoongMaterialTemporaryInsertInDTO inDTO);
     LoongMaterialTemporaryDetailOutDTO selectById(String id);
 
     Page<LoongMaterialTemporaryPageOutDTO> selectPage(LoongMaterialTemporarySelectLoongPageRequest request);

@@ -24,8 +24,8 @@ public class LoongMaterialTemporaryServiceImpl implements ILoongMaterialTemporar
     private ILoongMaterialTemporaryDao materialTemporaryDao;
 
     @Override
-    public String insert(LoongMaterialTemporaryInsertInBO insertInBO) {
-        LoongMaterialTemporaryInsertInDTO insertInDTO = JSONUtil.toBean(JSONUtil.toJsonStr(insertInBO), LoongMaterialTemporaryInsertInDTO.class);
+    public String insert(LoongMaterialTemporaryInsertInBO inBO) {
+        LoongMaterialTemporaryInsertInDTO insertInDTO = JSONUtil.toBean(JSONUtil.toJsonStr(inBO), LoongMaterialTemporaryInsertInDTO.class);
         return materialTemporaryDao.insert(insertInDTO);
     }
 

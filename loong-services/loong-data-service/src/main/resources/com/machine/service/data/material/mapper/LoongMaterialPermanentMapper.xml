@@ -28,4 +28,16 @@
         <result column="is_deleted" property="deleted"/>
     </resultMap>
 
+
+    <select id="selectMaterialPermanentPage" resultMap="LoongMaterialPermanentEntityMap">
+        select
+        <include refid="LoongMaterialPermanentColumn"/>
+        from t_material_permanent
+        <where>
+            <if test="select.materIalType != null ">
+                AND type = #{select.materIalType}
+            </if>
+        </where>
+    </select>
+
 </mapper>

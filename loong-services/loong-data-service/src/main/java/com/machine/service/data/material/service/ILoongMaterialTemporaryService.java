@@ -8,7 +8,7 @@ import com.machine.service.data.material.service.bo.outbo.LoongMaterialTemporary
 
 public interface ILoongMaterialTemporaryService {
 
-    String insert(LoongMaterialTemporaryInsertInBO insertInBO);
+    String insert(LoongMaterialTemporaryInsertInBO inBO);
 
     LoongMaterialTemporaryDetailOutBO selectById(String id);
 

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class LoongMaterialTemporaryInsertInDTO {
-    private String id;
 
     /**
      * 类型
