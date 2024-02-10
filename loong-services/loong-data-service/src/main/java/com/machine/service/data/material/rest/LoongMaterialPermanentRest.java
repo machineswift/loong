@@ -68,7 +68,10 @@ public class LoongMaterialPermanentRest {
             response.setHeader("Content-Length", String.valueOf(detailOutBO.getLength()));
             response.setHeader("Content-disposition", "attachment; filename=" +
                     new String(detailOutBO.getName().getBytes(StandardCharsets.UTF_8), "ISO8859-1"));
-            outputStream.write(objectResponse.readAllBytes());
+
+            byte[] result = new byte[detailOutBO.getLength().intValue()];
+            objectResponse.read(result);
+            outputStream.write(result);
             outputStream.flush();
         } catch (Exception e) {
             log.error(String.format("下载永久素材异常,id:%s", id), e);
