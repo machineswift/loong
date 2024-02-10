@@ -18,7 +18,6 @@ import io.minio.MinioClient;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -26,7 +25,6 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j
-@RefreshScope
 @RestController
 @RequestMapping("material/temporary")
 public class LoongMaterialTemporaryRest {
@@ -36,7 +34,6 @@ public class LoongMaterialTemporaryRest {
 
     @Autowired
     private ILoongMaterialTemporaryService materialTemporaryService;
-
 
     @PostMapping("upload")
     public String upload(@RequestParam("materIalType") DataMaterIalTypeEnum materIalType,

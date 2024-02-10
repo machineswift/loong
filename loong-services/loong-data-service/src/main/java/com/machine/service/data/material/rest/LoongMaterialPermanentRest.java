@@ -28,11 +28,12 @@ import java.nio.charset.StandardCharsets;
 @RestController
 @RequestMapping("material/permanent")
 public class LoongMaterialPermanentRest {
+
     @Autowired
     private MinioClient minioClient;
+
     @Autowired
     private ILoongMaterialPermanentService materialPermanentService;
-
 
     @PostMapping("upload")
     public String upload(@RequestParam("materIalType") DataMaterIalTypeEnum materIalType,
