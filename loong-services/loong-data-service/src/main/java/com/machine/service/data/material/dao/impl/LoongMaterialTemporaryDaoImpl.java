@@ -25,10 +25,6 @@ public class LoongMaterialTemporaryDaoImpl implements ILoongMaterialTemporaryDao
     @Override
     public String insert(LoongMaterialTemporaryInsertInDTO inDTO) {
         LoongMaterialTemporaryEntity entity = JSONUtil.toBean(JSONUtil.toJsonStr(inDTO), LoongMaterialTemporaryEntity.class);
-        entity.setCreateUser("system");
-        entity.setCreateTime(new Date().getTime());
-        entity.setUpdateUser("system");
-        entity.setUpdateTime(new Date().getTime());
         loongMaterialTemporaryMapper.insert(entity);
         return entity.getId();
     }

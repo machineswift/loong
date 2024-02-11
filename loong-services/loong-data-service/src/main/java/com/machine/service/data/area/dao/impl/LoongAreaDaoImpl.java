@@ -28,13 +28,13 @@ public class LoongAreaDaoImpl implements ILoongAreaDao {
 
         List<LoongAreaEntity> entityList = JSONUtil.toList(JSONUtil.toJsonStr(inDTOList), LoongAreaEntity.class);
 
-        for (LoongAreaEntity entity : entityList) {
-            entity.setCreateUser("system");
-            entity.setCreateTime(new Date().getTime());
-
-            entity.setUpdateUser("system");
-            entity.setUpdateTime(new Date().getTime());
-        }
+//        for (LoongAreaEntity entity : entityList) {
+//            entity.setCreateBy("system");
+//            entity.setCreateTime(new Date().getTime());
+//
+//            entity.setUpdateBy("system");
+//            entity.setUpdateTime(new Date().getTime());
+//        }
         loongAreaMapper.insertBatch(entityList);
         return Boolean.TRUE;
     }

@@ -55,8 +55,8 @@ public class LoongAreaEntity {
     /**
      * 创建人
      */
-    @TableField("create_user")
-    private String createUser;
+    @TableField("create_by")
+    private String createBy;
 
     /**
      * 创建时间
@@ -67,8 +67,8 @@ public class LoongAreaEntity {
     /**
      * 修改人
      */
-    @TableField("update_user")
-    private String updateUser;
+    @TableField("update_by")
+    private String updateBy;
 
     /**
      * 更新时间

@@ -14,5 +14,6 @@
 
     <modules>
         <module>loong-minio-boot-starter</module>
+        <module>loong-mybatis-boot-starter</module>
     </modules>
 </project>

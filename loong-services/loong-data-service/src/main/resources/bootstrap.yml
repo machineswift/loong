@@ -16,7 +16,6 @@ spring:
 
 
   # DataSource Config
-
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/loong_data?useUnicode=true&autoReconnect=true&allowMultiQueries=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
@@ -25,13 +24,11 @@ spring:
 
 #mybatis-plus配置
 mybatis-plus:
-  mapper-locations: classpath*:/com/machine/service/data/*/*Mapper.xml
+  mapper-locations: classpath*:/com/machine/service/*/*/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  type-aliases-package: com.machine.service.data.*.mapper.entity
-  type-handlers-package: com.machine.loong.starter.mybatis.handler
-  global-config:
-    # 关闭MP3.0自带的banner
-    banner: false
+  type-aliases-package: com.machine.service.*.*.mapper.entity
+  type-handlers-package: com.machine.starter.mybatis.handler
+
 
 logging:
   level:

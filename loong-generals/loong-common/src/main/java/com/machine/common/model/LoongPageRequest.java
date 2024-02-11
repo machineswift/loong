@@ -11,5 +11,5 @@ public class LoongPageRequest {
     private long current = 1;
 
     //每页的数量
-    private int size = 2;
+    private int size = 20;
 }

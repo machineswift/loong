@@ -10,9 +10,9 @@
             `category_code`,
             `name`,
             `has_child`,
-            `create_user`,
+            `create_by`,
             `create_time`,
-            `update_user`,
+            `update_by`,
             `update_time`,
             `is_deleted`
     </sql>
@@ -24,9 +24,9 @@
         <result column="category_code" property="categoryCode"/>
         <result column="name" property="name"/>
         <result column="has_child" property="hasChild"/>
-        <result column="create_user" property="createUser"/>
+        <result column="create_by" property="createBy"/>
         <result column="create_time" property="createTime"/>
-        <result column="update_user" property="updateUser"/>
+        <result column="update_by" property="updateBy"/>
         <result column="update_time" property="updateTime"/>
         <result column="is_deleted" property="deleted"/>
     </resultMap>
@@ -40,14 +40,14 @@
         `category_code`,
         `name`,
         `has_child`,
-        `create_user`,
+        `create_by`,
         `create_time`,
-        `update_user`,
+        `update_by`,
         `update_time`)
         VALUES
         <foreach collection="list" item="item" separator=",">
             (#{item.id}, #{item.level},#{item.parentCode}, #{item.code},#{item.categoryCode},
-            #{item.name},#{item.hasChild}, #{item.createUser},#{item.createTime}, #{item.updateUser},
+            #{item.name},#{item.hasChild}, #{item.createBy},#{item.createTime}, #{item.updateBy},
             #{item.updateTime})
         </foreach>
         ON DUPLICATE KEY UPDATE
@@ -56,9 +56,9 @@
         category_code = VALUES(category_code),
         name = VALUES(name),
         has_child = VALUES(has_child),
-        create_user = VALUES(create_user),
+        create_by = VALUES(create_by),
         create_time = VALUES(create_time),
-        update_user = VALUES(update_user),
+        update_by = VALUES(update_by),
         update_time = VALUES(update_time)
     </insert>
 
