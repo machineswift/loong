@@ -11,7 +11,7 @@ CREATE TABLE `t_area` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`is_deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
+	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
 	UNIQUE KEY `uk_01` ( `code` ) USING BTREE,
 	KEY `idx_01` ( `parent_code` ) USING BTREE
@@ -28,7 +28,7 @@ CREATE TABLE `t_material_permanent` (
      `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
      `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
      `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-     `is_deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
+     `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
      PRIMARY KEY ( `id` ) USING BTREE,
      KEY `idx_01` ( `update_time` ) USING BTREE
 ) COMMENT = '永久素材表';
@@ -44,7 +44,7 @@ CREATE TABLE `t_material_temporary` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `is_deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
+   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
 ) COMMENT = '临时素材表';
@@ -60,7 +60,7 @@ CREATE TABLE `t_label_category` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `is_deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
+   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    UNIQUE KEY `uk_01` ( `name` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
@@ -76,7 +76,7 @@ CREATE TABLE `t_label` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `is_deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
+   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    UNIQUE KEY `uk_01` ( `name` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
@@ -94,7 +94,7 @@ CREATE TABLE `t_label_option` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `is_deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
+   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    UNIQUE KEY `uk_01` (`label_id`, `name` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
@@ -111,7 +111,7 @@ CREATE TABLE `t_tag_category` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `is_deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
+   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    UNIQUE KEY `uk_01` ( `name` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
@@ -128,7 +128,7 @@ CREATE TABLE `t_tag` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `is_deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
+   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    UNIQUE KEY `uk_01` ( `name` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE

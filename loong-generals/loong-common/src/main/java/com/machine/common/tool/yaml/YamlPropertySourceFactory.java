@@ -11,7 +11,6 @@ import java.util.Properties;
 
 public class YamlPropertySourceFactory implements PropertySourceFactory {
 
-
     public PropertySource<?> createPropertySource(String name, EncodedResource encodedResource) {
 
         Resource resource = encodedResource.getResource();

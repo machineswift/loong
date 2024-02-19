@@ -38,6 +38,6 @@ public abstract class LoongBaseEntity {
     /**
      * 是否删除 0=不删除 1=删除
      */
-    @TableLogic(value = "is_deleted")
+    @TableLogic(value = "deleted")
     private Boolean deleted;
 }

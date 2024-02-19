@@ -79,6 +79,6 @@ public class LoongAreaEntity {
     /**
      * 是否已删除
      */
-    @TableField(value = "is_deleted")
+    @TableField(value = "deleted")
     private Boolean deleted;
 }

@@ -12,7 +12,7 @@
             `create_time`,
             `update_by`,
             `update_time`,
-            `is_deleted`
+            `deleted`
     </sql>
 
     <resultMap id="LoongMaterialTemporaryEntityMap" type="com.machine.service.data.material.mapper.entity.LoongMaterialTemporaryEntity">
@@ -25,7 +25,7 @@
         <result column="create_time" property="createTime"/>
         <result column="update_by" property="updateBy"/>
         <result column="update_time" property="updateTime"/>
-        <result column="is_deleted" property="deleted"/>
+        <result column="deleted" property="deleted"/>
     </resultMap>
 
 
