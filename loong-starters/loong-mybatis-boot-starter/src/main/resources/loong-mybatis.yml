@@ -1,3 +1,10 @@
 loong:
   mybatis:
     example: 1000
+
+#mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath*:/com/machine/service/*/*/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  type-aliases-package: com.machine.service.*.*.mapper.entity
+  type-handlers-package: com.machine.starter.mybatis.handler

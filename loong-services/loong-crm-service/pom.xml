@@ -8,7 +8,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>loong-data-service</artifactId>
+    <artifactId>loong-crm-service</artifactId>
 
     <dependencies>
         <dependency>
@@ -31,16 +31,6 @@
             <groupId>com.machine</groupId>
             <artifactId>loong-minio-boot-starter</artifactId>
             <version>${version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
         </dependency>
 
         <dependency>

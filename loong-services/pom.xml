@@ -13,6 +13,7 @@
 	<description>service 服务集合</description>
 
 	<modules>
+		<module>loong-crm-service</module>
 		<module>loong-data-service</module>
 		<module>loong-iam-service</module>
 	</modules>
