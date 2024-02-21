@@ -3,8 +3,8 @@ package com.machine.service.data.material.rest;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.machine.common.envm.data.material.DataMaterIalTypeEnum;
-import com.machine.common.model.LoongPageResponse;
-import com.machine.service.data.material.rest.request.LoongMaterialPermanentSelectLoongPageRequest;
+import com.machine.common.model.PageResponse;
+import com.machine.service.data.material.rest.request.LoongMaterialPermanentSelectPageRequest;
 import com.machine.service.data.material.rest.response.LoongMaterialPermanentDetailResponse;
 import com.machine.service.data.material.rest.response.LoongMaterialPermanentPageResponse;
 import com.machine.service.data.material.service.ILoongMaterialPermanentService;
@@ -82,9 +82,9 @@ public class LoongMaterialPermanentRest {
     }
 
     @PostMapping("selectPage")
-    public LoongPageResponse<LoongMaterialPermanentPageResponse> selectPage(@RequestBody LoongMaterialPermanentSelectLoongPageRequest request) {
+    public PageResponse<LoongMaterialPermanentPageResponse> selectPage(@RequestBody LoongMaterialPermanentSelectPageRequest request) {
         Page<LoongMaterialPermanentPageOutBO> outBOPage = materialPermanentService.selectPage(request);
-        return new LoongPageResponse<>(outBOPage.getCurrent(), outBOPage.getSize(), outBOPage.getTotal(), JSONUtil.toList(JSONUtil.toJsonStr(outBOPage.getRecords()), LoongMaterialPermanentPageResponse.class));
+        return new PageResponse<>(outBOPage.getCurrent(), outBOPage.getSize(), outBOPage.getTotal(), JSONUtil.toList(JSONUtil.toJsonStr(outBOPage.getRecords()), LoongMaterialPermanentPageResponse.class));
     }
 
 }

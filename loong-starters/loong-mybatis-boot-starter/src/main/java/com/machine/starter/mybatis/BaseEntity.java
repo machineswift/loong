@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public abstract class LoongBaseEntity {
+public abstract class BaseEntity {
 
     @TableId(type = IdType.ASSIGN_UUID)
     private String id;

@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class LoongWebResponse<T> {
+public class WebResponse<T> {
     private int status;
     private String traceId;
     private String message;

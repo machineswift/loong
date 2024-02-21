@@ -1,14 +1,14 @@
 package com.machine.service.data.material.mapper.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.machine.starter.mybatis.LoongBaseEntity;
+import com.machine.starter.mybatis.BaseEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @TableName("t_material_temporary")
-public class LoongMaterialTemporaryEntity extends LoongBaseEntity {
+public class MaterialTemporaryEntity extends BaseEntity {
     /**
      * 类型
      */

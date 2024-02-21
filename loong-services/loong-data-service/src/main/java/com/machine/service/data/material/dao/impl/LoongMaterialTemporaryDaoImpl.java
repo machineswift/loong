@@ -9,12 +9,10 @@ import com.machine.service.data.material.dao.dto.indto.LoongMaterialTemporaryIns
 import com.machine.service.data.material.dao.dto.outdto.LoongMaterialTemporaryDetailOutDTO;
 import com.machine.service.data.material.dao.dto.outdto.LoongMaterialTemporaryPageOutDTO;
 import com.machine.service.data.material.mapper.LoongMaterialTemporaryMapper;
-import com.machine.service.data.material.mapper.entity.LoongMaterialTemporaryEntity;
-import com.machine.service.data.material.rest.request.LoongMaterialTemporarySelectLoongPageRequest;
+import com.machine.service.data.material.mapper.entity.MaterialTemporaryEntity;
+import com.machine.service.data.material.rest.request.LoongMaterialTemporarySelectPageRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.Date;
 
 @Repository
 public class LoongMaterialTemporaryDaoImpl implements ILoongMaterialTemporaryDao {
@@ -24,14 +22,14 @@ public class LoongMaterialTemporaryDaoImpl implements ILoongMaterialTemporaryDao
 
     @Override
     public String insert(LoongMaterialTemporaryInsertInDTO inDTO) {
-        LoongMaterialTemporaryEntity entity = JSONUtil.toBean(JSONUtil.toJsonStr(inDTO), LoongMaterialTemporaryEntity.class);
+        MaterialTemporaryEntity entity = JSONUtil.toBean(JSONUtil.toJsonStr(inDTO), MaterialTemporaryEntity.class);
         loongMaterialTemporaryMapper.insert(entity);
         return entity.getId();
     }
 
     @Override
     public LoongMaterialTemporaryDetailOutDTO selectById(String id) {
-        LoongMaterialTemporaryEntity entity = loongMaterialTemporaryMapper.selectById(id);
+        MaterialTemporaryEntity entity = loongMaterialTemporaryMapper.selectById(id);
         if (null == entity) {
             return null;
         }
@@ -40,9 +38,9 @@ public class LoongMaterialTemporaryDaoImpl implements ILoongMaterialTemporaryDao
 
 
     @Override
-    public Page<LoongMaterialTemporaryPageOutDTO> selectPage(LoongMaterialTemporarySelectLoongPageRequest request) {
-        Page<LoongMaterialTemporaryEntity> page = new Page<>(request.getCurrent(), request.getSize());
-        IPage<LoongMaterialTemporaryEntity> entityIPage = loongMaterialTemporaryMapper.selectMaterialTemporaryPage(page, request);
+    public Page<LoongMaterialTemporaryPageOutDTO> selectPage(LoongMaterialTemporarySelectPageRequest request) {
+        Page<MaterialTemporaryEntity> page = new Page<>(request.getCurrent(), request.getSize());
+        IPage<MaterialTemporaryEntity> entityIPage = loongMaterialTemporaryMapper.selectMaterialTemporaryPage(page, request);
         return LoongPageUtil.convertT1ToT2(entityIPage, LoongMaterialTemporaryPageOutDTO.class);
     }
 }

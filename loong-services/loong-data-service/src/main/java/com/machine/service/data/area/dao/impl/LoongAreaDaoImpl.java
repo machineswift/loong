@@ -6,12 +6,11 @@ import com.machine.service.data.area.dao.ILoongAreaDao;
 import com.machine.service.data.area.dao.dto.indto.LoongAreaInsertInDTO;
 import com.machine.service.data.area.dao.dto.outdto.LoongAreaListOutDTO;
 import com.machine.service.data.area.mapper.LoongAreaMapper;
-import com.machine.service.data.area.mapper.entity.LoongAreaEntity;
+import com.machine.service.data.area.mapper.entity.AreaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -26,7 +25,7 @@ public class LoongAreaDaoImpl implements ILoongAreaDao {
             return Boolean.TRUE;
         }
 
-        List<LoongAreaEntity> entityList = JSONUtil.toList(JSONUtil.toJsonStr(inDTOList), LoongAreaEntity.class);
+        List<AreaEntity> entityList = JSONUtil.toList(JSONUtil.toJsonStr(inDTOList), AreaEntity.class);
 
 //        for (LoongAreaEntity entity : entityList) {
 //            entity.setCreateBy("system");
@@ -44,7 +43,7 @@ public class LoongAreaDaoImpl implements ILoongAreaDao {
         if (null == level) {
             return Collections.emptyList();
         }
-        List<LoongAreaEntity> entityList = loongAreaMapper.selectByLevel(level);
+        List<AreaEntity> entityList = loongAreaMapper.selectByLevel(level);
         return JSONUtil.toList(JSONUtil.toJsonStr(entityList), LoongAreaListOutDTO.class);
     }
 
@@ -53,7 +52,7 @@ public class LoongAreaDaoImpl implements ILoongAreaDao {
         if (null == parentCode) {
             return Collections.emptyList();
         }
-        List<LoongAreaEntity> entityList = loongAreaMapper.selectByParentCode(parentCode);
+        List<AreaEntity> entityList = loongAreaMapper.selectByParentCode(parentCode);
         return JSONUtil.toList(JSONUtil.toJsonStr(entityList), LoongAreaListOutDTO.class);
     }
 }

@@ -15,7 +15,7 @@
             `deleted`
     </sql>
 
-    <resultMap id="LoongMaterialPermanentEntityMap" type="com.machine.service.data.material.mapper.entity.LoongMaterialPermanentEntity">
+    <resultMap id="LoongMaterialPermanentEntityMap" type="com.machine.service.data.material.mapper.entity.MaterialPermanentEntity">
         <id column="id" property="id"/>
         <result column="type" property="type"/>
         <result column="length" property="length"/>

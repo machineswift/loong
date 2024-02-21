@@ -17,7 +17,7 @@
             `deleted`
     </sql>
 
-    <resultMap id="LoongAreaEntityMap" type="com.machine.service.data.area.mapper.entity.LoongAreaEntity">
+    <resultMap id="LoongAreaEntityMap" type="com.machine.service.data.area.mapper.entity.AreaEntity">
         <id column="id" property="id"/>
         <result column="parent_code" property="parentCode"/>
         <result column="code" property="code"/>

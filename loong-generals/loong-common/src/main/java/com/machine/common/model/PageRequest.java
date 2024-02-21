@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class LoongPageRequest {
+public class PageRequest {
 
     //当前页
     private long current = 1;

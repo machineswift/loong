@@ -7,7 +7,7 @@ import com.machine.service.data.material.dao.ILoongMaterialTemporaryDao;
 import com.machine.service.data.material.dao.dto.indto.LoongMaterialTemporaryInsertInDTO;
 import com.machine.service.data.material.dao.dto.outdto.LoongMaterialTemporaryDetailOutDTO;
 import com.machine.service.data.material.dao.dto.outdto.LoongMaterialTemporaryPageOutDTO;
-import com.machine.service.data.material.rest.request.LoongMaterialTemporarySelectLoongPageRequest;
+import com.machine.service.data.material.rest.request.LoongMaterialTemporarySelectPageRequest;
 import com.machine.service.data.material.service.ILoongMaterialTemporaryService;
 import com.machine.service.data.material.service.bo.inbo.LoongMaterialTemporaryInsertInBO;
 import com.machine.service.data.material.service.bo.outbo.LoongMaterialTemporaryDetailOutBO;
@@ -39,7 +39,7 @@ public class LoongMaterialTemporaryServiceImpl implements ILoongMaterialTemporar
     }
 
     @Override
-    public Page<LoongMaterialTemporaryPageOutBO> selectPage(LoongMaterialTemporarySelectLoongPageRequest request) {
+    public Page<LoongMaterialTemporaryPageOutBO> selectPage(LoongMaterialTemporarySelectPageRequest request) {
         Page<LoongMaterialTemporaryPageOutDTO> outBOPage = materialTemporaryDao.selectPage(request);
         return LoongPageUtil.convertT1ToT2(outBOPage, LoongMaterialTemporaryPageOutBO.class);
     }

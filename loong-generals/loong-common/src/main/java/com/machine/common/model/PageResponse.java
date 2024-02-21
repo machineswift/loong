@@ -6,19 +6,19 @@ import java.util.Collections;
 import java.util.List;
 
 @Data
-public class LoongPageResponse<T> {
-    public LoongPageResponse(long current,
-                             long size,
-                             long total) {
+public class PageResponse<T> {
+    public PageResponse(long current,
+                        long size,
+                        long total) {
         this.current = current;
         this.size = size;
         this.total = total;
     }
 
-    public LoongPageResponse(long current,
-                             long size,
-                             long total,
-                             List<T> records) {
+    public PageResponse(long current,
+                        long size,
+                        long total,
+                        List<T> records) {
         this.current = current;
         this.size = size;
         this.total = total;

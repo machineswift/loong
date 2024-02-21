@@ -1,18 +1,18 @@
 package com.machine.service.data.area.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.machine.service.data.area.mapper.entity.LoongAreaEntity;
+import com.machine.service.data.area.mapper.entity.AreaEntity;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 @Mapper
-public interface LoongAreaMapper extends BaseMapper<LoongAreaEntity> {
+public interface LoongAreaMapper extends BaseMapper<AreaEntity> {
 
-    int insertBatch(List<LoongAreaEntity> entityList);
+    int insertBatch(List<AreaEntity> entityList);
 
-    List<LoongAreaEntity> selectByLevel(@Param("level") Integer level);
+    List<AreaEntity> selectByLevel(@Param("level") Integer level);
 
-    List<LoongAreaEntity> selectByParentCode(@Param("parentCode")String parentCode);
+    List<AreaEntity> selectByParentCode(@Param("parentCode")String parentCode);
 }

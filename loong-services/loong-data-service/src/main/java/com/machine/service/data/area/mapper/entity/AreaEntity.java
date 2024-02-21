@@ -1,14 +1,14 @@
 package com.machine.service.data.area.mapper.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.machine.starter.mybatis.LoongBaseEntity;
+import com.machine.starter.mybatis.BaseEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @TableName("t_area")
-public class LoongAreaEntity extends LoongBaseEntity {
+public class AreaEntity extends BaseEntity {
 
     /**
      * 层级

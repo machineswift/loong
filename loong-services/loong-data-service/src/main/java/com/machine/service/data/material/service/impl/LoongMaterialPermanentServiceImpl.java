@@ -7,7 +7,7 @@ import com.machine.service.data.material.dao.ILoongMaterialPermanentDao;
 import com.machine.service.data.material.dao.dto.indto.LoongMaterialPermanentInsertInDTO;
 import com.machine.service.data.material.dao.dto.outdto.LoongMaterialPermanentDetailOutDTO;
 import com.machine.service.data.material.dao.dto.outdto.LoongMaterialPermanentPageOutDTO;
-import com.machine.service.data.material.rest.request.LoongMaterialPermanentSelectLoongPageRequest;
+import com.machine.service.data.material.rest.request.LoongMaterialPermanentSelectPageRequest;
 import com.machine.service.data.material.service.ILoongMaterialPermanentService;
 import com.machine.service.data.material.service.bo.inbo.LoongMaterialPermanentInsertInBO;
 import com.machine.service.data.material.service.bo.outbo.LoongMaterialPermanentDetailOutBO;
@@ -39,7 +39,7 @@ public class LoongMaterialPermanentServiceImpl implements ILoongMaterialPermanen
     }
 
     @Override
-    public Page<LoongMaterialPermanentPageOutBO> selectPage(LoongMaterialPermanentSelectLoongPageRequest request) {
+    public Page<LoongMaterialPermanentPageOutBO> selectPage(LoongMaterialPermanentSelectPageRequest request) {
         Page<LoongMaterialPermanentPageOutDTO> outBOPage = materialPermanentDao.selectPage(request);
         return LoongPageUtil.convertT1ToT2(outBOPage, LoongMaterialPermanentPageOutBO.class);
     }

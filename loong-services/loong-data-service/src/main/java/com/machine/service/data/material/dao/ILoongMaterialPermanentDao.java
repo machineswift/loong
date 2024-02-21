@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.machine.service.data.material.dao.dto.indto.LoongMaterialPermanentInsertInDTO;
 import com.machine.service.data.material.dao.dto.outdto.LoongMaterialPermanentDetailOutDTO;
 import com.machine.service.data.material.dao.dto.outdto.LoongMaterialPermanentPageOutDTO;
-import com.machine.service.data.material.rest.request.LoongMaterialPermanentSelectLoongPageRequest;
+import com.machine.service.data.material.rest.request.LoongMaterialPermanentSelectPageRequest;
 
 public interface ILoongMaterialPermanentDao {
 
@@ -12,5 +12,5 @@ public interface ILoongMaterialPermanentDao {
 
     LoongMaterialPermanentDetailOutDTO selectById(String id);
 
-    Page<LoongMaterialPermanentPageOutDTO> selectPage(LoongMaterialPermanentSelectLoongPageRequest request);
+    Page<LoongMaterialPermanentPageOutDTO> selectPage(LoongMaterialPermanentSelectPageRequest request);
 }
