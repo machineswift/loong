@@ -1,4 +1,3 @@
 CREATE DATABASE loong_data CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
 CREATE DATABASE loong_crm CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;
-
-
+CREATE DATABASE loong_scm CHARACTER SET utf8mb4 COLLATE utf8mb4_bin;

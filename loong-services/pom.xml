@@ -16,6 +16,7 @@
 		<module>loong-crm-service</module>
 		<module>loong-data-service</module>
 		<module>loong-iam-service</module>
+		<module>loong-scm-service</module>
 	</modules>
 
 	<dependencyManagement>

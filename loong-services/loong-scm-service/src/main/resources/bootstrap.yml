@@ -1,0 +1,29 @@
+server:
+  port: 8901
+  servlet:
+    context-path: /${spring.application.name}
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: DEV
+  application:
+    name: loong-scm-service
+  servlet:
+    multipart:
+      max-file-size: 2048MB
+      max-request-size: 4096MB
+
+
+  # DataSource Config
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/loong_scm?useUnicode=true&autoReconnect=true&allowMultiQueries=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+
+
+logging:
+  level:
+    root: DEBUG
