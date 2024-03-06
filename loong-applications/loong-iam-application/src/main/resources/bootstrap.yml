@@ -1,5 +1,5 @@
 server:
-  port: 8800
+  port: 8080
   servlet:
     context-path: /${spring.application.name}
 spring:
@@ -8,4 +8,4 @@ spring:
   profiles:
     active: DEV
   application:
-    name: loong-app-iam
+    name: loong-iam-app

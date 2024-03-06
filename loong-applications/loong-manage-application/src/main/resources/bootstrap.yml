@@ -8,4 +8,4 @@ spring:
   profiles:
     active: DEV
   application:
-    name: loong-app-manage
+    name: loong-manage-app
