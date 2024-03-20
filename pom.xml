@@ -11,6 +11,7 @@
         <module>loong-generals</module>
         <module>loong-services</module>
         <module>loong-starters</module>
+        <module>loong-tests</module>
     </modules>
 
     <name>loong</name>

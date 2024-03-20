@@ -128,7 +128,7 @@ CREATE TABLE `t_user_group_relation` (
 	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     UNIQUE KEY `uk_01` ( `user_id`,`group_id` ) USING BTREE
-) COMMENT = '用户分组关系表'
+) COMMENT = '用户分组关系表';
 
 
 DROP TABLE IF EXISTS `t_user_permission_relation`;
@@ -151,6 +151,7 @@ DROP TABLE IF EXISTS `t_user_role_relation`;
 CREATE TABLE `t_user_role_relation` (
    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
    `user_id` VARCHAR ( 32 ) NOT NULL COMMENT '用户ID',
+
 	`role_id` VARCHAR ( 32 ) NOT NULL COMMENT '角色id',
 	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
