@@ -151,7 +151,6 @@ DROP TABLE IF EXISTS `t_user_role_relation`;
 CREATE TABLE `t_user_role_relation` (
    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
    `user_id` VARCHAR ( 32 ) NOT NULL COMMENT '用户ID',
-
 	`role_id` VARCHAR ( 32 ) NOT NULL COMMENT '角色id',
 	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
@@ -201,8 +200,12 @@ DROP TABLE IF EXISTS `t_user_operate_log`;
 CREATE TABLE `t_user_operate_log` (
    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
    `user_id` VARCHAR ( 32 ) NOT NULL COMMENT '用户ID',
-	`name` VARCHAR ( 32 ) NOT NULL COMMENT '用户名',
-	`description` VARCHAR ( 2048 ) NOT NULL COMMENT '描述',
+   `ip_address` VARCHAR ( 32 ) NOT NULL COMMENT 'IP地址',
+   `device_info` VARCHAR ( 256 )  COMMENT '设备信息',
+   `action_result` INT NOT NULL DEFAULT '1' COMMENT '操作结果，0失败 1成功',
+   `action_url` VARCHAR ( 128 ) NOT NULL COMMENT '操作地址',
+    `action_param` TEXT COMMENT '操作参数',
+	`remark` VARCHAR ( 2048 ) NOT NULL COMMENT '备注',
 	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',

@@ -1,11 +1,16 @@
 package com.machine.test.temp.qiyu;
 
+import cn.hutool.json.JSONUtil;
+import com.dtyunxi.thirdparty.qiyu.session.QiYuStaffClient;
 import com.dtyunxi.thirdparty.qiyu.session.model.CommonResult;
+import com.dtyunxi.thirdparty.qiyu.session.model.request.QiYuStaffListRequest;
+import com.dtyunxi.thirdparty.qiyu.session.model.response.QiYuStaffListResponse;
 import com.dtyunxi.thirdparty.qiyu.session.util.FileUtil;
 import com.dtyunxi.thirdparty.qiyu.session.util.MediaUtil;
 import com.machine.test.temp.qiyu.model.QueryQueueResult;
 import com.machine.test.temp.qiyu.model.eo.ComplaintEo;
 import com.machine.test.temp.qiyu.model.eo.TicketEo;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -18,6 +23,7 @@ import java.util.*;
  * @author Qian.YongYan
  * @create 2024-03-13 16:22
  */
+@Slf4j
 public class QiyuTest {
 
     private static final String appKey = "89ddbe0d5eaca34cd6132fc54ffe66fc";
@@ -36,6 +42,18 @@ public class QiyuTest {
         test.testCreateTicket();
         //test.sendImageMessage(foreignId, path);
         //test.queryTicketDetail("101000420");
+
+       // test.queryStaffList();
+    }
+
+
+    public void queryStaffList() {
+        QiYuStaffClient client = new QiYuStaffClient(appKey, appSecret);
+        QiYuStaffListRequest request = new QiYuStaffListRequest();
+        //request.setStatus(1);
+        request.setRole(0);
+        List<QiYuStaffListResponse> responseList = client.staffList(request).getData();
+        log.info("七鱼客服列表:{}", JSONUtil.toJsonStr(responseList));
     }
 
     public void queryStaffGroup() throws IOException {
@@ -54,14 +72,16 @@ public class QiyuTest {
     public void testCreateTicket() throws IOException {
         TicketEo eo = new TicketEo();
         eo.setTitle("扫呗投诉");
-        eo.setUid("15936307651");
-        eo.setUserMobile("15936307651");
+        eo.setUid("1593630763");
+        eo.setUserMobile("1593630763");
+        //eo.setStaffId("6454385");
+        eo.setStaffId("6461160");
         ComplaintEo complaintEo = new ComplaintEo();
         complaintEo.setMerchantNumber("商户号");
         complaintEo.setMerchantName("商户名称");
         complaintEo.setTransactionOrderNumber("交易订单号");
         complaintEo.setComplaintNumber("投诉单号");
-        complaintEo.setComplainantContact("15936307651");
+        complaintEo.setComplainantContact("1593630763");
         complaintEo.setComplaintContent("孬吃");
         complaintEo.setComplaintDate(LocalDateTime.now().toString());
         complaintEo.setComplaintSource("微信");
@@ -83,7 +103,7 @@ public class QiyuTest {
         attachment.setFileName(fileName);
         attachment.setType(1);
 
-        HttpURLConnection connection = (HttpURLConnection)new URL(url).openConnection();
+        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
         connection.setRequestMethod("GET");
         connection.connect();
         InputStream is = connection.getInputStream();
