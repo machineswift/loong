@@ -39,19 +39,19 @@ public class QiyuTest {
     public static void main(String[] args) throws Exception {
         QiyuTest test = new QiyuTest();
         //test.queryStaffGroup();
-        test.testCreateTicket();
+       // test.testCreateTicket();
         //test.sendImageMessage(foreignId, path);
         //test.queryTicketDetail("101000420");
 
-       // test.queryStaffList();
+        test.queryStaffList();
     }
 
 
     public void queryStaffList() {
         QiYuStaffClient client = new QiYuStaffClient(appKey, appSecret);
         QiYuStaffListRequest request = new QiYuStaffListRequest();
-        //request.setStatus(1);
-        request.setRole(0);
+//        request.setStatus(1);
+//        request.setRole(0);
         List<QiYuStaffListResponse> responseList = client.staffList(request).getData();
         log.info("七鱼客服列表:{}", JSONUtil.toJsonStr(responseList));
     }

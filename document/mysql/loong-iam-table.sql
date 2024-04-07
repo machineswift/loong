@@ -205,6 +205,7 @@ CREATE TABLE `t_user_operate_log` (
    `action_result` INT NOT NULL DEFAULT '1' COMMENT '操作结果，0失败 1成功',
    `action_url` VARCHAR ( 128 ) NOT NULL COMMENT '操作地址',
    `action_param` TEXT COMMENT '操作参数',
+   `action_result` TEXT COMMENT '操作结果',
    `remark` VARCHAR ( 2048 ) NOT NULL COMMENT '备注',
    `create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
