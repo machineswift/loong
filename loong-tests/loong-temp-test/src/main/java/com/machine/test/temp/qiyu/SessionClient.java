@@ -12,7 +12,7 @@ import com.machine.test.temp.qiyu.model.ApplyStaffResult;
 import com.machine.test.temp.qiyu.model.QueryQueueResult;
 import com.machine.test.temp.qiyu.model.Session;
 import com.machine.test.temp.qiyu.model.eo.TicketEo;
-import org.apache.commons.codec.binary.Base64;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.w3c.dom.Element;
 
 import javax.sound.sampled.LineUnavailableException;
