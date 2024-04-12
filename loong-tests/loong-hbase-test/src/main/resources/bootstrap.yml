@@ -8,13 +8,11 @@ spring:
   profiles:
     active: DEV
   application:
-    name: loong-temp-test
+    name: loong-hbase-test
   servlet:
     multipart:
       max-file-size: 2048MB
       max-request-size: 4096MB
-
-
 
 logging:
   level:

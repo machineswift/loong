@@ -13,6 +13,7 @@
     <description>loong test 集合</description>
 
     <modules>
+        <module>loong-hbase-test</module>
         <module>loong-temp-test</module>
     </modules>
 
