@@ -13,6 +13,10 @@ spring:
     multipart:
       max-file-size: 2048MB
       max-request-size: 4096MB
+  phoenix:
+    zookeeper:
+      quorum: localhost:2181
+      znode: /hbase
 
 logging:
   level:
