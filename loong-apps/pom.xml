@@ -8,13 +8,13 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>loong-applications</artifactId>
+    <artifactId>loong-apps</artifactId>
     <packaging>pom</packaging>
     <description>app 服务集合</description>
 
     <modules>
-        <module>loong-iam-application</module>
-        <module>loong-manage-application</module>
+        <module>loong-iam-app</module>
+        <module>loong-manage-app</module>
     </modules>
 
     <dependencyManagement>
