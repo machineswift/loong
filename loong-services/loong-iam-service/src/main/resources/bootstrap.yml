@@ -1,14 +1,31 @@
 server:
-  port: 8901
-  servlet:
-    context-path: /${spring.application.name}
+  port: 8080
 spring:
-  main:
-    allow-bean-definition-overriding: true
   profiles:
     active: DEV
   application:
-    name: loong-service-iam
+    name: loong-iam-service
+
+
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848 #nacos中心地址
+        username: nacos
+        password: nacos
+        file-extension: yaml # 配置文件格式
+        namespace: LOONG_${spring.profiles.active}
+        group: LOONG_GROUP
+        sharedConfigs:
+          - dataId: loong.yaml
+            group: LOONG_GROUP
+            refresh: true
+      discovery:
+        server-addr: 127.0.0.1:8848 #nacos中心地址
+        username: nacos
+        password: nacos
+        namespace: LOONG_${spring.profiles.active}
+        group: LOONG_GROUP
 
   # DataSource Config
 
@@ -18,28 +35,8 @@ spring:
     username: root
     password: root
 
-#mybatis-plus配置
-mybatis-plus:
-  mapper-locations: classpath*:/com/machine/service/iam/area/*Mapper.xml
-  #实体扫描，多个package用逗号或者分号分隔
-  type-aliases-package: com.machine.service.iam.area.mapper.entity
-  type-handlers-package: com.machine.loong.starter.mybatis.handler
-  global-config:
-    # 关闭MP3.0自带的banner
-    banner: false
-    db-config:
-      #主键类型  0:"数据库ID自增", 1:"不操作", 2:"用户输入ID",3:"数字型snowflake", 4:"全局唯一ID UUID", 5:"字符串型snowflake";
-      id-type: assign_id
-      #字段策略
-      insert-strategy: not_null
-      update-strategy: not_null
-      #驼峰下划线转换
-      table-underline: true
-      # 逻辑删除配置
-      # 逻辑删除全局值（1表示已删除，这也是Mybatis Plus的默认配置）
-      logic-delete-value: 1
-      # 逻辑未删除全局值（0表示未删除，这也是Mybatis Plus的默认配置）
-      logic-not-delete-value: 0
-  configuration:
-    map-underscore-to-camel-case: true
-    cache-enabled: false
+
+#logging:
+#  level:
+#    root: DEBUG
+#    com.yourpackage: DEBUG

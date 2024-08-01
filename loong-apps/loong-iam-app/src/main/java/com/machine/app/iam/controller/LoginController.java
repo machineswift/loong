@@ -1,5 +1,7 @@
 package com.machine.app.iam.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,27 +12,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 
+@Slf4j
 @RestController
+@RefreshScope
 @RequestMapping("login")
 public class LoginController {
 
 
-    @GetMapping("/login")
+    @GetMapping("login")
     public ResponseEntity<String> login() {
         return ResponseEntity.ok("尚未登录，请登录");
     }
 
-    @GetMapping("/hello")
+    @GetMapping("hello")
     public ResponseEntity<String> hello() {
         return ResponseEntity.ok("hello");
     }
 
-    @GetMapping("/helloPost")
+    @GetMapping("helloPost")
     public ResponseEntity<String> helloPost() {
         return ResponseEntity.ok("helloPost");
     }
 
-    @GetMapping("/getUser")
+    @GetMapping("getUser")
     public String getUser() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
