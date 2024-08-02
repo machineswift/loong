@@ -12,7 +12,7 @@ import java.util.Properties;
  * 登录验证码
  */
 @Configuration
-public class KaptchaConfig {
+public class CaptchaConfig {
 
     @Bean
     public Producer captchaProducer() {

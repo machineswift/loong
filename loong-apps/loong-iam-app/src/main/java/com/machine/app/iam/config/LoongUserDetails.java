@@ -2,8 +2,10 @@ package com.machine.app.iam.config;
 
 import com.machine.client.iam.user.dto.LoongUserDetailDto;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 public class LoongUserDetails implements UserDetails {
@@ -16,7 +18,7 @@ public class LoongUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
