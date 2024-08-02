@@ -2,6 +2,7 @@ package com.machine.service.iam.user.serve;
 
 import com.machine.client.iam.user.ILoongUserClient;
 import com.machine.client.iam.user.dto.LoongUserDetailDto;
+import com.machine.client.iam.user.dto.LoongUserDto;
 import com.machine.service.iam.user.service.ILoongUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,5 +25,11 @@ public class LoongUserServe implements ILoongUserClient {
     @GetMapping("detail")
     public LoongUserDetailDto detail(@RequestParam("userId") String userId) {
         return loongUserService.detail(userId);
+    }
+
+    @Override
+    @GetMapping("getByUserName")
+    public LoongUserDto getByUserName(String userName) {
+        return loongUserService.getByUserName(userName);
     }
 }

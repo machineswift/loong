@@ -6,7 +6,6 @@ spring:
   application:
     name: loong-iam-service
 
-
   cloud:
     nacos:
       config:
@@ -34,9 +33,3 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/loong_iam?useUnicode=true&autoReconnect=true&allowMultiQueries=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: root
     password: root
-
-
-#logging:
-#  level:
-#    root: DEBUG
-#    com.yourpackage: DEBUG

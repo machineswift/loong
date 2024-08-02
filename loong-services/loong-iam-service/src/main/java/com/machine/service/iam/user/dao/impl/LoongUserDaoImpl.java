@@ -1,5 +1,7 @@
 package com.machine.service.iam.user.dao.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.machine.service.iam.user.dao.ILoongUserDao;
 import com.machine.service.iam.user.dao.mapper.ILoongUserMapper;
 import com.machine.service.iam.user.dao.mapper.entity.LoongUserEntity;
@@ -15,5 +17,12 @@ public class LoongUserDaoImpl implements ILoongUserDao {
     @Override
     public LoongUserEntity detail(String userId) {
         return loongUserMapper.selectById(userId);
+    }
+
+    @Override
+    public LoongUserEntity getByUserName(String userName) {
+        Wrapper<LoongUserEntity> queryWrapper = new LambdaQueryWrapper<LoongUserEntity>()
+                .eq(LoongUserEntity::getUserName, userName);
+        return loongUserMapper.selectOne(queryWrapper);
     }
 }

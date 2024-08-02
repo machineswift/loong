@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS `t_user`;
 CREATE TABLE `t_user` (
 	`id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
 	`user_name` VARCHAR ( 32 ) NOT NULL COMMENT '用户名',
+    `enabled` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '状态，禁用:0 启用:1',
 	`password` VARCHAR ( 256 ) NOT NULL COMMENT '密码，加密存储',
 	`phone` VARCHAR ( 16 ) NOT NULL default '' COMMENT '手机号',
 	`full_name` VARCHAR ( 64 ) NOT NULL default '' COMMENT '用户姓名',

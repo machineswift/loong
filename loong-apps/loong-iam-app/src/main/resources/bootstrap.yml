@@ -6,6 +6,7 @@ spring:
   application:
     name: loong-iam-app
 
+
   cloud:
     nacos:
       config:

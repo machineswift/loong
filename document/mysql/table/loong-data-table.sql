@@ -88,7 +88,7 @@ CREATE TABLE `t_label_option` (
    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
    `label_id` VARCHAR ( 32 ) NOT NULL COMMENT '人工标签ID',
    `sort` INT UNSIGNED NOT NULL COMMENT '排序，sort值大的排序靠前',
-   `status` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '状态，禁用:0 启用:1',
+   `enabled` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '状态，禁用:0 启用:1',
    `name` VARCHAR ( 32 ) NOT NULL DEFAULT '' COMMENT '名称',
    `create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',

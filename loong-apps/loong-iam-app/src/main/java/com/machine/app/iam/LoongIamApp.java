@@ -5,9 +5,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@SpringBootApplication
+
 @EnableDiscoveryClient
-@EnableFeignClients("com.machine.client")
+@EnableFeignClients(basePackages = {
+        "com.machine.client"
+})
+@SpringBootApplication(scanBasePackages = {
+        "com.machine.app.iam"
+})
 public class LoongIamApp {
 
     public static void main(String[] args) {
