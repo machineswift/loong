@@ -2,6 +2,7 @@ package com.machine.service.iam.user.service.impl;
 
 import com.machine.client.iam.user.dto.LoongUserDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDto;
+import com.machine.client.iam.user.dto.LoongUserUpdatePasswordDto;
 import com.machine.service.iam.user.dao.ILoongUserDao;
 import com.machine.service.iam.user.dao.mapper.entity.LoongUserEntity;
 import com.machine.service.iam.user.service.ILoongUserService;
@@ -15,6 +16,15 @@ public class LoongUserServiceImpl implements ILoongUserService {
 
     @Autowired
     private ILoongUserDao loongUserDao;
+
+    @Override
+    public int updatePassword(LoongUserUpdatePasswordDto dto) {
+        LoongUserEntity entity = loongUserDao.detail(dto.getUserId());
+        if(null == entity){
+            return 0;
+        }
+        return loongUserDao.updatePassword(dto.getUserId(),dto.getPassword());
+    }
 
     @Override
     public LoongUserDetailDto detail(String userId) {

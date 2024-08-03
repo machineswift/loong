@@ -19,6 +19,5 @@ public class LoongMybatisAutoConfiguration {
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return interceptor;
     }
-
 }
 

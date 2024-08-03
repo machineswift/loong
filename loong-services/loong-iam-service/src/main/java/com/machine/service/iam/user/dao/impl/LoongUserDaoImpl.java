@@ -14,6 +14,17 @@ public class LoongUserDaoImpl implements ILoongUserDao {
     @Autowired
     private ILoongUserMapper loongUserMapper;
 
+
+    @Override
+    public int updatePassword(String userId,
+                              String password) {
+        LoongUserEntity updateEntity =new LoongUserEntity();
+        updateEntity.setId(userId);
+        updateEntity.setPassword(password);
+
+       return loongUserMapper.updateById(updateEntity);
+    }
+
     @Override
     public LoongUserEntity detail(String userId) {
         return loongUserMapper.selectById(userId);
@@ -25,4 +36,5 @@ public class LoongUserDaoImpl implements ILoongUserDao {
                 .eq(LoongUserEntity::getUserName, userName);
         return loongUserMapper.selectOne(queryWrapper);
     }
+
 }
