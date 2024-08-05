@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 public class LoongUserRoleRelationDaoImpl implements ILoongUserROleRelationDao {
 
     @Autowired
-    private ILoongUserRoleRelationMapper loongUserRoleRelationMapper;
+    private ILoongUserRoleRelationMapper userRoleRelationMapper;
 
     @Override
     public LoongUserRoleRelationEntity detail(String id) {
-        return loongUserRoleRelationMapper.selectById(id);
+        return userRoleRelationMapper.selectById(id);
     }
 }

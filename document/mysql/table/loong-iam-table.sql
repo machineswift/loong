@@ -218,3 +218,20 @@ CREATE TABLE `t_user_operate_log` (
     KEY `idx_02` ( `action_url` ) USING BTREE,
 	KEY `idx_03` ( `create_time` ) USING BTREE
 ) COMMENT = '用户操作日志表';
+
+
+DROP TABLE IF EXISTS `t_auth_token`;
+CREATE TABLE `t_auth_token` (
+	`id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
+	`user_name` VARCHAR ( 32 ) NOT NULL COMMENT '用户名',
+	`series` VARCHAR ( 64 ) NOT NULL COMMENT 'series',
+	`token` VARCHAR ( 64 ) NOT NULL COMMENT 'token',
+	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
+	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
+	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
+	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
+	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
+	PRIMARY KEY ( `id` ) USING BTREE,
+	UNIQUE KEY `uk_01` ( `user_name` ) USING BTREE,
+	UNIQUE KEY `uk_02` ( `series` ) USING BTREE
+) COMMENT = '认证token表';

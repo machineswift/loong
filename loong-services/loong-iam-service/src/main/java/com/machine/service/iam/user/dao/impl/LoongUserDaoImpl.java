@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public class LoongUserDaoImpl implements ILoongUserDao {
 
     @Autowired
-    private ILoongUserMapper loongUserMapper;
+    private ILoongUserMapper userMapper;
 
 
     @Override
@@ -22,19 +22,19 @@ public class LoongUserDaoImpl implements ILoongUserDao {
         updateEntity.setId(userId);
         updateEntity.setPassword(password);
 
-       return loongUserMapper.updateById(updateEntity);
+       return userMapper.updateById(updateEntity);
     }
 
     @Override
     public LoongUserEntity detail(String userId) {
-        return loongUserMapper.selectById(userId);
+        return userMapper.selectById(userId);
     }
 
     @Override
     public LoongUserEntity getByUserName(String userName) {
         Wrapper<LoongUserEntity> queryWrapper = new LambdaQueryWrapper<LoongUserEntity>()
                 .eq(LoongUserEntity::getUserName, userName);
-        return loongUserMapper.selectOne(queryWrapper);
+        return userMapper.selectOne(queryWrapper);
     }
 
 }

@@ -17,23 +17,23 @@ import org.springframework.web.bind.annotation.*;
 public class LoongUserServe implements ILoongUserClient {
 
     @Autowired
-    private ILoongUserService loongUserService;
+    private ILoongUserService userService;
 
     @Override
     @PostMapping("updatePassword")
     public int updatePassword(LoongUserUpdatePasswordDto dto) {
-        return loongUserService.updatePassword(dto);
+        return userService.updatePassword(dto);
     }
 
     @Override
     @GetMapping("detail")
     public LoongUserDetailDto detail(@RequestParam("userId") String userId) {
-        return loongUserService.detail(userId);
+        return userService.detail(userId);
     }
 
     @Override
     @GetMapping("getByUserName")
     public LoongUserDto getByUserName(String userName) {
-        return loongUserService.getByUserName(userName);
+        return userService.getByUserName(userName);
     }
 }

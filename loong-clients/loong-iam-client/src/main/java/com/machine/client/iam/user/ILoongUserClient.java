@@ -4,15 +4,12 @@ import com.machine.client.iam.user.dto.LoongUserDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDto;
 import com.machine.client.iam.user.dto.LoongUserUpdatePasswordDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "loong-iam-service/loong-iam-service/serve/user")
 public interface ILoongUserClient {
 
-    @PostMapping("updatePassword")
+    @PutMapping("updatePassword")
     int updatePassword(@RequestBody LoongUserUpdatePasswordDto dto);
 
     @GetMapping("detail")

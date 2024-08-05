@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,6 +19,9 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import java.io.PrintWriter;
@@ -31,15 +33,11 @@ import java.util.Map;
 public class SpringSecurityConfig {
 
     @Autowired
+    private LoongTokenRepository tokenRepository;
+
+    @Autowired
     private LoongUserDetailsService userDetailsService;
 
-//    @Bean
-//    public AuthenticationProvider kaptchaAuthProvider() {
-//        CaptchaAuthProvider provider = new CaptchaAuthProvider();
-//        provider.setUserDetailsService(userDetailsService);
-//        provider.setUserDetailsPasswordService(userDetailsService);
-//        return provider;
-//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -99,6 +97,11 @@ public class SpringSecurityConfig {
                 .csrf((csrf) -> csrf
                         .csrfTokenRepository(new HttpSessionCsrfTokenRepository()).disable()
                 )
+//                .rememberMe((remember) -> remember
+//                        .rememberMeServices(new PersistentTokenBasedRememberMeServices( "remember-me",userDetailsService,tokenRepository))
+////                        .tokenRepository(tokenRepository)
+////                        .tokenValiditySeconds(24*60*60)
+//                );
                 .rememberMe(Customizer.withDefaults());
 
         return http.build();

@@ -15,20 +15,20 @@ import org.springframework.stereotype.Service;
 public class LoongUserServiceImpl implements ILoongUserService {
 
     @Autowired
-    private ILoongUserDao loongUserDao;
+    private ILoongUserDao userDao;
 
     @Override
     public int updatePassword(LoongUserUpdatePasswordDto dto) {
-        LoongUserEntity entity = loongUserDao.detail(dto.getUserId());
+        LoongUserEntity entity = userDao.detail(dto.getUserId());
         if(null == entity){
             return 0;
         }
-        return loongUserDao.updatePassword(dto.getUserId(),dto.getPassword());
+        return userDao.updatePassword(dto.getUserId(),dto.getPassword());
     }
 
     @Override
     public LoongUserDetailDto detail(String userId) {
-        LoongUserEntity entity = loongUserDao.detail(userId);
+        LoongUserEntity entity = userDao.detail(userId);
 
         LoongUserDetailDto detailDto = new LoongUserDetailDto();
         detailDto.setUserId(entity.getId());
@@ -43,7 +43,7 @@ public class LoongUserServiceImpl implements ILoongUserService {
 
     @Override
     public LoongUserDto getByUserName(String userName) {
-        LoongUserEntity entity = loongUserDao.getByUserName(userName);
+        LoongUserEntity entity = userDao.getByUserName(userName);
         if (entity == null) {
             return null;
         }

@@ -10,10 +10,10 @@ import org.springframework.stereotype.Repository;
 public class LoongRoleDaoImpl implements ILoongRoleDao {
 
     @Autowired
-    private ILoongRoleMapper loongRoleMapper;
+    private ILoongRoleMapper roleMapper;
 
     @Override
     public LoongRoleEntity detail(String roleId) {
-        return loongRoleMapper.selectById(roleId);
+        return roleMapper.selectById(roleId);
     }
 }

@@ -30,10 +30,7 @@ public class LoongMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         Long currentTimeMillis = System.currentTimeMillis();
-        this.setFieldValByName(CREATE_TIME_FIELD_NAME, currentTimeMillis, metaObject);
         this.setFieldValByName(UPDATE_TIME_FIELD_NAME, currentTimeMillis, metaObject);
-
-        this.setFieldValByName(CREATE_BY_FIELD_NAME, "system_user_id", metaObject);
         this.setFieldValByName(UPDATE_BY_FIELD_NAME, "system_user_id", metaObject);
     }
 }

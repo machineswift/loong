@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoongRoleServe implements ILoongRoleClient {
 
     @Autowired
-    private ILoongRoleService loongRoleService;
+    private ILoongRoleService roleService;
 
     @Override
     @GetMapping("detail")
     public LoongRoleDetailDto detail(@RequestParam("roleId") String roleId) {
-        return loongRoleService.detail(roleId);
+        return roleService.detail(roleId);
     }
 }

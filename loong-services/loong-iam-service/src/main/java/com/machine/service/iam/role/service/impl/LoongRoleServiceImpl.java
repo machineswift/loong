@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 public class LoongRoleServiceImpl implements ILoongRoleService {
 
     @Autowired
-    private ILoongRoleDao loongRoleDao;
+    private ILoongRoleDao roleDao;
 
     @Override
     public LoongRoleDetailDto detail(String roleId) {
-        LoongRoleEntity entity = loongRoleDao.detail(roleId);
+        LoongRoleEntity entity = roleDao.detail(roleId);
 
         LoongRoleDetailDto detailDto = new LoongRoleDetailDto();
         detailDto.setRoleId(entity.getId());
