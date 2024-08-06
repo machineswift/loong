@@ -7,11 +7,11 @@ import com.machine.client.iam.auth.dto.LoongAuthTokenUpdateTokenDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.rememberme.PersistentRememberMeToken;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Repository
+@Service
 public class LoongTokenRepository implements PersistentTokenRepository {
 
     @Autowired
@@ -43,7 +43,7 @@ public class LoongTokenRepository implements PersistentTokenRepository {
             return null;
         }
 
-        return new PersistentRememberMeToken(dto.getUsername(),
+        return new PersistentRememberMeToken(dto.getUserName(),
                 dto.getSeries(), dto.getToken(), new Date(dto.getUpdateTime()));
     }
 

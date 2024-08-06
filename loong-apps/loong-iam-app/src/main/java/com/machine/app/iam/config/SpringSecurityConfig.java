@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
@@ -18,10 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 import java.io.PrintWriter;
@@ -38,37 +33,43 @@ public class SpringSecurityConfig {
     @Autowired
     private LoongUserDetailsService userDetailsService;
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers("/auth/vc", "/auth/login").permitAll()
+                                //必须通过用户名密码方式认证
+                                .requestMatchers("/admin").fullyAuthenticated()
+                                //必须通过RememberMe方式认证
+                                .requestMatchers("/rememberme").rememberMe()
                                 //.requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest()
                                 .authenticated())
-                .addFilterAt(new LoongJsonAuthFilter(), UsernamePasswordAuthenticationFilter.class)
-//                .formLogin(formLogin ->
-//                        formLogin.loginProcessingUrl("/doLogin")
-//                                .usernameParameter("username")
-//                                .passwordParameter("password")
-//                                .successHandler((req, resp, authentication) -> {
-//                                    Object principal = authentication.getPrincipal();
-//                                    resp.setContentType("application/json;charset=utf-8");
-//                                    PrintWriter out = resp.getWriter();
-//                                    out.write(new ObjectMapper().writeValueAsString(principal));
-//                                    out.flush();
-//                                    out.close();
-//                                })
-//                                .failureHandler((req, resp, e) -> {
-//                                    resp.setContentType("application/json;charset=utf-8");
-//                                    PrintWriter out = resp.getWriter();
-//                                    out.write(e.getMessage());
-//                                    out.flush();
-//                                    out.close();
-//                                }).permitAll())
+                .authenticationManager(authenticationManager())
+                .formLogin(formLogin ->
+                        formLogin.loginProcessingUrl("/auth/login")
+                                .usernameParameter("username")
+                                .passwordParameter("password")
+                                .successHandler((req, resp, authentication) -> {
+                                    Object principal = authentication.getPrincipal();
+                                    JSONObject jsonObj = JSONUtil.parseObj(new ObjectMapper().writeValueAsString(principal));
+                                    jsonObj.remove("password");
+
+                                    resp.setContentType("application/json;charset=utf-8");
+                                    PrintWriter out = resp.getWriter();
+                                    out.write(jsonObj.toString());
+                                    out.flush();
+                                    out.close();
+                                })
+                                .failureHandler((req, resp, e) -> {
+                                    resp.setContentType("application/json;charset=utf-8");
+                                    PrintWriter out = resp.getWriter();
+                                    out.write(e.getMessage());
+                                    out.flush();
+                                    out.close();
+                                }).permitAll())
                 .logout(logout ->
-                        logout.logoutUrl("/logout")
+                        logout.logoutUrl("/auth/logout")
                                 .logoutSuccessHandler((req, resp, authentication) -> {
                                     resp.setContentType("application/json;charset=utf-8");
                                     PrintWriter out = resp.getWriter();
@@ -97,41 +98,20 @@ public class SpringSecurityConfig {
                 .csrf((csrf) -> csrf
                         .csrfTokenRepository(new HttpSessionCsrfTokenRepository()).disable()
                 )
-//                .rememberMe((remember) -> remember
-//                        .rememberMeServices(new PersistentTokenBasedRememberMeServices( "remember-me",userDetailsService,tokenRepository))
-////                        .tokenRepository(tokenRepository)
-////                        .tokenValiditySeconds(24*60*60)
-//                );
-                .rememberMe(Customizer.withDefaults());
+                .rememberMe((remember) -> remember
+                        .rememberMeServices(loongRememberMeServices())
+                )
+        ;
 
         return http.build();
     }
 
-
     @Bean
-    public LoongJsonAuthFilter jsonLoginFilter() {
-        LoongJsonAuthFilter filter = new LoongJsonAuthFilter();
-        filter.setAuthenticationSuccessHandler((req, resp, auth) -> {
-            Object principal = auth.getPrincipal();
-            JSONObject jsonObj = JSONUtil.parseObj(new ObjectMapper().writeValueAsString(principal));
-            jsonObj.remove("password");
-
-            resp.setContentType("application/json;charset=utf-8");
-            PrintWriter out = resp.getWriter();
-            out.write(jsonObj.toString());
-            out.flush();
-            out.close();
-        });
-        filter.setAuthenticationFailureHandler((req, resp, e) -> {
-            resp.setContentType("application/json;charset=utf-8");
-            PrintWriter out = resp.getWriter();
-            out.write(e.getMessage());
-            out.flush();
-            out.close();
-        });
-        filter.setAuthenticationManager(authenticationManager());
-        filter.setFilterProcessesUrl("/auth/login");
-        return filter;
+    public LoongRememberMeServices loongRememberMeServices() {
+        LoongRememberMeServices services = new LoongRememberMeServices(
+                "loong-remember-service-key", userDetailsService, tokenRepository);
+        services.setTokenValiditySeconds(7 * 24 * 60 * 60);
+        return services;
     }
 
     @Bean

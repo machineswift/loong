@@ -11,7 +11,6 @@ CREATE TABLE `t_user` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
 	UNIQUE KEY `uk_01` ( `user_name` ) USING BTREE,
 	KEY `idx_01` ( `phone` ) USING BTREE,
@@ -29,7 +28,6 @@ CREATE TABLE `t_role` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     KEY `idx_01` ( `parent_id` ) USING BTREE,
 	KEY `idx_02` ( `create_time` ) USING BTREE
@@ -46,7 +44,6 @@ CREATE TABLE `t_permission` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     KEY `idx_01` ( `parent_id` ) USING BTREE,
 	KEY `idx_02` ( `create_time` ) USING BTREE
@@ -63,7 +60,6 @@ CREATE TABLE `t_group` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     KEY `idx_01` ( `parent_id` ) USING BTREE,
 	KEY `idx_02` ( `create_time` ) USING BTREE
@@ -80,7 +76,6 @@ CREATE TABLE `t_role_permission_relation` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     UNIQUE KEY `uk_01` ( `role_id`,`permission_id` ) USING BTREE
 ) COMMENT = '角色权限关系表';
@@ -96,7 +91,6 @@ CREATE TABLE `t_group_permission_relation` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     UNIQUE KEY `uk_01` ( `group_id`,`permission_id` ) USING BTREE
 ) COMMENT = '分组权限关系表';
@@ -111,7 +105,6 @@ CREATE TABLE `t_group_role_relation` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     UNIQUE KEY `uk_01` ( `group_id`,`role_id` ) USING BTREE
 ) COMMENT = '分组角色关系表';
@@ -126,7 +119,6 @@ CREATE TABLE `t_user_group_relation` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     UNIQUE KEY `uk_01` ( `user_id`,`group_id` ) USING BTREE
 ) COMMENT = '用户分组关系表';
@@ -142,7 +134,6 @@ CREATE TABLE `t_user_permission_relation` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     UNIQUE KEY `uk_01` ( `user_id`,`permission_id` ) USING BTREE
 ) COMMENT = '用户权限关系表';
@@ -157,7 +148,6 @@ CREATE TABLE `t_user_role_relation` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     UNIQUE KEY `uk_01` ( `user_id`,`role_id` ) USING BTREE
 ) COMMENT = '用户角色关系表';
@@ -174,7 +164,6 @@ CREATE TABLE `t_organization` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     KEY `idx_01` ( `parent_id` ) USING BTREE,
 	KEY `idx_02` ( `create_time` ) USING BTREE
@@ -191,7 +180,6 @@ CREATE TABLE `t_user_organization_relation` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     UNIQUE KEY `uk_01` ( `user_id`,`organization_id` ) USING BTREE
 ) COMMENT = '用户组织关系表';
@@ -212,7 +200,6 @@ CREATE TABLE `t_user_operate_log` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
     KEY `idx_01` ( `user_id` ) USING BTREE,
     KEY `idx_02` ( `action_url` ) USING BTREE,
@@ -230,8 +217,7 @@ CREATE TABLE `t_auth_token` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
-	UNIQUE KEY `uk_01` ( `user_name` ) USING BTREE,
-	UNIQUE KEY `uk_02` ( `series` ) USING BTREE
+	UNIQUE KEY `uk_01` ( `series` ) USING BTREE,
+	KEY `idx_01` ( `user_name` ) USING BTREE
 ) COMMENT = '认证token表';

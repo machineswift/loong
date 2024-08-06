@@ -29,6 +29,9 @@ public class LoongUserServiceImpl implements ILoongUserService {
     @Override
     public LoongUserDetailDto detail(String userId) {
         LoongUserEntity entity = userDao.detail(userId);
+        if(null == entity){
+            return null;
+        }
 
         LoongUserDetailDto detailDto = new LoongUserDetailDto();
         detailDto.setUserId(entity.getId());

@@ -12,7 +12,7 @@ import java.util.Properties;
  * 登录验证码
  */
 @Configuration
-public class CaptchaConfig {
+public class LoongCaptchaConfig {
 
     // 验证码有效期为5分钟
     public static final long CAPTCHA_EXPIRATION_TIME = 300;

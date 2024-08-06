@@ -21,7 +21,7 @@ public class LoongAuthTokenServe implements ILoongAuthTokenClient {
 
     @Override
     @PostMapping("add")
-    public int add(LoongAuthTokenAddDto dto) {
+    public int add(@RequestBody LoongAuthTokenAddDto dto) {
         return authTokenService.add(dto);
     }
 
@@ -32,12 +32,14 @@ public class LoongAuthTokenServe implements ILoongAuthTokenClient {
     }
 
     @Override
-    public int updateToken(LoongAuthTokenUpdateTokenDto dto) {
+    @PutMapping("updateToken")
+    public int updateToken(@RequestBody LoongAuthTokenUpdateTokenDto dto) {
         return authTokenService.updateToken(dto);
     }
 
     @Override
-    public LoongAuthTokenDto getBySeries(String series) {
+    @GetMapping("getBySeries")
+    public LoongAuthTokenDto getBySeries(@RequestParam("series") String series) {
         return authTokenService.getBySeries(series);
     }
 }

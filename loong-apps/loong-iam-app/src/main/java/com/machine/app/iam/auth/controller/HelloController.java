@@ -15,25 +15,23 @@ import java.util.Collection;
 @Slf4j
 @RestController
 @RefreshScope
-@RequestMapping("login")
-public class LoginController {
-
-
-    @GetMapping("login")
-    public ResponseEntity<String> login() {
-        return ResponseEntity.ok("尚未登录，请登录");
-    }
+@RequestMapping("hello")
+public class HelloController {
 
     @GetMapping("hello")
-    public ResponseEntity<String> hello() {
-        return ResponseEntity.ok("hello");
+    public String hello() {
+        return "hello";
     }
 
-    @GetMapping("helloPost")
-    public ResponseEntity<String> helloPost() {
-        return ResponseEntity.ok("helloPost");
+    @GetMapping("admin")
+    public String admin() {
+        return "admin";
     }
 
+    @GetMapping("rememberme")
+    public String rememberMe() {
+        return "rememberme";
+    }
     @GetMapping("getUser")
     public String getUser() {
         Authentication authentication =

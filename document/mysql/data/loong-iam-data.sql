@@ -9,11 +9,11 @@ VALUES
 
 DELETE FROM t_user;
 INSERT INTO t_user
-	(id,user_name,PASSWORD,full_name, `create_by`,`create_time`,`update_by`,`update_time`)
+	(id,user_name,enabled,PASSWORD,full_name, `create_by`,`create_time`,`update_by`,`update_time`)
 VALUES
-		('system_user_id','system','{noop}123456','系统管理员','system_user_id',1722499004775,'system_user_id',1722499004775),
-		('admin_user_id','admin','{noop}123456','管理员','system_user_id',1722499004775,'system_user_id',1722499004775),
-		('userbbbbccccddddeeeeffffggggiiii','machine','{noop}123456','机械','system_user_id',1722499004775,'system_user_id',1722499004775);
+		('system_user_id','system',1,'{noop}123456','系统管理员','system_user_id',1722499004775,'system_user_id',1722499004775),
+		('admin_user_id','admin',1,'{noop}123456','管理员','system_user_id',1722499004775,'system_user_id',1722499004775),
+		('userbbbbccccddddeeeeffffggggiiii','machine',1,'{noop}123456','机械','system_user_id',1722499004775,'system_user_id',1722499004775);
 
 
 DELETE FROM t_user_role_relation;
@@ -23,3 +23,4 @@ VALUES
 		('system_user_role_id','system_user_id','system_role_id','system_user_id',1722499004775,'system_user_id',1722499004775),
 		('admin_user_role_id','admin_user_id','admin_role_id','system_user_id',1722499004775,'system_user_id',1722499004775),
 		('userroleccccddddeeeeffffggggiiii','userbbbbccccddddeeeeffffggggiiii','rolebbbbccccddddeeeeffffggggiiii','system_user_id',1722499004775,'system_user_id',1722499004775);
+

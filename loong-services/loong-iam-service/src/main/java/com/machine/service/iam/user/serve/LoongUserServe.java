@@ -20,8 +20,8 @@ public class LoongUserServe implements ILoongUserClient {
     private ILoongUserService userService;
 
     @Override
-    @PostMapping("updatePassword")
-    public int updatePassword(LoongUserUpdatePasswordDto dto) {
+    @PutMapping("updatePassword")
+    public int updatePassword(@RequestBody LoongUserUpdatePasswordDto dto) {
         return userService.updatePassword(dto);
     }
 
@@ -33,7 +33,7 @@ public class LoongUserServe implements ILoongUserClient {
 
     @Override
     @GetMapping("getByUserName")
-    public LoongUserDto getByUserName(String userName) {
+    public LoongUserDto getByUserName(@RequestParam("userName") String userName) {
         return userService.getByUserName(userName);
     }
 }

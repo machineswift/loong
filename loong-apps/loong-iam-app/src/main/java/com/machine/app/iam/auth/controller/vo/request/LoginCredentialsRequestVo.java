@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class LoginCredentialsRequestVo {
-    private String username;
+    private String userName;
     private String password;
     private String captcha;
+    private String rememberMe;
 }

@@ -28,6 +28,6 @@ spring:
         group: LOONG_GROUP
 
 
-logging:
-  level:
-    root: DEBUG
+#logging:
+#  level:
+#    root: DEBUG

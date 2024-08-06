@@ -38,6 +38,6 @@ public abstract class BaseEntity {
     /**
      * 是否删除 0=不删除 1=删除
      */
-    @TableLogic(value = "deleted")
-    private Boolean deleted;
+//    @TableLogic(value = "deleted")
+//    private Boolean deleted;
 }
