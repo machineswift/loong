@@ -32,7 +32,7 @@ public class LoongAuthController {
         String text = producer.createText();
         session.setAttribute("captcha", text);
         session.setAttribute("captchaExpirationTime",
-                LocalDateTime.now().plus(LoongCaptchaConfig.CAPTCHA_EXPIRATION_TIME, ChronoUnit.SECONDS));
+                System.currentTimeMillis() + LoongCaptchaConfig.CAPTCHA_EXPIRATION_TIME * 1000);
         BufferedImage image = producer.createImage(text);
         try (ServletOutputStream out = resp.getOutputStream()) {
             ImageIO.write(image, "jpg", out);

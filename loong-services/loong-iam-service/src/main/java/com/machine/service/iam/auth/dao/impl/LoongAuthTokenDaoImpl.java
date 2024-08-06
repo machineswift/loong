@@ -26,13 +26,9 @@ public class LoongAuthTokenDaoImpl implements ILoongAuthTokenDao {
 
     @Override
     public int deleteByUserName(String userName) {
-        Wrapper<LoongAuthTokenEntity> queryWrapper = new LambdaQueryWrapper<LoongAuthTokenEntity>()
+        Wrapper<LoongAuthTokenEntity> wrapper = new LambdaQueryWrapper<LoongAuthTokenEntity>()
                 .eq(LoongAuthTokenEntity::getUserName, userName);
-        LoongAuthTokenEntity entity = authTokenMapper.selectOne(queryWrapper);
-        if (null == entity) {
-            return 0;
-        }
-        return authTokenMapper.deleteById(entity.getId());
+        return authTokenMapper.delete(wrapper);
     }
 
     @Override

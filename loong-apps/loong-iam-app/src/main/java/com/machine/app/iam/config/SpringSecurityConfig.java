@@ -19,6 +19,7 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
+
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,9 +34,34 @@ public class SpringSecurityConfig {
     @Autowired
     private LoongUserDetailsService userDetailsService;
 
+//    public SpringSessionBackedSessionRegistry sessionRegistry(FindByIndexNameSessionRepository sessionRepository){
+//        SpringSessionBackedSessionRegistry sessionRegistry=new SpringSessionBackedSessionRegistry(sessionRepository);
+//        sessionRegistry.
+//        return sessionRegistry;
+//    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
+                .sessionManagement((session) -> {
+                    session
+                            .maximumSessions(1)
+                            .maxSessionsPreventsLogin(false)
+                            //.sessionRegistry()
+                            .expiredSessionStrategy(event -> {
+                                HttpServletResponse response = event.getResponse();
+                                response.setContentType("application/json;charset=utf-8");
+                                Map<String, Object> result = new HashMap<>();
+                                result.put("status", 500);
+                                result.put("msg", "当前会话已经失效，请重新登录");
+                                String s = new ObjectMapper().writeValueAsString(result);
+                                response.getWriter().print(s);
+                                response.flushBuffer();
+                            });
+                })
+                .rememberMe((remember) -> remember
+                        .rememberMeServices(loongRememberMeServices())
+                )
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers("/auth/vc", "/auth/login").permitAll()
                                 //必须通过用户名密码方式认证
@@ -44,30 +70,8 @@ public class SpringSecurityConfig {
                                 .requestMatchers("/rememberme").rememberMe()
                                 //.requestMatchers("/admin/**").hasRole("ADMIN")
                                 .anyRequest()
-                                .authenticated())
-                .authenticationManager(authenticationManager())
-                .formLogin(formLogin ->
-                        formLogin.loginProcessingUrl("/auth/login")
-                                .usernameParameter("username")
-                                .passwordParameter("password")
-                                .successHandler((req, resp, authentication) -> {
-                                    Object principal = authentication.getPrincipal();
-                                    JSONObject jsonObj = JSONUtil.parseObj(new ObjectMapper().writeValueAsString(principal));
-                                    jsonObj.remove("password");
-
-                                    resp.setContentType("application/json;charset=utf-8");
-                                    PrintWriter out = resp.getWriter();
-                                    out.write(jsonObj.toString());
-                                    out.flush();
-                                    out.close();
-                                })
-                                .failureHandler((req, resp, e) -> {
-                                    resp.setContentType("application/json;charset=utf-8");
-                                    PrintWriter out = resp.getWriter();
-                                    out.write(e.getMessage());
-                                    out.flush();
-                                    out.close();
-                                }).permitAll())
+                                .authenticated()
+                )
                 .logout(logout ->
                         logout.logoutUrl("/auth/logout")
                                 .logoutSuccessHandler((req, resp, authentication) -> {
@@ -76,7 +80,8 @@ public class SpringSecurityConfig {
                                     out.write("注销成功");
                                     out.flush();
                                     out.close();
-                                }))
+                                })
+                )
                 .exceptionHandling(exceptionHandle ->
                         exceptionHandle
                                 .accessDeniedHandler((req, resp, e) -> {
@@ -98,9 +103,30 @@ public class SpringSecurityConfig {
                 .csrf((csrf) -> csrf
                         .csrfTokenRepository(new HttpSessionCsrfTokenRepository()).disable()
                 )
-                .rememberMe((remember) -> remember
-                        .rememberMeServices(loongRememberMeServices())
+                .formLogin(formLogin ->
+                        formLogin.loginProcessingUrl("/auth/login")
+                                .usernameParameter("username")
+                                .passwordParameter("password")
+                                .successHandler((req, resp, authentication) -> {
+                                    Object principal = authentication.getPrincipal();
+                                    JSONObject jsonObj = JSONUtil.parseObj(new ObjectMapper().writeValueAsString(principal));
+                                    jsonObj.remove("password");
+
+                                    resp.setContentType("application/json;charset=utf-8");
+                                    PrintWriter out = resp.getWriter();
+                                    out.write(jsonObj.toString());
+                                    out.flush();
+                                    out.close();
+                                })
+                                .failureHandler((req, resp, e) -> {
+                                    resp.setContentType("application/json;charset=utf-8");
+                                    PrintWriter out = resp.getWriter();
+                                    out.write(e.getMessage());
+                                    out.flush();
+                                    out.close();
+                                }).permitAll()
                 )
+                .authenticationManager(authenticationManager())
         ;
 
         return http.build();

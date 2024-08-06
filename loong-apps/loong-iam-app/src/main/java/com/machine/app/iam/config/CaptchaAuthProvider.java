@@ -21,8 +21,8 @@ public class CaptchaAuthProvider extends DaoAuthenticationProvider {
 
         HttpSession session = req.getSession();
 
-        LocalDateTime expirationTime = (LocalDateTime) session.getAttribute("captchaExpirationTime");
-        if (null == expirationTime || LocalDateTime.now().isAfter(expirationTime)) {
+        Long expirationTime = (Long) session.getAttribute("captchaExpirationTime");
+        if (null == expirationTime || expirationTime.compareTo(System.currentTimeMillis()) < 0) {
             session.removeAttribute("captcha");
             session.removeAttribute("captchaExpirationTime");
             throw new AuthenticationServiceException("验证码输入错误");
