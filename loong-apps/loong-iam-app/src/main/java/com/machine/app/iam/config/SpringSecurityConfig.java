@@ -18,8 +18,12 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.security.web.firewall.HttpFirewall;
+import org.springframework.security.web.firewall.StrictHttpFirewall;
 import org.springframework.session.data.redis.RedisIndexedSessionRepository;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
+import org.springframework.session.web.http.CookieSerializer;
+import org.springframework.session.web.http.DefaultCookieSerializer;
 
 
 import java.io.PrintWriter;
@@ -132,10 +136,24 @@ public class SpringSecurityConfig {
     }
 
     @Bean
+    public HttpFirewall firewall() {
+        StrictHttpFirewall firewall = new StrictHttpFirewall();
+        return firewall;
+    }
+
+    @Bean
+    public CookieSerializer httpSessionIdResolver() {
+        DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
+        cookieSerializer.setSameSite("strict");
+        return cookieSerializer;
+    }
+
+    @Bean
     public LoongRememberMeServices loongRememberMeServices() {
         LoongRememberMeServices services = new LoongRememberMeServices(
-                "loong-remember-service-key", userDetailsService, tokenRepository);
+                "loong-secret-key", userDetailsService, tokenRepository);
         services.setTokenValiditySeconds(7 * 24 * 60 * 60);
+        services.setParameter("rememberMe");
         return services;
     }
 

@@ -20,7 +20,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration;
 
 @Configuration
-@EnableRedisIndexedHttpSession(redisNamespace = "spring:session:loong")
+@EnableRedisIndexedHttpSession(redisNamespace = "loong:session")
 public class LoongRedisConfig implements BeanClassLoaderAware {
 
     private ClassLoader loader;
