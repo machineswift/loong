@@ -18,6 +18,8 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
+import org.springframework.session.data.redis.RedisIndexedSessionRepository;
+import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 
 
 import java.io.PrintWriter;
@@ -34,11 +36,8 @@ public class SpringSecurityConfig {
     @Autowired
     private LoongUserDetailsService userDetailsService;
 
-//    public SpringSessionBackedSessionRegistry sessionRegistry(FindByIndexNameSessionRepository sessionRepository){
-//        SpringSessionBackedSessionRegistry sessionRegistry=new SpringSessionBackedSessionRegistry(sessionRepository);
-//        sessionRegistry.
-//        return sessionRegistry;
-//    }
+    @Autowired
+    private RedisIndexedSessionRepository sessionRepository;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -47,7 +46,7 @@ public class SpringSecurityConfig {
                     session
                             .maximumSessions(1)
                             .maxSessionsPreventsLogin(false)
-                            //.sessionRegistry()
+                            .sessionRegistry(new SpringSessionBackedSessionRegistry(sessionRepository))
                             .expiredSessionStrategy(event -> {
                                 HttpServletResponse response = event.getResponse();
                                 response.setContentType("application/json;charset=utf-8");
