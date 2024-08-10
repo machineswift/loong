@@ -5,9 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.machine.app.iam.config.serializer.LongMixin;
 import com.machine.app.iam.config.serializer.LoongUserDetailsDeserializer;
-import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -21,21 +19,17 @@ import org.springframework.session.data.redis.config.annotation.web.http.RedisHt
 
 @Configuration
 @EnableRedisIndexedHttpSession(redisNamespace = "loong:session")
-public class LoongRedisConfig implements BeanClassLoaderAware {
-
-    private ClassLoader loader;
+public class LoongRedisConfig {
 
     @Bean
     public RedisSerializer<Object> springSessionDefaultRedisSerializer() {
         ObjectMapper mapper = new ObjectMapper();
 
-        mapper.addMixIn(Long.class, LongMixin.class);
-
         mapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance,
                 ObjectMapper.DefaultTyping.NON_FINAL, JsonTypeInfo.As.PROPERTY);
 
         mapper.registerModule(new JavaTimeModule());
-        mapper.registerModules(SecurityJackson2Modules.getModules(this.loader));
+        mapper.registerModules(SecurityJackson2Modules.getModules(getClass().getClassLoader()));
 
         SimpleModule module = new SimpleModule();
         module.addDeserializer(LoongUserDetails.class, new LoongUserDetailsDeserializer());
@@ -63,10 +57,5 @@ public class LoongRedisConfig implements BeanClassLoaderAware {
         RedisHttpSessionConfiguration config = new RedisHttpSessionConfiguration();
         config.setDefaultRedisSerializer(springSessionDefaultRedisSerializer());
         return config;
-    }
-
-    @Override
-    public void setBeanClassLoader(ClassLoader classLoader) {
-        this.loader = classLoader;
     }
 }
