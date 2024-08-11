@@ -18,7 +18,9 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration;
 
 @Configuration
-@EnableRedisIndexedHttpSession(redisNamespace = "loong:session")
+@EnableRedisIndexedHttpSession(
+        redisNamespace = "loong:session",
+        maxInactiveIntervalInSeconds = 24 * 3600)
 public class LoongRedisConfig {
 
     @Bean
