@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.machine.app.iam.auth.controller.vo.request.LoginCredentialsRequestVo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.Data;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,6 +26,7 @@ public class LoongJsonAuthFilter extends UsernamePasswordAuthenticationFilter {
         try {
             LoginCredentialsRequestVo credentials = new ObjectMapper().readValue(request.getInputStream(), LoginCredentialsRequestVo.class);
             request.setAttribute("captcha", credentials.getCaptcha());
+            request.setAttribute("rememberMe", credentials.getRememberMe());
 
             //构建登录令牌
             UsernamePasswordAuthenticationToken authRequest = UsernamePasswordAuthenticationToken.unauthenticated(

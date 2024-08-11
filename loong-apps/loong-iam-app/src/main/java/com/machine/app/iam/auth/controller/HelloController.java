@@ -52,6 +52,7 @@ public class HelloController {
     public String rememberMe() {
         return "rememberme";
     }
+
     @GetMapping("getUser")
     public String getUser() {
         Authentication authentication =

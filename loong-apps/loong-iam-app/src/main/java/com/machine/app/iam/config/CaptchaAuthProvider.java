@@ -9,7 +9,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class CaptchaAuthProvider extends DaoAuthenticationProvider {
@@ -28,7 +27,8 @@ public class CaptchaAuthProvider extends DaoAuthenticationProvider {
             throw new AuthenticationServiceException("验证码输入错误");
         }
 
-        String captcha = req.getParameter("captcha");
+        String captcha = (String) req.getAttribute("captcha");
+     //   String captcha =req.getParameter("captcha");
         String sessionCaptcha = (String) session.getAttribute("captcha");
         if (captcha == null || !captcha.equalsIgnoreCase(sessionCaptcha)) {
             session.removeAttribute("captcha");
