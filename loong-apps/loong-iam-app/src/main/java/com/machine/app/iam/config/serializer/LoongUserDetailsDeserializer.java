@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.machine.app.iam.config.LoongUserDetails;
-import com.machine.client.iam.user.dto.LoongUserDetailDto;
+import com.machine.client.iam.user.dto.LoongUserAuthDetailDto;
 
 import java.io.IOException;
 
@@ -17,7 +17,6 @@ public class LoongUserDetailsDeserializer extends JsonDeserializer<LoongUserDeta
         // 解析JSON节点
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
 
-        // 从JSON节点中提取UserDetails所需的信息( todo machine authorities 字段)
         String username = node.get("username").asText();
         String password = node.get("password").asText();
         boolean accountNonExpired = node.get("accountNonExpired").asBoolean();
@@ -25,12 +24,17 @@ public class LoongUserDetailsDeserializer extends JsonDeserializer<LoongUserDeta
         boolean accountNonLocked = node.get("accountNonLocked").asBoolean();
         boolean enabled = node.get("enabled").asBoolean();
 
+        LoongUserAuthDetailDto userDetailDto = new LoongUserAuthDetailDto();
 
-        LoongUserDetailDto userDetailDto = new LoongUserDetailDto();
+        JsonNode authNodeList = node.get("authorities");
+        for (JsonNode authNode : authNodeList.get(1)) {
+            String authority = authNode.get("authority").asText();
+            userDetailDto.addPermissionCode(authority);
+        }
+
         userDetailDto.setUserName(username);
         userDetailDto.setPassword(password);
         userDetailDto.setEnabled(enabled);
-
         return new LoongUserDetails(userDetailDto);
     }
 }

@@ -1,6 +1,7 @@
 package com.machine.app.iam.config;
 
 import com.machine.client.iam.user.ILoongUserClient;
+import com.machine.client.iam.user.dto.LoongUserAuthDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDto;
 import com.machine.client.iam.user.dto.LoongUserUpdatePasswordDto;
@@ -20,7 +21,7 @@ public class LoongUserDetailsService implements UserDetailsService, UserDetailsP
         if (userDto == null) {
             throw new UsernameNotFoundException(username);
         }
-        LoongUserDetailDto userDetailDto = loongUserClient.detail(userDto.getUserId());
+        LoongUserAuthDetailDto userDetailDto = loongUserClient.authDetail(userDto.getUserId());
         return new LoongUserDetails(userDetailDto);
     }
 

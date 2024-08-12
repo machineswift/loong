@@ -36,13 +36,13 @@ public class HelloController {
         return "hello";
     }
 
-    @PreAuthorize("hasRole('ADMIN') && authentication.name=='admin'")
+    @PreAuthorize("hasRole('admin')  ")
     @GetMapping("admin")
     public String admin() {
         return "admin";
     }
 
-    @PreAuthorize("authentication.name=='user'")
+    @PreAuthorize("hasRole('user')  && hasAnyAuthority('123456') ")
     @GetMapping("user")
     public String user() {
         return "user";

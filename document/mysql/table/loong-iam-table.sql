@@ -22,6 +22,7 @@ DROP TABLE IF EXISTS `t_role`;
 CREATE TABLE `t_role` (
    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
    `parent_id` VARCHAR ( 32 ) NOT NULL COMMENT '父ID',
+ 	`code` VARCHAR ( 32 ) NOT NULL COMMENT '编码',
 	`name` VARCHAR ( 32 ) NOT NULL COMMENT '用户名',
 	`description` VARCHAR ( 2048 ) NOT NULL COMMENT '描述',
 	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
@@ -29,6 +30,7 @@ CREATE TABLE `t_role` (
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
 	PRIMARY KEY ( `id` ) USING BTREE,
+	UNIQUE KEY `uk_01` ( `code` ) USING BTREE,
     KEY `idx_01` ( `parent_id` ) USING BTREE,
 	KEY `idx_02` ( `create_time` ) USING BTREE
 ) COMMENT = '角色表';
@@ -38,13 +40,16 @@ DROP TABLE IF EXISTS `t_permission`;
 CREATE TABLE `t_permission` (
    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
    `parent_id` VARCHAR ( 32 ) NOT NULL COMMENT '父ID',
-	`name` VARCHAR ( 64 ) NOT NULL COMMENT '用户名',
+ 	`code` VARCHAR ( 64 ) NOT NULL COMMENT '编码',
+	`name` VARCHAR ( 32 ) NOT NULL COMMENT '名称',
+	`type` VARCHAR ( 8 ) NOT NULL COMMENT '类型，MENU、BUTTON',
 	`description` VARCHAR ( 2048 ) NOT NULL COMMENT '描述',
 	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
 	PRIMARY KEY ( `id` ) USING BTREE,
+	UNIQUE KEY `uk_01` ( `code` ) USING BTREE,
     KEY `idx_01` ( `parent_id` ) USING BTREE,
 	KEY `idx_02` ( `create_time` ) USING BTREE
 ) COMMENT = '权限表';

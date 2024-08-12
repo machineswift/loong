@@ -1,24 +1,41 @@
 package com.machine.app.iam.config;
 
-import com.machine.client.iam.user.dto.LoongUserDetailDto;
+import cn.hutool.core.collection.CollectionUtil;
+import com.machine.client.iam.user.dto.LoongUserAuthDetailDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class LoongUserDetails implements UserDetails {
 
-    private LoongUserDetailDto userDetailDto;
+    private LoongUserAuthDetailDto userDetailDto;
 
-    public LoongUserDetails(LoongUserDetailDto userDetailDto) {
+    public LoongUserDetails(LoongUserAuthDetailDto userDetailDto) {
         this.userDetailDto = userDetailDto;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        List<GrantedAuthority> resultList = new ArrayList<>();
+
+        List<String> roleCodeList = userDetailDto.getRoleCodeList();
+        if (CollectionUtil.isNotEmpty(roleCodeList)) {
+            for (String roleCode : roleCodeList) {
+                resultList.add(new SimpleGrantedAuthority("ROLE_" + roleCode));
+            }
+        }
+
+        List<String> permissionCodeList = userDetailDto.getPermissionCodeList();
+        if (CollectionUtil.isNotEmpty(permissionCodeList)) {
+            for (String permissionCode : permissionCodeList) {
+                resultList.add(new SimpleGrantedAuthority(permissionCode));
+            }
+        }
+        return resultList;
     }
 
     @Override

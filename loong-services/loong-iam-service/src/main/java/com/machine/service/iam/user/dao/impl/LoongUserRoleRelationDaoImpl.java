@@ -1,13 +1,13 @@
 package com.machine.service.iam.user.dao.impl;
 
-import com.machine.service.iam.user.dao.ILoongUserROleRelationDao;
+import com.machine.service.iam.user.dao.ILoongUserRoleRelationDao;
 import com.machine.service.iam.user.dao.mapper.ILoongUserRoleRelationMapper;
 import com.machine.service.iam.user.dao.mapper.entity.LoongUserRoleRelationEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class LoongUserRoleRelationDaoImpl implements ILoongUserROleRelationDao {
+public class LoongUserRoleRelationDaoImpl implements ILoongUserRoleRelationDao {
 
     @Autowired
     private ILoongUserRoleRelationMapper userRoleRelationMapper;

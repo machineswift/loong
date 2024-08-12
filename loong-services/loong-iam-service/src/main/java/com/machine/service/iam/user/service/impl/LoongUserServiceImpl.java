@@ -1,14 +1,27 @@
 package com.machine.service.iam.user.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
+import com.machine.client.iam.user.dto.LoongUserAuthDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDto;
 import com.machine.client.iam.user.dto.LoongUserUpdatePasswordDto;
+import com.machine.service.iam.permission.dao.ILoongPermissionDao;
+import com.machine.service.iam.permission.dao.mapper.entity.LoongPermissionEntity;
+import com.machine.service.iam.role.dao.ILoongRoleDao;
+import com.machine.service.iam.role.dao.mapper.entity.LoongRoleEntity;
 import com.machine.service.iam.user.dao.ILoongUserDao;
 import com.machine.service.iam.user.dao.mapper.entity.LoongUserEntity;
 import com.machine.service.iam.user.service.ILoongUserService;
+import com.machine.starter.mybatis.BaseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -17,19 +30,25 @@ public class LoongUserServiceImpl implements ILoongUserService {
     @Autowired
     private ILoongUserDao userDao;
 
+    @Autowired
+    private ILoongRoleDao roleDao;
+
+    @Autowired
+    private ILoongPermissionDao permissionDao;
+
     @Override
     public int updatePassword(LoongUserUpdatePasswordDto dto) {
         LoongUserEntity entity = userDao.detail(dto.getUserId());
-        if(null == entity){
+        if (null == entity) {
             return 0;
         }
-        return userDao.updatePassword(dto.getUserId(),dto.getPassword());
+        return userDao.updatePassword(dto.getUserId(), dto.getPassword());
     }
 
     @Override
     public LoongUserDetailDto detail(String userId) {
         LoongUserEntity entity = userDao.detail(userId);
-        if(null == entity){
+        if (null == entity) {
             return null;
         }
 
@@ -41,6 +60,46 @@ public class LoongUserServiceImpl implements ILoongUserService {
         detailDto.setPhone(entity.getPhone());
         detailDto.setEnabled(entity.getEnabled());
 
+        return detailDto;
+    }
+
+    @Override
+    public LoongUserAuthDetailDto authDetail(String userId) {
+        //查询用户信息
+        LoongUserEntity userEntity = userDao.detail(userId);
+        if (null == userEntity) {
+            return null;
+        }
+
+        //查询用户角色信息
+        List<LoongRoleEntity> rolesByUserId = roleDao.selectByUserId(userId);
+
+        //查询角色权限信息
+        List<LoongPermissionEntity> permissionsByUserId = permissionDao.selectByUserId(userId);
+        List<LoongPermissionEntity> permissionsByRoleIds = permissionDao.selectByRoleIds(
+                rolesByUserId.stream().map(BaseEntity::getId).collect(Collectors.toList()));
+
+        LoongUserAuthDetailDto detailDto = new LoongUserAuthDetailDto();
+        detailDto.setUserId(userEntity.getId());
+        detailDto.setUserName(userEntity.getUserName());
+        detailDto.setPassword(userEntity.getPassword());
+        detailDto.setFullName(userEntity.getFullName());
+        detailDto.setPhone(userEntity.getPhone());
+        detailDto.setEnabled(userEntity.getEnabled());
+        if (CollectionUtil.isNotEmpty(rolesByUserId)){
+            detailDto.setRoleCodeList(rolesByUserId.stream().map(LoongRoleEntity::getCode).collect(Collectors.toList()));
+        }
+
+        Set<String> permissionCodeSet= new HashSet<>();
+        if (CollectionUtil.isNotEmpty(permissionsByUserId)){
+            permissionCodeSet.addAll(permissionsByUserId.stream().map(LoongPermissionEntity::getCode).collect(Collectors.toList()));
+        }
+        if (CollectionUtil.isNotEmpty(permissionsByRoleIds)){
+            permissionCodeSet.addAll(permissionsByRoleIds.stream().map(LoongPermissionEntity::getCode).collect(Collectors.toList()));
+
+        }
+
+        detailDto.setPermissionCodeList(new ArrayList<>(permissionCodeSet));
         return detailDto;
     }
 

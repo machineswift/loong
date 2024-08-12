@@ -2,6 +2,7 @@ package com.machine.app.iam.user.business.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.machine.app.iam.user.business.ILoongUserBusiness;
+import com.machine.app.iam.user.controller.vo.request.LoongUserCreateRequestVo;
 import com.machine.app.iam.user.controller.vo.response.LoongUserDetailResponseVo;
 import com.machine.client.iam.user.ILoongUserClient;
 import com.machine.client.iam.user.dto.LoongUserDetailDto;
@@ -15,6 +16,11 @@ public class LoongUserBusinessImpl implements ILoongUserBusiness {
 
     @Autowired
     private ILoongUserClient loongUserClient;
+
+    @Override
+    public String create(LoongUserCreateRequestVo requestVo) {
+        return "";
+    }
 
     @Override
     public LoongUserDetailResponseVo detail(String userId) {

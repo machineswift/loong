@@ -1,6 +1,7 @@
 package com.machine.service.iam.user.serve;
 
 import com.machine.client.iam.user.ILoongUserClient;
+import com.machine.client.iam.user.dto.LoongUserAuthDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDto;
 import com.machine.client.iam.user.dto.LoongUserUpdatePasswordDto;
@@ -29,6 +30,11 @@ public class LoongUserServe implements ILoongUserClient {
     @GetMapping("detail")
     public LoongUserDetailDto detail(@RequestParam("userId") String userId) {
         return userService.detail(userId);
+    }
+
+    @Override
+    public LoongUserAuthDetailDto authDetail(@RequestParam("userId") String userId) {
+        return userService.authDetail(userId);
     }
 
     @Override

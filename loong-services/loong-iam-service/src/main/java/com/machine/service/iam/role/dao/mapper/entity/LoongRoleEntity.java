@@ -17,6 +17,12 @@ public class LoongRoleEntity extends BaseEntity {
     private String parentId;
 
     /**
+     * 编码
+     */
+    @TableField("code")
+    private String code;
+
+    /**
      * 用户名
      */
     @TableField("name")

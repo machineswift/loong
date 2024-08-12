@@ -1,10 +1,11 @@
 DELETE FROM t_role;
 INSERT INTO `t_role`
- (`id`,`parent_id`,`NAME`,`description`,`create_by`,`create_time`,`update_by`,`update_time`)
+ (`id`,`parent_id`,`code`,`NAME`,`description`,`create_by`,`create_time`,`update_by`,`update_time`)
 VALUES
-	('system_role_id','','system','系统管理员','system_user_id',1722499004775,'system_user_id',1722499004775),
-	('admin_role_id','','admin','系统管理员','system_user_id',1722499004775,'system_user_id',1722499004775),
-	('rolebbbbccccddddeeeeffffggggiiii','','user','用户','system_user_id',1722499004775,'system_user_id',1722499004775);
+	('system_role_id','','system','系统管理员','系统管理员','system_user_id',1722499004775,'system_user_id',1722499004775),
+	('admin_role_id','','admin','系统管理员','系统管理员','system_user_id',1722499004775,'system_user_id',1722499004775),
+	('rolebbbbccccddddeeeeffffggggiiii','','user','用户','用户','system_user_id',1722499004775,'system_user_id',1722499004775);
+
 
 
 DELETE FROM t_user;
