@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("serve/role")
-public class LoongRoleServe implements ILoongRoleClient {
+@RequestMapping("server/role")
+public class LoongRoleServer implements ILoongRoleClient {
 
     @Autowired
     private ILoongRoleService roleService;

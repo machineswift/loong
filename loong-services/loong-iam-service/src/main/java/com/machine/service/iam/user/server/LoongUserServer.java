@@ -1,4 +1,4 @@
-package com.machine.service.iam.user.serve;
+package com.machine.service.iam.user.server;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.machine.client.iam.user.ILoongUserClient;
@@ -16,14 +16,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("serve/user")
-public class LoongUserServe implements ILoongUserClient {
+@RequestMapping("server/user")
+public class LoongUserServer implements ILoongUserClient {
 
     @Autowired
     private ILoongUserService userService;

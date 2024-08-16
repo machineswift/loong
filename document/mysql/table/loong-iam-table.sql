@@ -158,7 +158,6 @@ CREATE TABLE `t_user_role_relation` (
 ) COMMENT = '用户角色关系表';
 
 
-
 DROP TABLE IF EXISTS `t_organization`;
 CREATE TABLE `t_organization` (
    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
@@ -175,7 +174,6 @@ CREATE TABLE `t_organization` (
 ) COMMENT = '组织表';
 
 
-
 DROP TABLE IF EXISTS `t_user_organization_relation`;
 CREATE TABLE `t_user_organization_relation` (
    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
@@ -188,6 +186,34 @@ CREATE TABLE `t_user_organization_relation` (
 	PRIMARY KEY ( `id` ) USING BTREE,
     UNIQUE KEY `uk_01` ( `user_id`,`organization_id` ) USING BTREE
 ) COMMENT = '用户组织关系表';
+
+DROP TABLE IF EXISTS `t_department`;
+CREATE TABLE `t_department` (
+   `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
+   `parent_id` VARCHAR ( 32 ) NOT NULL COMMENT '父ID',
+	`name` VARCHAR ( 32 ) NOT NULL COMMENT '名称',
+	`description` VARCHAR ( 2048 ) NOT NULL COMMENT '描述',
+	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
+	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
+	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
+	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
+	PRIMARY KEY ( `id` ) USING BTREE,
+    KEY `idx_01` ( `parent_id` ) USING BTREE,
+	KEY `idx_02` ( `create_time` ) USING BTREE
+) COMMENT = '部门表';
+
+DROP TABLE IF EXISTS `t_user_department_relation`;
+CREATE TABLE `t_user_department_relation` (
+   `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
+   `user_id` VARCHAR ( 32 ) NOT NULL COMMENT '用户ID',
+	`department_id` VARCHAR ( 32 ) NOT NULL COMMENT '组织id',
+	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
+	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
+	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
+	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
+	PRIMARY KEY ( `id` ) USING BTREE,
+    UNIQUE KEY `uk_01` ( `user_id`,`department_id` ) USING BTREE
+) COMMENT = '用户部门关系表';
 
 
 DROP TABLE IF EXISTS `t_user_operate_log`;

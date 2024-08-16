@@ -23,9 +23,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.security.InvalidParameterException;
-import java.util.List;
-
-import static cn.hutool.http.ContentType.JSON;
 
 @Slf4j
 @Component
@@ -68,7 +65,6 @@ public class LoongUserBusinessImpl implements ILoongUserBusiness {
     public LoongPageResponse<LoongUserListResponseVo> selectPage(LoongUserQueryPageRequestVo requestVo) {
         LoongUserQueryPageInputVo inputVo = JSONUtil.toBean(JSONUtil.toJsonStr(requestVo), LoongUserQueryPageInputVo.class);
         LoongPageResponse<LoongUserListOutputDto> page = loongUserClient.selectPage(inputVo);
-
         return new LoongPageResponse<>(
                 page.getCurrent(),
                 page.getSize(),

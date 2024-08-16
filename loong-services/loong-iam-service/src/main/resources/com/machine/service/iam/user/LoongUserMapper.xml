@@ -21,15 +21,3 @@
     </select>
 
 </mapper>
-
-
-
-<!--        private String userName;-->
-
-
-<!--        private String phone;-->
-
-<!--        /**-->
-<!--        * 用户姓名-->
-<!--        */-->
-<!--        private String fullName;-->

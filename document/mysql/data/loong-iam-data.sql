@@ -25,3 +25,13 @@ VALUES
 		('admin_user_role_id','admin_user_id','admin_role_id','root_user_id',1722499004775,'root_user_id',1722499004775),
 		('userroleccccddddeeeeffffggggiiii','userbbbbccccddddeeeeffffggggiiii','rolebbbbccccddddeeeeffffggggiiii','root_user_id',1722499004775,'root_user_id',1722499004775);
 
+
+
+
+DELETE FROM t_department;
+INSERT INTO `t_department` (id,parent_id,name,description,`create_by`,`create_time`,`update_by`,`update_time`)
+VALUES
+ ('root_department_id', '',  'machine', '','root_user_id',1722499004775,'root_user_id',1722499004775),
+ ('departmentccddddeeeeffffggggxxbx', 'root_department_id',  '信息部', '','root_user_id',1722499004775,'root_user_id',1722499004775),
+ ('departmentccddddeeeeffffggggxscb', 'root_department_id',  '市场部', '','root_user_id',1722499004775,'root_user_id',1722499004775),
+ ('departmentccddddeeeeffffggggxcwb', 'root_department_id',  '财务部', '','root_user_id',1722499004775,'root_user_id',1722499004775);

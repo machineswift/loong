@@ -49,17 +49,6 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .cors((cors) -> {
-                    cors.configurationSource(request -> {
-                        CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowCredentials(true);
-                        config.addAllowedOriginPattern("http://localhost:4200");
-                        config.addAllowedHeader("*");
-                        config.addAllowedMethod("*");
-                        config.setMaxAge(3600L);
-                        return config;
-                    });
-                })
                 .sessionManagement((session) -> {
                     session
                             .maximumSessions(1)
