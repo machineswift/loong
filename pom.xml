@@ -10,6 +10,7 @@
         <module>loong-apps</module>
         <module>loong-generals</module>
         <module>loong-clients</module>
+        <module>loong-servers</module>
         <module>loong-services</module>
         <module>loong-starters</module>
         <module>loong-tests</module>
