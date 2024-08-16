@@ -1,13 +1,16 @@
-package com.machine.app.iam.user.controller.vo.response;
+package com.machine.client.iam.user.dto.input;
 
 import com.machine.common.envm.crm.customer.GenderEnum;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class LoongUserDetailResponseVo {
-    private String userId;
+@NoArgsConstructor
+public class LoongUserCreateInputDto {
+
     private String userName;
     private String phone;
     private String fullName;
+    private String password;
     private GenderEnum gender;
 }

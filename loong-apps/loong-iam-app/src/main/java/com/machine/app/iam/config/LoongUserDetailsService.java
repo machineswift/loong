@@ -2,9 +2,8 @@ package com.machine.app.iam.config;
 
 import com.machine.client.iam.user.ILoongUserClient;
 import com.machine.client.iam.user.dto.LoongUserAuthDetailDto;
-import com.machine.client.iam.user.dto.LoongUserDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDto;
-import com.machine.client.iam.user.dto.LoongUserUpdatePasswordDto;
+import com.machine.client.iam.user.dto.input.LoongUserUpdatePasswordInputDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
@@ -33,7 +32,7 @@ public class LoongUserDetailsService implements UserDetailsService, UserDetailsP
             throw new UsernameNotFoundException(user.getUsername());
         }
 
-        LoongUserUpdatePasswordDto updatePasswordDto = new LoongUserUpdatePasswordDto();
+        LoongUserUpdatePasswordInputDto updatePasswordDto = new LoongUserUpdatePasswordInputDto();
         updatePasswordDto.setUserId(userDto.getUserId());
         updatePasswordDto.setPassword(newPassword);
         loongUserClient.updatePassword(updatePasswordDto);

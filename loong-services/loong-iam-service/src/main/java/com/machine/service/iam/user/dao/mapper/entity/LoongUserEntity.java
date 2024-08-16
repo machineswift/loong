@@ -2,6 +2,7 @@ package com.machine.service.iam.user.dao.mapper.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.machine.common.envm.crm.customer.GenderEnum;
 import com.machine.starter.mybatis.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -46,5 +47,5 @@ public class LoongUserEntity extends BaseEntity {
      * 性别
      */
     @TableField("gender")
-    private String gender;
+    private GenderEnum gender;
 }

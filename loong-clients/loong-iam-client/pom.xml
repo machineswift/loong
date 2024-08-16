@@ -21,6 +21,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.machine</groupId>
+            <artifactId>loong-common</artifactId>
+            <version>${version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
@@ -38,6 +44,7 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
     </dependencies>
 
 </project>

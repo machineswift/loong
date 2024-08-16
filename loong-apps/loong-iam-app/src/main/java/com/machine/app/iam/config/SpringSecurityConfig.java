@@ -53,7 +53,7 @@ public class SpringSecurityConfig {
                     cors.configurationSource(request -> {
                         CorsConfiguration config = new CorsConfiguration();
                         config.setAllowCredentials(true);
-                        config.addAllowedOrigin("*");
+                        config.addAllowedOriginPattern("http://localhost:4200");
                         config.addAllowedHeader("*");
                         config.addAllowedMethod("*");
                         config.setMaxAge(3600L);
@@ -82,7 +82,7 @@ public class SpringSecurityConfig {
                 )
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers(
-                                        "/auth/vc",
+                                        "/auth/captcha",
                                         "/auth/login").permitAll()
                                 //必须通过用户名密码方式认证
                                 //.requestMatchers("/admin").fullyAuthenticated()

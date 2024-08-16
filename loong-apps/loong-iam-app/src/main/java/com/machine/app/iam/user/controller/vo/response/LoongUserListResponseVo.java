@@ -1,13 +1,21 @@
 package com.machine.app.iam.user.controller.vo.response;
 
-import com.machine.common.envm.crm.customer.GenderEnum;
 import lombok.Data;
 
 @Data
-public class LoongUserDetailResponseVo {
+public class LoongUserListResponseVo {
+
     private String userId;
+
     private String userName;
+
+    /**
+     * 手机号
+     */
     private String phone;
+
+    /**
+     * 用户姓名
+     */
     private String fullName;
-    private GenderEnum gender;
 }

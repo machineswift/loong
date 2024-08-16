@@ -3,7 +3,7 @@ package com.machine.service.data.material.rest;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.machine.common.envm.data.material.DataMaterIalTypeEnum;
-import com.machine.common.model.PageResponse;
+import com.machine.common.model.LoongPageResponse;
 import com.machine.service.data.material.rest.request.LoongMaterialTemporarySelectPageRequest;
 import com.machine.service.data.material.rest.response.LoongMaterialTemporaryDetailResponse;
 import com.machine.service.data.material.rest.response.LoongMaterialTemporaryPageResponse;
@@ -82,8 +82,8 @@ public class LoongMaterialTemporaryRest {
     }
 
     @PostMapping("selectPage")
-    public PageResponse<LoongMaterialTemporaryPageResponse> selectPage(@RequestBody LoongMaterialTemporarySelectPageRequest request) {
+    public LoongPageResponse<LoongMaterialTemporaryPageResponse> selectPage(@RequestBody LoongMaterialTemporarySelectPageRequest request) {
         Page<LoongMaterialTemporaryPageOutBO> outBOPage = materialTemporaryService.selectPage(request);
-        return new PageResponse<>(outBOPage.getCurrent(), outBOPage.getSize(), outBOPage.getTotal(), JSONUtil.toList(JSONUtil.toJsonStr(outBOPage.getRecords()), LoongMaterialTemporaryPageResponse.class));
+        return new LoongPageResponse<>(outBOPage.getCurrent(), outBOPage.getSize(), outBOPage.getTotal(), JSONUtil.toList(JSONUtil.toJsonStr(outBOPage.getRecords()), LoongMaterialTemporaryPageResponse.class));
     }
 }

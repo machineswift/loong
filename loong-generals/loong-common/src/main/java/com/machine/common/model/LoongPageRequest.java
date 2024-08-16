@@ -5,11 +5,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class PageRequest {
+public class LoongPageRequest {
 
     //当前页
-    private long current = 1;
+    private Long current = 1L;
 
     //每页的数量
-    private int size = 20;
+    private Long size = 20L;
 }

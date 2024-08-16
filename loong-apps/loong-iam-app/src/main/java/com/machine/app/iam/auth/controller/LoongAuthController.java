@@ -25,7 +25,7 @@ public class LoongAuthController {
     @Autowired
     private Producer producer;
 
-    @GetMapping("vc")
+    @GetMapping("captcha")
     public void getVerifyCode(HttpServletResponse resp,
                               HttpSession session) throws IOException {
         resp.setContentType("image/jpeg");

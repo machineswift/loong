@@ -7,11 +7,13 @@ import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
-public class WebResponse<T> {
-    private int status;
-    private String traceId;
+public class LoongAppResponse<T> {
+    /**
+     * 状态码
+     */
+    private int code;
+    private String requestId;
     private String message;
     private LocalDateTime now = LocalDateTime.now();
-    private String url;
     private T data;
 }

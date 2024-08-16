@@ -1,10 +1,15 @@
 package com.machine.service.iam.user.service.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.json.JSONUtil;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.machine.client.iam.user.dto.LoongUserAuthDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDetailDto;
 import com.machine.client.iam.user.dto.LoongUserDto;
-import com.machine.client.iam.user.dto.LoongUserUpdatePasswordDto;
+import com.machine.client.iam.user.dto.input.LoongUserCreateInputDto;
+import com.machine.client.iam.user.dto.input.LoongUserQueryPageInputVo;
+import com.machine.client.iam.user.dto.input.LoongUserUpdatePasswordInputDto;
+import com.machine.client.iam.user.dto.output.LoongUserListOutputDto;
 import com.machine.service.iam.permission.dao.ILoongPermissionDao;
 import com.machine.service.iam.permission.dao.mapper.entity.LoongPermissionEntity;
 import com.machine.service.iam.role.dao.ILoongRoleDao;
@@ -17,6 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,7 +43,30 @@ public class LoongUserServiceImpl implements ILoongUserService {
     private ILoongPermissionDao permissionDao;
 
     @Override
-    public int updatePassword(LoongUserUpdatePasswordDto dto) {
+    public String create(LoongUserCreateInputDto inputDto) {
+        //验证用户名是否存在
+        LoongUserEntity userNameEntity = userDao.getByUserName(inputDto.getUserName());
+        if (null != userNameEntity) {
+            throw new InvalidParameterException("用户名已经存在");
+        }
+
+        //验证手机号是否存在
+        LoongUserEntity phoneEntity = userDao.getByUserName(inputDto.getPhone());
+        if (null != phoneEntity) {
+            throw new InvalidParameterException("手机号已经存在");
+        }
+
+        LoongUserEntity insertEntity = new LoongUserEntity();
+        insertEntity.setUserName(inputDto.getUserName());
+        insertEntity.setPassword(inputDto.getPassword());
+        insertEntity.setFullName(inputDto.getFullName());
+        insertEntity.setPhone(inputDto.getPhone());
+        insertEntity.setGender(inputDto.getGender());
+        return userDao.insert(insertEntity);
+    }
+
+    @Override
+    public int updatePassword(LoongUserUpdatePasswordInputDto dto) {
         LoongUserEntity entity = userDao.detail(dto.getUserId());
         if (null == entity) {
             return 0;
@@ -55,9 +84,9 @@ public class LoongUserServiceImpl implements ILoongUserService {
         LoongUserDetailDto detailDto = new LoongUserDetailDto();
         detailDto.setUserId(entity.getId());
         detailDto.setUserName(entity.getUserName());
-        detailDto.setPassword(entity.getPassword());
         detailDto.setFullName(entity.getFullName());
         detailDto.setPhone(entity.getPhone());
+        detailDto.setGender(entity.getGender());
         detailDto.setEnabled(entity.getEnabled());
 
         return detailDto;
@@ -86,15 +115,15 @@ public class LoongUserServiceImpl implements ILoongUserService {
         detailDto.setFullName(userEntity.getFullName());
         detailDto.setPhone(userEntity.getPhone());
         detailDto.setEnabled(userEntity.getEnabled());
-        if (CollectionUtil.isNotEmpty(rolesByUserId)){
+        if (CollectionUtil.isNotEmpty(rolesByUserId)) {
             detailDto.setRoleCodeList(rolesByUserId.stream().map(LoongRoleEntity::getCode).collect(Collectors.toList()));
         }
 
-        Set<String> permissionCodeSet= new HashSet<>();
-        if (CollectionUtil.isNotEmpty(permissionsByUserId)){
+        Set<String> permissionCodeSet = new HashSet<>();
+        if (CollectionUtil.isNotEmpty(permissionsByUserId)) {
             permissionCodeSet.addAll(permissionsByUserId.stream().map(LoongPermissionEntity::getCode).collect(Collectors.toList()));
         }
-        if (CollectionUtil.isNotEmpty(permissionsByRoleIds)){
+        if (CollectionUtil.isNotEmpty(permissionsByRoleIds)) {
             permissionCodeSet.addAll(permissionsByRoleIds.stream().map(LoongPermissionEntity::getCode).collect(Collectors.toList()));
 
         }
@@ -113,5 +142,20 @@ public class LoongUserServiceImpl implements ILoongUserService {
         LoongUserDto dto = new LoongUserDto();
         dto.setUserId(entity.getId());
         return dto;
+    }
+
+    @Override
+    public Page<LoongUserListOutputDto> selectPage(LoongUserQueryPageInputVo inputVo) {
+        Page<LoongUserEntity> page = userDao.selectPage(inputVo);
+
+        Page<LoongUserListOutputDto> pageResult = new Page<>(page.getCurrent(), page.getSize(), page.getTotal());
+        List<LoongUserListOutputDto> outputDtoList = new ArrayList<>();
+        for (LoongUserEntity entity : page.getRecords()) {
+            LoongUserListOutputDto outputDto = JSONUtil.toBean(JSONUtil.toJsonStr(entity), LoongUserListOutputDto.class);
+            outputDto.setUserId(entity.getId());
+            outputDtoList.add(outputDto);
+        }
+        pageResult.setRecords(outputDtoList);
+        return pageResult;
     }
 }
