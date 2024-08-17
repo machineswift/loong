@@ -1,5 +1,6 @@
 package com.machine.app.iam.auth.controller;
 
+import com.machine.app.iam.config.LoongUserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.data.annotation.Persistent;
@@ -24,8 +25,8 @@ import java.util.UUID;
 public class HelloController {
 
     @RequestMapping("resource")
-    public Map<String,Object> home() {
-        Map<String,Object> model = new HashMap<String,Object>();
+    public Map<String, Object> home() {
+        Map<String, Object> model = new HashMap<String, Object>();
         model.put("id", UUID.randomUUID().toString());
         model.put("content", "Hello World");
         return model;
@@ -52,11 +53,18 @@ public class HelloController {
     public String rememberMe() {
         return "rememberme";
     }
+
     @GetMapping("getUser")
     public String getUser() {
         Authentication authentication =
                 SecurityContextHolder.getContext().getAuthentication();
         String name = authentication.getName();
+        if(authentication.getPrincipal() instanceof LoongUserDetails userDetails){
+            String userId = userDetails.getUserId();
+            String password = userDetails.getPassword();
+        }
+
+
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         System.out.println("name =" + name);
         System.out.println("authorities=" + authorities);

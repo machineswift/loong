@@ -17,6 +17,7 @@ public class LoongUserDetailsDeserializer extends JsonDeserializer<LoongUserDeta
         // 解析JSON节点
         JsonNode node = jsonParser.getCodec().readTree(jsonParser);
 
+        String userId = node.get("userId").asText();
         String username = node.get("username").asText();
         String password = node.get("password").asText();
         boolean accountNonExpired = node.get("accountNonExpired").asBoolean();
@@ -32,6 +33,7 @@ public class LoongUserDetailsDeserializer extends JsonDeserializer<LoongUserDeta
             userDetailDto.addPermissionCode(authority);
         }
 
+        userDetailDto.setUserId(userId);
         userDetailDto.setUserName(username);
         userDetailDto.setPassword(password);
         userDetailDto.setEnabled(enabled);
