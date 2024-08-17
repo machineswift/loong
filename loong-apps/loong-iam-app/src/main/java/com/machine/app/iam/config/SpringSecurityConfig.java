@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.*;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -17,6 +18,10 @@ import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtDecoders;
+import org.springframework.security.oauth2.server.resource.introspection.OpaqueTokenIntrospector;
+import org.springframework.security.oauth2.server.resource.introspection.SpringOpaqueTokenIntrospector;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
@@ -147,9 +152,27 @@ public class SpringSecurityConfig {
                                     out.close();
                                 }).permitAll()
                 )
-                .authenticationManager(authenticationManager());
+                .oauth2ResourceServer((oauth2) -> oauth2
+                        .jwt(Customizer.withDefaults())
+                        .opaqueToken(Customizer.withDefaults())
+                )
+                .authenticationManager(
+                        authenticationManager()
+                );
 
         return http.build();
+    }
+
+
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        return JwtDecoders.fromIssuerLocation("https://my-auth-server.com");
+    }
+
+    @Bean
+    public OpaqueTokenIntrospector opaqueTokenIntrospector() {
+        return new SpringOpaqueTokenIntrospector(
+                "https://my-auth-server.com/oauth2/introspect", "my-client-id", "my-client-secret");
     }
 
     @Bean
