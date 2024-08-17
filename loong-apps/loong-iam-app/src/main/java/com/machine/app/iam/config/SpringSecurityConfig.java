@@ -18,19 +18,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
+import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
 import org.springframework.session.data.redis.RedisIndexedSessionRepository;
 import org.springframework.session.security.SpringSessionBackedSessionRegistry;
 import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
-import org.springframework.web.cors.CorsConfiguration;
 
 
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter.Directive.COOKIES;
 
 @Configuration
 @EnableWebSecurity
@@ -83,10 +87,11 @@ public class SpringSecurityConfig {
                 )
                 .logout(logout ->
                         logout
+                                .logoutUrl("/auth/logout")
                                 .invalidateHttpSession(true)
                                 .clearAuthentication(true)
                                 .deleteCookies("SESSION", "JSESSIONID", "remember-me")
-                                .logoutUrl("/auth/logout")
+                                .addLogoutHandler(new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(COOKIES)))
                                 .logoutSuccessHandler((req, resp, authentication) -> {
                                     resp.setContentType("application/json;charset=utf-8");
                                     PrintWriter out = resp.getWriter();
@@ -160,8 +165,8 @@ public class SpringSecurityConfig {
     }
 
     @Bean
-    public LoongRememberMeServices loongRememberMeServices() {
-        LoongRememberMeServices services = new LoongRememberMeServices(
+    public PersistentTokenBasedRememberMeServices loongRememberMeServices() {
+        PersistentTokenBasedRememberMeServices services = new PersistentTokenBasedRememberMeServices(
                 "loong-secret-key", userDetailsService, tokenRepository);
         services.setTokenValiditySeconds(7 * 24 * 60 * 60);
         services.setParameter("rememberMe");

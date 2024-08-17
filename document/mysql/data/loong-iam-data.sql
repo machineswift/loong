@@ -3,7 +3,7 @@ INSERT INTO `t_role`
  (`id`,`parent_id`,`code`,`NAME`,`description`,`create_by`,`create_time`,`update_by`,`update_time`)
 VALUES
 	('root_role_id','','root','系统管理员','系统管理员','root_user_id',1722499004775,'root_user_id',1722499004775),
-	('admin_role_id','','admin','系统管理员','系统管理员','root_user_id',1722499004775,'root_user_id',1722499004775),
+	('admin_role_id','','admin','管理员','管理员','root_user_id',1722499004775,'root_user_id',1722499004775),
 	('rolebbbbccccddddeeeeffffggggiiii','','user','用户','用户','root_user_id',1722499004775,'root_user_id',1722499004775);
 
 
