@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableDiscoveryClient
 @EnableTransactionManagement
 @SpringBootApplication(scanBasePackages = {
+        "com.machine.common",
         "com.machine.starter",
         "com.machine.service"
 })

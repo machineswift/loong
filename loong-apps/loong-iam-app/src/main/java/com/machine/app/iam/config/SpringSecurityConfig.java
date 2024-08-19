@@ -20,6 +20,7 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
+import org.springframework.security.web.context.SecurityContextHolderFilter;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
@@ -147,7 +148,8 @@ public class SpringSecurityConfig {
                                     out.close();
                                 }).permitAll()
                 )
-                .authenticationManager(authenticationManager());
+                .authenticationManager(authenticationManager())
+                .addFilterAfter(new LoongSecurityFilter(), SecurityContextHolderFilter.class);
 
         return http.build();
     }

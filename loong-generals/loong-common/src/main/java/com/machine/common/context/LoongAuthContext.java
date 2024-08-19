@@ -2,18 +2,17 @@ package com.machine.common.context;
 
 import com.alibaba.ttl.TransmittableThreadLocal;
 
-public class LoongContext {
+public class LoongAuthContext {
 
-    private static final ThreadLocal<LoongContext> THREAD_LOCAL = new TransmittableThreadLocal<>();
+    private static final ThreadLocal<LoongAuthContext> THREAD_LOCAL = new TransmittableThreadLocal<>();
 
     private String userId;
 
-
-    public static LoongContext getContext() {
-        LoongContext result = THREAD_LOCAL.get();
+    public static LoongAuthContext getContext() {
+        LoongAuthContext result = THREAD_LOCAL.get();
 
         if (result == null) {
-            result = new LoongContext();
+            result = new LoongAuthContext();
             THREAD_LOCAL.set(result);
         }
 
@@ -26,5 +25,9 @@ public class LoongContext {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public void clear() {
+        THREAD_LOCAL.remove();
     }
 }

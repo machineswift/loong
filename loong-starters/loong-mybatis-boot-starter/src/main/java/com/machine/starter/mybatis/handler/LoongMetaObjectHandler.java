@@ -1,6 +1,7 @@
 package com.machine.starter.mybatis.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
+import com.machine.common.context.LoongAuthContext;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 
@@ -17,11 +18,13 @@ public class LoongMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         //根据名称设置属性值
         Long currentTimeMillis = System.currentTimeMillis();
+        String userId= LoongAuthContext.getContext().getUserId();
+
         this.setFieldValByName(CREATE_TIME_FIELD_NAME, currentTimeMillis, metaObject);
         this.setFieldValByName(UPDATE_TIME_FIELD_NAME, currentTimeMillis, metaObject);
 
-        this.setFieldValByName(CREATE_BY_FIELD_NAME, "root_user_id", metaObject);
-        this.setFieldValByName(UPDATE_BY_FIELD_NAME, "root_user_id", metaObject);
+        this.setFieldValByName(CREATE_BY_FIELD_NAME, userId, metaObject);
+        this.setFieldValByName(UPDATE_BY_FIELD_NAME, userId, metaObject);
     }
 
     /**
@@ -30,7 +33,9 @@ public class LoongMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void updateFill(MetaObject metaObject) {
         Long currentTimeMillis = System.currentTimeMillis();
+        String userId= LoongAuthContext.getContext().getUserId();
+
         this.setFieldValByName(UPDATE_TIME_FIELD_NAME, currentTimeMillis, metaObject);
-        this.setFieldValByName(UPDATE_BY_FIELD_NAME, "root_user_id", metaObject);
+        this.setFieldValByName(UPDATE_BY_FIELD_NAME, userId, metaObject);
     }
 }

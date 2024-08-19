@@ -7,11 +7,12 @@ import com.machine.client.iam.user.dto.input.LoongUserCreateInputDto;
 import com.machine.client.iam.user.dto.input.LoongUserQueryPageInputVo;
 import com.machine.client.iam.user.dto.input.LoongUserUpdatePasswordInputDto;
 import com.machine.client.iam.user.dto.output.LoongUserListOutputDto;
+import com.machine.common.context.LoongFeignConfig;
 import com.machine.common.model.LoongPageResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "loong-iam-service/loong-iam-service/server/user")
+@FeignClient(name = "loong-iam-service/loong-iam-service/server/user", configuration = LoongFeignConfig.class)
 public interface ILoongUserClient {
 
     @PostMapping("create")
