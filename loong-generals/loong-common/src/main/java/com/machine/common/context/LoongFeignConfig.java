@@ -1,5 +1,6 @@
 package com.machine.common.context;
 
+import feign.Logger;
 import com.machine.common.constant.LoongContextConstant;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -18,6 +19,10 @@ import java.util.Set;
 @Configuration
 public class LoongFeignConfig {
 
+    @Bean
+    public Logger.Level feignLoggerLevel() {
+        return Logger.Level.NONE;
+    }
 
     @Bean
     public RequestInterceptor requestInterceptor() {
