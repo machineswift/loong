@@ -7,6 +7,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.InvalidParameterException;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 public class LoongHandlerInterceptorAdapter implements HandlerInterceptor {
 
     /**
@@ -17,7 +22,14 @@ public class LoongHandlerInterceptorAdapter implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) throws Exception {
         String userId = request.getHeader(LoongContextConstant.HEAD_USER_ID);
-        LoongAuthContext.getContext().setUserId(userId);
+        if (null == userId || userId.trim().isEmpty()) {
+            String feignMethod = request.getRequestURI();
+            if (IGNORE_SET.contains(feignMethod)) {
+                return true;
+            }
+            throw new InvalidParameterException("用户Id丢失");
+        }
+        LoongAppContext.getContext().setUserId(userId);
         return true;
     }
 
@@ -37,6 +49,13 @@ public class LoongHandlerInterceptorAdapter implements HandlerInterceptor {
                                 HttpServletResponse response,
                                 Object handler,
                                 @Nullable Exception ex) throws Exception {
-        LoongAuthContext.getContext().clear();
+        LoongAppContext.getContext().clear();
     }
+
+
+    private static final Set<String> IGNORE_SET = new HashSet<>(
+            List.of("/loong-iam-service/serve/auth/getBySeries",
+                    "/loong-iam-service/server/user/auth_detail",
+                    "/loong-iam-service/server/user/getByUserName"));
+
 }
