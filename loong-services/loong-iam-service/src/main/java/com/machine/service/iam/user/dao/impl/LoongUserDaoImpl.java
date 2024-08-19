@@ -29,7 +29,6 @@ public class LoongUserDaoImpl implements ILoongUserDao {
         LoongUserEntity updateEntity = new LoongUserEntity();
         updateEntity.setId(userId);
         updateEntity.setPassword(password);
-
         return userMapper.updateById(updateEntity);
     }
 
