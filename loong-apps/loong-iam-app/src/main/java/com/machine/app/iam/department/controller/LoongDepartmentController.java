@@ -1,6 +1,7 @@
 package com.machine.app.iam.department.controller;
 
 import com.machine.app.iam.department.business.ILoongDepartmentBusiness;
+import com.machine.app.iam.department.controller.vo.request.LoongDepartmentCreateRequestVo;
 import com.machine.app.iam.department.controller.vo.request.LoongDepartmentQueryListRequestVo;
 import com.machine.app.iam.department.controller.vo.response.LoongDepartmentListResponseVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,11 @@ public class LoongDepartmentController {
 
     @Autowired
     private ILoongDepartmentBusiness departmentBusiness;
+
+    @PostMapping("create")
+    public String create(@RequestBody LoongDepartmentCreateRequestVo requestVo) {
+        return departmentBusiness.create(requestVo);
+    }
 
     @PostMapping("list")
     public List<LoongDepartmentListResponseVo> list(@RequestBody LoongDepartmentQueryListRequestVo requestVo) {

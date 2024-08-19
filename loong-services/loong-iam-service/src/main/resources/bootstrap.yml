@@ -34,6 +34,6 @@ spring:
     username: root
     password: root
 
-#logging:
-#  level:
-#    root: DEBUG
+logging:
+  level:
+    root: DEBUG

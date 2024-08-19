@@ -1,7 +1,8 @@
 package com.machine.service.iam.department.server;
 
 import com.machine.client.iam.department.ILoongDepartmentClient;
-import com.machine.client.iam.department.dto.input.LoongDepartmentQueryListInputVo;
+import com.machine.client.iam.department.dto.input.LoongDepartmentCreateInputDto;
+import com.machine.client.iam.department.dto.input.LoongDepartmentQueryListInputDto;
 import com.machine.client.iam.department.dto.output.LoongDepartmentListOutputDto;
 import com.machine.service.iam.department.service.ILoongDepartmentService;
 import lombok.extern.slf4j.Slf4j;
@@ -21,8 +22,14 @@ public class LoongDepartmentServer implements ILoongDepartmentClient {
     private ILoongDepartmentService departmentService;
 
     @Override
+    @PostMapping("create")
+    public String create(@RequestBody LoongDepartmentCreateInputDto inputVo) {
+        return departmentService.create(inputVo);
+    }
+
+    @Override
     @PostMapping("list")
-    public List<LoongDepartmentListOutputDto> list(@RequestBody LoongDepartmentQueryListInputVo inputVo) {
+    public List<LoongDepartmentListOutputDto> list(@RequestBody LoongDepartmentQueryListInputDto inputVo) {
         return departmentService.list(inputVo);
     }
 }
