@@ -1,4 +1,4 @@
-package com.machine.app.iam.config;
+package com.machine.app.manage.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -7,13 +7,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class Knife4jIamConfiguration {
+public class Knife4jManageConfiguration {
 
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Loong 用户系统API")
+                        .title("Loong 管理系统API")
                         .version("1.0")
                         .description("Knife4j集成springdoc-openapi示例")
                         .termsOfService("http://www.machine.com")

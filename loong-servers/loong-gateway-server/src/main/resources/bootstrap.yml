@@ -40,7 +40,3 @@ spring:
         password: nacos
         namespace: LOONG_${spring.profiles.active}
         group: LOONG_GROUP
-
-#logging:
-#  level:
-#    root: DEBUG
