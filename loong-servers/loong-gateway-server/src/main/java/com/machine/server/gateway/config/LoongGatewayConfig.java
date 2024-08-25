@@ -8,6 +8,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class LoongGatewayConfig {
+
     @Bean
     public CorsWebFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
@@ -21,4 +22,5 @@ public class LoongGatewayConfig {
         source.registerCorsConfiguration("/**", config);
         return new CorsWebFilter(source);
     }
+
 }

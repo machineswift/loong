@@ -1,6 +1,7 @@
 package com.machine.client.iam.department;
 
-import com.machine.client.iam.department.dto.input.LoongDepartmentQueryListInputVo;
+import com.machine.client.iam.department.dto.input.LoongDepartmentCreateInputDto;
+import com.machine.client.iam.department.dto.input.LoongDepartmentQueryListInputDto;
 import com.machine.client.iam.department.dto.output.LoongDepartmentListOutputDto;
 import com.machine.common.context.LoongFeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -12,6 +13,10 @@ import java.util.List;
 @FeignClient(name = "loong-iam-service/loong-iam-service/server/department", configuration = LoongFeignConfig.class)
 public interface ILoongDepartmentClient {
 
+    @PostMapping("create")
+    String create(@RequestBody LoongDepartmentCreateInputDto inputVo);
+
     @PostMapping("list")
-    List<LoongDepartmentListOutputDto> list(@RequestBody LoongDepartmentQueryListInputVo inputVo);
+    List<LoongDepartmentListOutputDto> list(@RequestBody LoongDepartmentQueryListInputDto inputVo);
+
 }

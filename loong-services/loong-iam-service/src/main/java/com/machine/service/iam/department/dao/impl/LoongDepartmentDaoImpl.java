@@ -1,6 +1,8 @@
 package com.machine.service.iam.department.dao.impl;
 
-import com.machine.client.iam.department.dto.input.LoongDepartmentQueryListInputVo;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.machine.client.iam.department.dto.input.LoongDepartmentQueryListInputDto;
 import com.machine.service.iam.department.dao.ILoongDepartmentDao;
 import com.machine.service.iam.department.dao.mapper.ILoongDepartmentMapper;
 import com.machine.service.iam.department.dao.mapper.entity.LoongDepartmentEntity;
@@ -16,7 +18,27 @@ public class LoongDepartmentDaoImpl implements ILoongDepartmentDao {
     private ILoongDepartmentMapper departmentMapper;
 
     @Override
-    public List<LoongDepartmentEntity> list(LoongDepartmentQueryListInputVo inputVo) {
+    public String insert(LoongDepartmentEntity insertEntity) {
+        departmentMapper.insert(insertEntity);
+        return insertEntity.getId();
+    }
+
+    @Override
+    public LoongDepartmentEntity getById(String parentId) {
+        return departmentMapper.selectById(parentId);
+    }
+
+    @Override
+    public LoongDepartmentEntity getByName(String parentId,
+                                           String name) {
+        Wrapper<LoongDepartmentEntity> queryWrapper = new LambdaQueryWrapper<LoongDepartmentEntity>()
+                .eq(LoongDepartmentEntity::getParentId, parentId)
+                .eq(LoongDepartmentEntity::getName, name);
+        return departmentMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public List<LoongDepartmentEntity> list(LoongDepartmentQueryListInputDto inputVo) {
         return departmentMapper.list(inputVo);
     }
 }

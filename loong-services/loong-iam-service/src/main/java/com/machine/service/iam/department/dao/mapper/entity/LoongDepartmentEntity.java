@@ -29,5 +29,5 @@ public class LoongDepartmentEntity extends BaseEntity {
      * 描述
      */
     @TableField("description")
-    private Boolean description;
+    private String description;
 }
