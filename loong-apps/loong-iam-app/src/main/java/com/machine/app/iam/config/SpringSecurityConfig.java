@@ -53,22 +53,20 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .sessionManagement((session) -> {
-                    session
-                            .maximumSessions(1)
-                            .maxSessionsPreventsLogin(false)
-                            .sessionRegistry(new SpringSessionBackedSessionRegistry<>(sessionRepository))
-                            .expiredSessionStrategy(event -> {
-                                HttpServletResponse response = event.getResponse();
-                                response.setContentType("application/json;charset=utf-8");
-                                Map<String, Object> result = new HashMap<>();
-                                result.put("status", 500);
-                                result.put("msg", "当前会话已经失效，请重新登录");
-                                String s = new ObjectMapper().writeValueAsString(result);
-                                response.getWriter().print(s);
-                                response.flushBuffer();
-                            });
-                })
+                .sessionManagement((session) -> session
+                        .maximumSessions(1)
+                        .maxSessionsPreventsLogin(false)
+                        .sessionRegistry(new SpringSessionBackedSessionRegistry<>(sessionRepository))
+                        .expiredSessionStrategy(event -> {
+                            HttpServletResponse response = event.getResponse();
+                            response.setContentType("application/json;charset=utf-8");
+                            Map<String, Object> result = new HashMap<>();
+                            result.put("status", 500);
+                            result.put("msg", "当前会话已经失效，请重新登录");
+                            String s = new ObjectMapper().writeValueAsString(result);
+                            response.getWriter().print(s);
+                            response.flushBuffer();
+                        }))
                 .rememberMe((remember) ->
                         remember
                                 .rememberMeServices(loongRememberMeServices())
@@ -148,7 +146,6 @@ public class SpringSecurityConfig {
                                 }).permitAll()
                 )
                 .authenticationManager(authenticationManager());
-
         return http.build();
     }
 
