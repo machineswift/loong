@@ -1,5 +1,5 @@
 server:
-  port: 8801
+  port: 8080
   servlet:
     context-path: /${spring.application.name}
 spring:
@@ -11,6 +11,15 @@ spring:
     name: loong-manage-app
 
 
+  thymeleaf:
+    cache: false
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: Ov23liLktACeZ8H3GW6F
+            client-secret: a1bd09f5b80409b3b7e04906cad05d3b72b6f4bc
 
   cloud:
     nacos:
