@@ -18,8 +18,8 @@ spring:
       client:
         registration:
           github:
-            client-id: Ov23lieUSvyxoUiadcLc
-            client-secret: a33eb0e4756ffbb481e2d80a94299436b8bf8a9a
+            client-id: Ov23likionwoDaqBO3Sz
+            client-secret: f51b1875cc9e0d20e185be45dc9e5ff890895705
 
   cloud:
     nacos:
