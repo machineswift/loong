@@ -10,17 +10,6 @@ spring:
   application:
     name: loong-manage-app
 
-
-  thymeleaf:
-    cache: false
-  security:
-    oauth2:
-      client:
-        registration:
-          github:
-            client-id: Ov23likionwoDaqBO3Sz
-            client-secret: f51b1875cc9e0d20e185be45dc9e5ff890895705
-
   cloud:
     nacos:
       config:
