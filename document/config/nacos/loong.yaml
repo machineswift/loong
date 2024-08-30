@@ -1,10 +1,38 @@
-server:
-  servlet:
-    context-path: /${spring.application.name}
 spring:
-  main:
-    allow-bean-definition-overriding: true
-  servlet:
-    multipart:
-      max-file-size: 4096MB
-      max-request-size: 4096MB
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: redis
+
+wx:
+  mp:
+    useRedis: ture
+    redisConfig:
+      host: 127.0.0.1
+      port: 6379
+      password: redis
+      timeout: 3000
+    configs:
+      - appId: 1111 # 第一个公众号的appid
+        secret: 1111 # 公众号的appsecret
+        token: 111 # 接口配置里的Token值
+        aesKey: 111 # 接口配置里的EncodingAESKey值
+
+wechat:
+  cp:
+    appConfigs:
+      - agentId: 1000001
+        corpId: xxxx
+        secret: 1111
+        token: 111
+        aesKey: 111
+      - agentId: 1000002
+        corpId: xxxx
+        secret: 1111
+        token: 111
+        aesKey: 111
+
+#logging:
+#  level:
+#    root: trace
