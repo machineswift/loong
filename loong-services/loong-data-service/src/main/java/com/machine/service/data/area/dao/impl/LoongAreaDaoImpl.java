@@ -5,8 +5,8 @@ import cn.hutool.json.JSONUtil;
 import com.machine.service.data.area.dao.ILoongAreaDao;
 import com.machine.service.data.area.dao.dto.indto.LoongAreaInsertInDTO;
 import com.machine.service.data.area.dao.dto.outdto.LoongAreaListOutDTO;
-import com.machine.service.data.area.mapper.LoongAreaMapper;
-import com.machine.service.data.area.mapper.entity.AreaEntity;
+import com.machine.service.data.area.dao.mapper.LoongAreaMapper;
+import com.machine.service.data.area.dao.mapper.entity.AreaEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

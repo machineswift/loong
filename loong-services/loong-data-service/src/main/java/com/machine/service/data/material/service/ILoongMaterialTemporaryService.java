@@ -1,17 +1,17 @@
 package com.machine.service.data.material.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.machine.service.data.material.rest.request.LoongMaterialTemporarySelectPageRequest;
-import com.machine.service.data.material.service.bo.inbo.LoongMaterialTemporaryInsertInBO;
-import com.machine.service.data.material.service.bo.outbo.LoongMaterialTemporaryDetailOutBO;
-import com.machine.service.data.material.service.bo.outbo.LoongMaterialTemporaryPageOutBO;
+import com.machine.client.data.material.indto.LoongMaterialTemporaryCreateInputDto;
+import com.machine.client.data.material.indto.LoongMaterialTemporaryQueryPageInputVo;
+import com.machine.client.data.material.outdto.LoongMaterialTemporaryDetailOutputDto;
+import com.machine.client.data.material.outdto.LoongMaterialTemporaryListOutputDto;
 
 public interface ILoongMaterialTemporaryService {
 
-    String insert(LoongMaterialTemporaryInsertInBO inBO);
+    String create(LoongMaterialTemporaryCreateInputDto inputDto);
 
-    LoongMaterialTemporaryDetailOutBO selectById(String id);
+    LoongMaterialTemporaryDetailOutputDto detail(String id);
 
-    Page<LoongMaterialTemporaryPageOutBO> selectPage(LoongMaterialTemporarySelectPageRequest request);
+    Page<LoongMaterialTemporaryListOutputDto> selectPage(LoongMaterialTemporaryQueryPageInputVo inputVo);
 
 }

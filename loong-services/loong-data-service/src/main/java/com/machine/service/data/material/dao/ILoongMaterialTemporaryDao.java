@@ -1,17 +1,18 @@
 package com.machine.service.data.material.dao;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.machine.service.data.material.dao.dto.indto.LoongMaterialTemporaryInsertInDTO;
-import com.machine.service.data.material.dao.dto.outdto.LoongMaterialTemporaryDetailOutDTO;
-import com.machine.service.data.material.dao.dto.outdto.LoongMaterialTemporaryPageOutDTO;
-import com.machine.service.data.material.rest.request.LoongMaterialTemporarySelectPageRequest;
+import com.machine.client.data.material.indto.LoongMaterialTemporaryCreateInputDto;
+import com.machine.client.data.material.indto.LoongMaterialTemporaryQueryPageInputVo;
+import com.machine.client.data.material.outdto.LoongMaterialTemporaryDetailOutputDto;
+import com.machine.service.data.material.dao.mapper.entity.MaterialTemporaryEntity;
 
 public interface ILoongMaterialTemporaryDao {
 
-    String insert(LoongMaterialTemporaryInsertInDTO inDTO);
-    LoongMaterialTemporaryDetailOutDTO selectById(String id);
+    String insert(LoongMaterialTemporaryCreateInputDto inDTO);
 
-    Page<LoongMaterialTemporaryPageOutDTO> selectPage(LoongMaterialTemporarySelectPageRequest request);
+    LoongMaterialTemporaryDetailOutputDto selectById(String id);
+
+    Page<MaterialTemporaryEntity> selectPage(LoongMaterialTemporaryQueryPageInputVo request);
 
 
 }

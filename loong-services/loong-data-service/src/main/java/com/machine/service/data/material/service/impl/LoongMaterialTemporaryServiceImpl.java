@@ -2,19 +2,19 @@ package com.machine.service.data.material.service.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.machine.common.tool.json.LoongPageUtil;
+import com.machine.client.data.material.indto.LoongMaterialTemporaryQueryPageInputVo;
 import com.machine.service.data.material.dao.ILoongMaterialTemporaryDao;
-import com.machine.service.data.material.dao.dto.indto.LoongMaterialTemporaryInsertInDTO;
-import com.machine.service.data.material.dao.dto.outdto.LoongMaterialTemporaryDetailOutDTO;
-import com.machine.service.data.material.dao.dto.outdto.LoongMaterialTemporaryPageOutDTO;
-import com.machine.service.data.material.rest.request.LoongMaterialTemporarySelectPageRequest;
+import com.machine.client.data.material.indto.LoongMaterialTemporaryCreateInputDto;
+import com.machine.client.data.material.outdto.LoongMaterialTemporaryDetailOutputDto;
+import com.machine.client.data.material.outdto.LoongMaterialTemporaryListOutputDto;
+import com.machine.service.data.material.dao.mapper.entity.MaterialTemporaryEntity;
 import com.machine.service.data.material.service.ILoongMaterialTemporaryService;
-import com.machine.service.data.material.service.bo.inbo.LoongMaterialTemporaryInsertInBO;
-import com.machine.service.data.material.service.bo.outbo.LoongMaterialTemporaryDetailOutBO;
-import com.machine.service.data.material.service.bo.outbo.LoongMaterialTemporaryPageOutBO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -24,23 +24,31 @@ public class LoongMaterialTemporaryServiceImpl implements ILoongMaterialTemporar
     private ILoongMaterialTemporaryDao materialTemporaryDao;
 
     @Override
-    public String insert(LoongMaterialTemporaryInsertInBO inBO) {
-        LoongMaterialTemporaryInsertInDTO insertInDTO = JSONUtil.toBean(JSONUtil.toJsonStr(inBO), LoongMaterialTemporaryInsertInDTO.class);
-        return materialTemporaryDao.insert(insertInDTO);
+    public String create(LoongMaterialTemporaryCreateInputDto inputDto) {
+        return materialTemporaryDao.insert(inputDto);
     }
 
     @Override
-    public LoongMaterialTemporaryDetailOutBO selectById(String id) {
-        LoongMaterialTemporaryDetailOutDTO detailOutDTO = materialTemporaryDao.selectById(id);
+    public LoongMaterialTemporaryDetailOutputDto detail(String id) {
+        LoongMaterialTemporaryDetailOutputDto detailOutDTO = materialTemporaryDao.selectById(id);
         if(null == detailOutDTO){
             return null;
         }
-        return JSONUtil.toBean(JSONUtil.toJsonStr(detailOutDTO), LoongMaterialTemporaryDetailOutBO.class);
+        return JSONUtil.toBean(JSONUtil.toJsonStr(detailOutDTO), LoongMaterialTemporaryDetailOutputDto.class);
     }
 
     @Override
-    public Page<LoongMaterialTemporaryPageOutBO> selectPage(LoongMaterialTemporarySelectPageRequest request) {
-        Page<LoongMaterialTemporaryPageOutDTO> outBOPage = materialTemporaryDao.selectPage(request);
-        return LoongPageUtil.convertT1ToT2(outBOPage, LoongMaterialTemporaryPageOutBO.class);
+    public Page<LoongMaterialTemporaryListOutputDto> selectPage(LoongMaterialTemporaryQueryPageInputVo request) {
+        Page<MaterialTemporaryEntity> page = materialTemporaryDao.selectPage(request);
+
+        Page<LoongMaterialTemporaryListOutputDto> pageResult = new Page<>(page.getCurrent(), page.getSize(), page.getTotal());
+        List<LoongMaterialTemporaryListOutputDto> outputDtoList = new ArrayList<>();
+        for (MaterialTemporaryEntity entity : page.getRecords()) {
+            LoongMaterialTemporaryListOutputDto outputDto = JSONUtil.toBean(JSONUtil.toJsonStr(entity), LoongMaterialTemporaryListOutputDto.class);
+            outputDto.setMaterialId(entity.getId());
+            outputDtoList.add(outputDto);
+        }
+        pageResult.setRecords(outputDtoList);
+        return pageResult;
     }
 }

@@ -12,6 +12,7 @@
     <description>client 服务集合</description>
 
     <modules>
+        <module>loong-data-client</module>
         <module>loong-iam-client</module>
     </modules>
 

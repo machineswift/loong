@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.machine.service.data.material.dao.mapper.LoongMaterialPermanentMapper">
+
+    <select id="selectMaterialPage" resultType="com.machine.service.data.material.dao.mapper.entity.MaterialPermanentEntity">
+        select mp.* from t_material_permanent mp
+        <where>
+            <if test="inputVo.type != null and inputVo.type !='' ">
+                AND mp.type = #{inputVo.type}
+            </if>
+        </where>
+    </select>
+
+</mapper>
