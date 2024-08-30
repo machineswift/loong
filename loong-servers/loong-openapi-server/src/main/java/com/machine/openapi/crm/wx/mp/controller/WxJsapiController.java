@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * jsapi 演示接口的 controller.
- *
- * @author <a href="https://github.com/binarywang">Binary Wang</a>
- * @date 2020-04-25
  */
 @AllArgsConstructor
 @RestController

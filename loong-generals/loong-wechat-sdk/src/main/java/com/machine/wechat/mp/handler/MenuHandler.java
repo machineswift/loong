@@ -1,4 +1,4 @@
-package com.machine.openapi.crm.wx.mp.handler;
+package com.machine.wechat.mp.handler;
 
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;

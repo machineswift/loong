@@ -1,7 +1,7 @@
-package com.machine.openapi.crm.wx.mp.handler;
+package com.machine.wechat.mp.handler;
 
-import com.machine.openapi.crm.wx.mp.builder.TextBuilder;
-import com.machine.openapi.crm.wx.mp.utils.JsonUtils;
+import com.machine.wechat.mp.builder.TextBuilder;
+import com.machine.wechat.mp.utils.JsonUtils;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;

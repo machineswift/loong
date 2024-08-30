@@ -1,6 +1,5 @@
 package com.machine.app.manage.wx.cp.controller;
 
-import com.honey.web.manage.wxcp.fade.HoneyWxCpAuthFade;
 import com.machine.app.manage.wx.cp.business.ILoongWxCpAuthBusiness;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

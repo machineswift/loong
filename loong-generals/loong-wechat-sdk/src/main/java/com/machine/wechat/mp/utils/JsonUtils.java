@@ -1,4 +1,4 @@
-package com.machine.openapi.crm.wx.mp.utils;
+package com.machine.wechat.mp.utils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

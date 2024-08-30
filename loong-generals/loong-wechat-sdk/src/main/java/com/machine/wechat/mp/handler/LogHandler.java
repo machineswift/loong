@@ -1,5 +1,7 @@
-package com.machine.openapi.crm.wx.mp.handler;
+package com.machine.wechat.mp.handler;
 
+import com.machine.wechat.mp.utils.JsonUtils;
+import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;
 import me.chanjar.weixin.mp.bean.message.WxMpXmlMessage;
@@ -8,15 +10,14 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-
+@Slf4j
 @Component
-public class StoreCheckNotifyHandler extends AbstractHandler {
-
+public class LogHandler extends AbstractHandler {
     @Override
     public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
                                     Map<String, Object> context, WxMpService wxMpService,
                                     WxSessionManager sessionManager) {
-        // TODO 处理门店审核事件
+        log.info("接收到请求消息，内容：{}", JsonUtils.toJson(wxMessage));
         return null;
     }
 

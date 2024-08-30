@@ -1,6 +1,6 @@
-package com.machine.openapi.crm.wx.mp.handler;
+package com.machine.wechat.mp.handler;
 
-import com.machine.openapi.crm.wx.mp.builder.TextBuilder;
+import com.machine.wechat.mp.builder.TextBuilder;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.mp.api.WxMpService;

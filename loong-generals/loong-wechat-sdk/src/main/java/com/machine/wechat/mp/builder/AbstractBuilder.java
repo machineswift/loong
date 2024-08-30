@@ -1,4 +1,4 @@
-package com.machine.openapi.crm.wx.mp.builder;
+package com.machine.wechat.mp.builder;
 
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.mp.api.WxMpService;

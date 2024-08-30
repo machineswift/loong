@@ -14,7 +14,7 @@
 
     <modules>
         <module>loong-common-sdk</module>
-       <!-- <module>loong-wechat-sdk</module>-->
+        <module>loong-wechat-sdk</module>
     </modules>
 
     <dependencyManagement>

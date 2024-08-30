@@ -1,6 +1,6 @@
-package com.machine.openapi.crm.wx.mp.config;
+package com.machine.wechat.mp.config;
 
-import com.machine.openapi.crm.wx.mp.utils.JsonUtils;
+import com.machine.wechat.mp.utils.JsonUtils;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

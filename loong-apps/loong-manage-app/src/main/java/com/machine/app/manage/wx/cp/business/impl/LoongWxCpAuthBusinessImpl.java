@@ -18,7 +18,8 @@ public class LoongWxCpAuthBusinessImpl implements ILoongWxCpAuthBusiness {
                           String timestamp,
                           String nonce,
                           String echoStr) {
-        final WxCpService wxCpService = WxCpConfiguration.getCpService(corpId, agentId);
+        //final WxCpService wxCpService = WxCpConfiguration.getCpService(corpId, agentId);
+        final WxCpService wxCpService=null;
         if (wxCpService == null) {
             throw new IllegalArgumentException(String.format("未找到对应agentId=[%d]的配置，请核实！", agentId));
         }
