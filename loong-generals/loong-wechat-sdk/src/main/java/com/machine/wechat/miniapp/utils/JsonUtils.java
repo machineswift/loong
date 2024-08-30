@@ -1,4 +1,4 @@
-package com.machine.openapi.crm.wx.miniapp.utils;
+package com.machine.wechat.miniapp.utils;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -1,4 +1,4 @@
-package com.machine.openapi.crm.wx.miniapp.config;
+package com.machine.wechat.miniapp.config;
 
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;

@@ -1,4 +1,4 @@
-package com.machine.openapi.crm.wx.miniapp.config;
+package com.machine.wechat.miniapp.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
