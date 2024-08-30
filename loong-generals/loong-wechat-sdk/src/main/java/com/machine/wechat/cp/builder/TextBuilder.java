@@ -1,21 +1,18 @@
-package com.machine.openapi.crm.wx.cp.builder;
+package com.machine.wechat.cp.builder;
 
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;
-import me.chanjar.weixin.cp.bean.message.WxCpXmlOutImageMessage;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;
+import me.chanjar.weixin.cp.bean.message.WxCpXmlOutTextMessage;
 
-
-public class ImageBuilder extends AbstractBuilder {
+public class TextBuilder extends AbstractBuilder {
 
   @Override
   public WxCpXmlOutMessage build(String content, WxCpXmlMessage wxMessage,
                                  WxCpService service) {
-
-    WxCpXmlOutImageMessage m = WxCpXmlOutMessage.IMAGE().mediaId(content)
+    WxCpXmlOutTextMessage m = WxCpXmlOutMessage.TEXT().content(content)
         .fromUser(wxMessage.getToUserName()).toUser(wxMessage.getFromUserName())
         .build();
-
     return m;
   }
 

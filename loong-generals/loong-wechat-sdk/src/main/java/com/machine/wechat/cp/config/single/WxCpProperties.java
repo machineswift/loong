@@ -1,6 +1,6 @@
-package com.machine.openapi.crm.wx.cp.config.single;
+package com.machine.wechat.cp.config.single;
 
-import com.machine.openapi.crm.wx.cp.utils.JsonUtils;
+import com.machine.wechat.cp.utils.JsonUtils;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;

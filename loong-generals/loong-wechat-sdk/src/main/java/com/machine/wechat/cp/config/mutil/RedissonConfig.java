@@ -1,4 +1,4 @@
-package com.machine.openapi.crm.wx.cp.config.mutil;
+package com.machine.wechat.cp.config.mutil;
 
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;

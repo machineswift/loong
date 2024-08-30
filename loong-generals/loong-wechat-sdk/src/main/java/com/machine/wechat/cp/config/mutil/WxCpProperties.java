@@ -1,4 +1,4 @@
-package com.machine.openapi.crm.wx.cp.config.mutil;
+package com.machine.wechat.cp.config.mutil;
 
 import lombok.Data;
 import lombok.Getter;

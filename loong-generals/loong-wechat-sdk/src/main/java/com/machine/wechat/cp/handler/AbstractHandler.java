@@ -1,4 +1,4 @@
-package com.machine.openapi.crm.wx.cp.handler;
+package com.machine.wechat.cp.handler;
 
 import me.chanjar.weixin.cp.message.WxCpMessageHandler;
 

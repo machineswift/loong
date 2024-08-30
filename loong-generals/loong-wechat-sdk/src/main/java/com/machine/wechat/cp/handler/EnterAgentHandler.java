@@ -1,4 +1,4 @@
-package com.machine.openapi.crm.wx.cp.handler;
+package com.machine.wechat.cp.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;

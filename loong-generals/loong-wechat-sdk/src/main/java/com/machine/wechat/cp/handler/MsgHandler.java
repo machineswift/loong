@@ -1,7 +1,7 @@
-package com.machine.openapi.crm.wx.cp.handler;
+package com.machine.wechat.cp.handler;
 
-import com.machine.openapi.crm.wx.cp.builder.TextBuilder;
-import com.machine.openapi.crm.wx.cp.utils.JsonUtils;
+import com.machine.wechat.cp.builder.TextBuilder;
+import com.machine.wechat.cp.utils.JsonUtils;
 import me.chanjar.weixin.common.api.WxConsts;
 import me.chanjar.weixin.common.session.WxSessionManager;
 import me.chanjar.weixin.cp.api.WxCpService;

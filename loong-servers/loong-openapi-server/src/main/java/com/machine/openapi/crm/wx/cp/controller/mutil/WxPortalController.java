@@ -1,7 +1,7 @@
 package com.machine.openapi.crm.wx.cp.controller.mutil;
 
-import com.machine.openapi.crm.wx.cp.config.mutil.WxCpConfiguration;
-import com.machine.openapi.crm.wx.cp.utils.JsonUtils;
+import com.machine.wechat.cp.config.mutil.WxCpConfiguration;
+import com.machine.wechat.cp.utils.JsonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;

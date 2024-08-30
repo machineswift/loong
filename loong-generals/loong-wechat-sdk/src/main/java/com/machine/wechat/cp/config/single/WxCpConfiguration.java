@@ -1,7 +1,7 @@
-package com.machine.openapi.crm.wx.cp.config.single;
+package com.machine.wechat.cp.config.single;
 
 import com.google.common.collect.Maps;
-import com.machine.openapi.crm.wx.cp.handler.*;
+import com.machine.wechat.cp.handler.*;
 import jakarta.annotation.PostConstruct;
 import lombok.val;
 import me.chanjar.weixin.common.api.WxConsts;

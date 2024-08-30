@@ -1,6 +1,6 @@
 package com.machine.openapi.crm.wx.cp.controller.single;
 
-import com.machine.openapi.crm.wx.cp.config.single.WxCpConfiguration;
+import com.machine.wechat.cp.config.single.WxCpConfiguration;
 import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.cp.api.WxCpService;
 import me.chanjar.weixin.cp.bean.message.WxCpXmlMessage;
@@ -8,7 +8,7 @@ import me.chanjar.weixin.cp.bean.message.WxCpXmlOutMessage;
 import me.chanjar.weixin.cp.util.crypto.WxCpCryptUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import com.machine.openapi.crm.wx.cp.utils.JsonUtils;
+import com.machine.wechat.cp.utils.JsonUtils;
 
 @Slf4j
 public class WxPortalController {

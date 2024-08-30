@@ -1,6 +1,6 @@
 package com.machine.openapi.crm.wx.cp.controller.mutil;
 
-import com.machine.openapi.crm.wx.cp.config.mutil.WxCpConfiguration;
+import com.machine.wechat.cp.config.mutil.WxCpConfiguration;
 import lombok.RequiredArgsConstructor;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.error.WxErrorException;

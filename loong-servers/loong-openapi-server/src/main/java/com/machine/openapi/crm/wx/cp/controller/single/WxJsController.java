@@ -1,6 +1,6 @@
 package com.machine.openapi.crm.wx.cp.controller.single;
 
-import com.machine.openapi.crm.wx.cp.config.single.WxCpConfiguration;
+import com.machine.wechat.cp.config.single.WxCpConfiguration;
 import me.chanjar.weixin.common.bean.WxJsapiSignature;
 import me.chanjar.weixin.common.error.WxErrorException;
 import me.chanjar.weixin.cp.api.WxCpService;
