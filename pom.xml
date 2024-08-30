@@ -115,6 +115,37 @@
                 <version>2.14.5</version>
             </dependency>
 
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>1.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.11.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>3.35.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>5.1.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.jedis-lock</groupId>
+                <artifactId>jedis-lock</artifactId>
+                <version>1.0.0</version>
+            </dependency>
+
+
             <!-- 微信小程序  -->
             <dependency>
                 <groupId>com.github.binarywang</groupId>
@@ -150,29 +181,6 @@
                 <version>4.6.0</version>
             </dependency>
 
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>2.11.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.redisson</groupId>
-                <artifactId>redisson</artifactId>
-                <version>3.35.0</version>
-            </dependency>
-
-            <dependency>
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-                <version>5.1.5</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.jedis-lock</groupId>
-                <artifactId>jedis-lock</artifactId>
-                <version>1.0.0</version>
-            </dependency>
 
             <dependency>
                 <groupId>org.projectlombok</groupId>

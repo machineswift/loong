@@ -19,6 +19,14 @@ wx:
         token: 111 # 接口配置里的Token值
         aesKey: 111 # 接口配置里的EncodingAESKey值
 
+  miniapp:
+    configs:
+      - appid: #微信小程序的appid
+        secret: #微信小程序的Secret
+        token: #微信小程序消息服务器配置的token
+        aesKey: #微信小程序消息服务器配置的EncodingAESKey
+        msgDataFormat: JSON
+
 wechat:
   cp:
     appConfigs:
