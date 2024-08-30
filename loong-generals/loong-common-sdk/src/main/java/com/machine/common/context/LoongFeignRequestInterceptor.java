@@ -1,12 +1,9 @@
 package com.machine.common.context;
 
-import feign.Logger;
 import com.machine.common.constant.LoongContextConstant;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.SneakyThrows;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -16,21 +13,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Configuration
-public class LoongFeignConfig {
+public class LoongFeignRequestInterceptor implements RequestInterceptor {
 
-    @Bean
-    public Logger.Level feignLoggerLevel() {
-        return Logger.Level.NONE;
-    }
-
-    @Bean
-    public RequestInterceptor requestInterceptor() {
-        return LoongFeignConfig::apply;
-    }
-
+    @Override
     @SneakyThrows
-    private static void apply(RequestTemplate template) {
+    public void apply(RequestTemplate template) {
         String userId = LoongAppContext.getContext().getUserId();
         if (null == userId || userId.trim().isEmpty()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,4 +41,5 @@ public class LoongFeignConfig {
             List.of("loong-iam-service/loong-iam-service/serve/auth/getBySeries",
                     "loong-iam-service/loong-iam-service/server/user/auth_detail",
                     "loong-iam-service/loong-iam-service/server/user/getByUserName"));
+
 }

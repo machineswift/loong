@@ -13,7 +13,8 @@
     <description>通用集合</description>
 
     <modules>
-        <module>loong-common</module>
+        <module>loong-common-sdk</module>
+       <!-- <module>loong-wechat-sdk</module>-->
     </modules>
 
     <dependencyManagement>

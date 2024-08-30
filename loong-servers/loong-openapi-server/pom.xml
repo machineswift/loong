@@ -38,9 +38,17 @@
         </dependency>
 
         <dependency>
+            <groupId>com.machine</groupId>
+            <artifactId>loong-common-sdk</artifactId>
+            <version>${version}</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+
 
         <!-- redisson -->
         <dependency>
@@ -81,7 +89,6 @@
             <groupId>com.github.binarywang</groupId>
             <artifactId>weixin-java-miniapp</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>org.projectlombok</groupId>

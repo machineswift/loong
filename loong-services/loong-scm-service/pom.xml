@@ -39,7 +39,7 @@
 
         <dependency>
             <groupId>com.machine</groupId>
-            <artifactId>loong-common</artifactId>
+            <artifactId>loong-common-sdk</artifactId>
             <version>${version}</version>
         </dependency>
 
