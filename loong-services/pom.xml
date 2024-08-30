@@ -13,9 +13,13 @@
 	<description>service 服务集合</description>
 
 	<modules>
-		<module>loong-crm-service</module>
 		<module>loong-data-service</module>
 		<module>loong-iam-service</module>
+		<!-- 人力资源管理 -->
+		<module>loong-hrm-service</module>
+		<!-- 客户关系管理 -->
+		<module>loong-crm-service</module>
+		<!-- 供应链管理 -->
 		<module>loong-scm-service</module>
 	</modules>
 
