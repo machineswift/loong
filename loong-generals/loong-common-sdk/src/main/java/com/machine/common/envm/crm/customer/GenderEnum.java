@@ -1,5 +1,7 @@
 package com.machine.common.envm.crm.customer;
 
+import com.machine.common.envm.LoongBaseEnum;
+import com.machine.common.envm.LoongStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum GenderEnum {
+public enum GenderEnum implements LoongBaseEnum<LoongStatusEnum, String> {
     MALE("MALE", "男"),
     FEMALE("FEMALE", "女"),
     UNDEFINED("UNDEFINED", "未知");

@@ -1,11 +1,13 @@
 package com.machine.common.envm.system;
 
+import com.machine.common.envm.LoongBaseEnum;
+import com.machine.common.envm.LoongStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum SystemEnvironmentEnum {
+public enum SystemEnvironmentEnum implements LoongBaseEnum<LoongStatusEnum, String> {
     DEV("DEV", "开发环境"),
     SIT("SIT", "系统整合测试环境（内测）"),
     TEST("TEST", "测试环境"),

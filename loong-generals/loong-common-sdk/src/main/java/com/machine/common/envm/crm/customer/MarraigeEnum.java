@@ -1,5 +1,7 @@
-package com.machine.common.envm;
+package com.machine.common.envm.crm.customer;
 
+import com.machine.common.envm.LoongBaseEnum;
+import com.machine.common.envm.LoongStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -8,7 +10,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum MarraigeEnum {
+public enum MarraigeEnum implements LoongBaseEnum<LoongStatusEnum, String> {
 
     SECRECY("SECRECY", "保密"),
     MARRIED("MARRIED", "已婚"),

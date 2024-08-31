@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum LoongStatusEnum {
+public enum LoongStatusEnum implements LoongBaseEnum<LoongStatusEnum, String> {
     DISABLE("DISABLE", "禁用"),
 
     ENABLE("ENABLE", "启用");
