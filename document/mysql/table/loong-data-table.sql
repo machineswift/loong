@@ -11,7 +11,6 @@ CREATE TABLE `t_area` (
 	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
 	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
 	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-	`deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
 	PRIMARY KEY ( `id` ) USING BTREE,
 	UNIQUE KEY `uk_01` ( `code` ) USING BTREE,
 	KEY `idx_01` ( `parent_code` ) USING BTREE
@@ -28,7 +27,6 @@ CREATE TABLE `t_material_permanent` (
      `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
      `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
      `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-     `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
      PRIMARY KEY ( `id` ) USING BTREE,
      KEY `idx_01` ( `update_time` ) USING BTREE
 ) COMMENT = '永久素材表';
@@ -44,7 +42,6 @@ CREATE TABLE `t_material_temporary` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
 ) COMMENT = '临时素材表';
@@ -60,7 +57,6 @@ CREATE TABLE `t_label_category` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    UNIQUE KEY `uk_01` ( `name` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
@@ -76,7 +72,6 @@ CREATE TABLE `t_label` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    UNIQUE KEY `uk_01` ( `name` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
@@ -94,7 +89,6 @@ CREATE TABLE `t_label_option` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    UNIQUE KEY `uk_01` (`label_id`, `name` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
@@ -111,7 +105,6 @@ CREATE TABLE `t_tag_category` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    UNIQUE KEY `uk_01` ( `name` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
@@ -128,8 +121,25 @@ CREATE TABLE `t_tag` (
    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
-   `deleted` TINYINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否已删除',
    PRIMARY KEY ( `id` ) USING BTREE,
    UNIQUE KEY `uk_01` ( `name` ) USING BTREE,
    KEY `idx_01` ( `update_time` ) USING BTREE
 ) COMMENT = '智能标签表';
+
+
+DROP TABLE IF EXISTS `t_leaf_alloc`;
+CREATE TABLE IF NOT EXISTS `t_leaf_alloc` (
+    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
+    `biz_tag` VARCHAR ( 128 ) NOT NULL COMMENT '业务标签',
+    `max_id` BIGINT UNSIGNED NOT NULL DEFAULT '0' COMMENT '当前已分配的最大ID',
+    `step` INT UNSIGNED NOT NULL DEFAULT '100' COMMENT '每次分配的步长，默认为100',
+    `expire_time` BIGINT UNSIGNED NOT NULL COMMENT '过期时间',
+    `remark` VARCHAR ( 2048 ) NOT NULL COMMENT '备注',
+    `create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
+    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
+    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
+    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
+    PRIMARY KEY ( `id` ),
+    UNIQUE KEY `uk_01` ( `biz_tag` ),
+	KEY `idx_01` ( `expire_time` )
+) COMMENT = 'leaf 表';
