@@ -13,6 +13,7 @@
     <description>starter 集合</description>
 
     <modules>
+        <module>loong-mq-boot-starter</module>
         <module>loong-minio-boot-starter</module>
         <module>loong-mybatis-boot-starter</module>
     </modules>

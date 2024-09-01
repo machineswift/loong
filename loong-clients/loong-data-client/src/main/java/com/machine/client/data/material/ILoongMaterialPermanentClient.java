@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "loong-iam-service/loong-data-service/serve/material-permanent",
-        configuration = LoongFeignConfig.class)
+@FeignClient(name = "loong-data-service/loong-data-service/server/material-permanent", configuration = LoongFeignConfig.class)
 public interface ILoongMaterialPermanentClient {
 
     @PostMapping("create")

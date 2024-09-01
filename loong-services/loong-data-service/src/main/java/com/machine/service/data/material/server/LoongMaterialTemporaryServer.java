@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("material/temporary")
+@RequestMapping("server/material-temporary")
 public class LoongMaterialTemporaryServer implements ILoongMaterialTemporaryClient {
 
     @Autowired

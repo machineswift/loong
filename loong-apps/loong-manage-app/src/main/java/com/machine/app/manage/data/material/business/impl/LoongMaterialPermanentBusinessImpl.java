@@ -1,7 +1,7 @@
-package com.machine.app.manage.data.base.business.impl;
+package com.machine.app.manage.data.material.business.impl;
 
 import cn.hutool.json.JSONUtil;
-import com.machine.app.manage.data.base.business.ILoongMaterialPermanentBusiness;
+import com.machine.app.manage.data.material.business.ILoongMaterialPermanentBusiness;
 import com.machine.app.manage.data.material.controller.request.LoongMaterialPermanentQueryPageRequest;
 import com.machine.app.manage.data.material.controller.response.LoongMaterialPermanentDetailResponse;
 import com.machine.app.manage.data.material.controller.response.LoongMaterialPermanentListResponse;
@@ -10,6 +10,7 @@ import com.machine.client.data.material.indto.LoongMaterialPermanentCreateInputD
 import com.machine.client.data.material.indto.LoongMaterialPermanentQueryPageInputVo;
 import com.machine.client.data.material.outdto.LoongMaterialPermanentDetailOutputDto;
 import com.machine.client.data.material.outdto.LoongMaterialPermanentListOutputDto;
+import com.machine.client.iam.department.ILoongDepartmentClient;
 import com.machine.common.envm.data.material.DataMaterIalTypeEnum;
 import com.machine.common.model.LoongPageResponse;
 import com.machine.starter.minio.LoongMinioUtil;
@@ -33,7 +34,10 @@ public class LoongMaterialPermanentBusinessImpl implements ILoongMaterialPermane
     private MinioClient minioClient;
 
     @Autowired
-    private ILoongMaterialPermanentClient materialPermanentClient;
+    private ILoongDepartmentClient departmentClient;
+//
+//    @Autowired
+//    private ILoongMaterialPermanentClient materialPermanentClient;
 
 
     @Override
@@ -43,12 +47,14 @@ public class LoongMaterialPermanentBusinessImpl implements ILoongMaterialPermane
         inputDto.setLength(file.getSize());
         inputDto.setName(file.getOriginalFilename());
         inputDto.setUrl(LoongMinioUtil.uploadFilePermanentMinio(minioClient, file));
-        return materialPermanentClient.create(inputDto);
+        //return materialPermanentClient.create(inputDto);
+        return null;
     }
 
     @Override
     public LoongMaterialPermanentDetailResponse downloadFile(String id, HttpServletResponse response) {
-        LoongMaterialPermanentDetailOutputDto detailOutputDto = materialPermanentClient.detail(id);
+       // LoongMaterialPermanentDetailOutputDto detailOutputDto = materialPermanentClient.detail(id);
+        LoongMaterialPermanentDetailOutputDto detailOutputDto =null;
         if (null == detailOutputDto) {
             return null;
         }
@@ -80,7 +86,8 @@ public class LoongMaterialPermanentBusinessImpl implements ILoongMaterialPermane
     @Override
     public LoongPageResponse<LoongMaterialPermanentListResponse> selectPage(LoongMaterialPermanentQueryPageRequest request) {
         LoongMaterialPermanentQueryPageInputVo inputVo = JSONUtil.toBean(JSONUtil.toJsonStr(request), LoongMaterialPermanentQueryPageInputVo.class);
-        LoongPageResponse<LoongMaterialPermanentListOutputDto> page = materialPermanentClient.selectPage(inputVo);
+        //LoongPageResponse<LoongMaterialPermanentListOutputDto> page = materialPermanentClient.selectPage(inputVo);
+        LoongPageResponse<LoongMaterialPermanentListOutputDto> page =null;
         return new LoongPageResponse<>(
                 page.getCurrent(),
                 page.getSize(),

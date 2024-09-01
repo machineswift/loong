@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @RefreshScope
 @RestController
-@RequestMapping("serve/auth")
+@RequestMapping("server/auth")
 public class LoongAuthTokenServe implements ILoongAuthTokenClient {
 
     @Autowired

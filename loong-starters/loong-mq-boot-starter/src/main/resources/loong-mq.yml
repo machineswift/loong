@@ -1,0 +1,24 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: loong
+    password: loong
+    virtualHost: loong
+  cloud:
+    function:
+      definition: loongLogFunction;loongLogConsumer
+    stream:
+      bindings:
+        loongLogProducer:
+          destination: loong-log-producer-topic
+        #代码中function的名称
+        loongLogFunction-in-0:
+          destination: loong-log-producer-topic
+          group: loong-log-group
+        loongLogFunction-out-0:
+          destination: loong-log-function-topic
+        loongLogConsumer-in-0:
+          destination: loong-log-function-topic
+          group: loong-log-group
+

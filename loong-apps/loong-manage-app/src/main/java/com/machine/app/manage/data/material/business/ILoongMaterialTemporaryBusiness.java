@@ -1,4 +1,4 @@
-package com.machine.app.manage.data.base.business;
+package com.machine.app.manage.data.material.business;
 
 import com.machine.app.manage.data.material.controller.response.LoongMaterialTemporaryDetailResponse;
 import com.machine.common.envm.data.material.DataMaterIalTypeEnum;
@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ILoongMaterialTemporaryBusiness {
 
-    String upload(DataMaterIalTypeEnum materIalType, MultipartFile file);
-
-    LoongMaterialTemporaryDetailResponse downloadFile(String id, HttpServletResponse response);
+//    String upload(DataMaterIalTypeEnum materIalType, MultipartFile file);
+//
+//    LoongMaterialTemporaryDetailResponse downloadFile(String id, HttpServletResponse response);
 }

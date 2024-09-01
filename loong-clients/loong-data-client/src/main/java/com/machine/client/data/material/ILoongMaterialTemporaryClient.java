@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(name = "loong-iam-service/loong-data-service/serve/material-temporary",
+@FeignClient(name = "loong-data-service/loong-data-service/server/material-temporary",
         configuration = LoongFeignConfig.class)
 public interface ILoongMaterialTemporaryClient {
 
@@ -21,7 +21,6 @@ public interface ILoongMaterialTemporaryClient {
 
     @GetMapping("detail")
     LoongMaterialTemporaryDetailOutputDto detail(@RequestParam("materIalId") String materIalId);
-
 
     @PostMapping("page")
     LoongPageResponse<LoongMaterialTemporaryListOutputDto> selectPage(@RequestBody LoongMaterialTemporaryQueryPageInputVo inputVo);

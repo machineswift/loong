@@ -1,4 +1,4 @@
-package com.machine.app.manage.data.base.business;
+package com.machine.app.manage.data.material.business;
 
 import com.machine.app.manage.data.material.controller.request.LoongMaterialPermanentQueryPageRequest;
 import com.machine.app.manage.data.material.controller.response.LoongMaterialPermanentDetailResponse;
@@ -10,9 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ILoongMaterialPermanentBusiness {
 
-    String upload(DataMaterIalTypeEnum materIalType, MultipartFile file);
+    String upload(DataMaterIalTypeEnum materIalType,
+                  MultipartFile file);
 
-    LoongMaterialPermanentDetailResponse downloadFile(String id, HttpServletResponse response);
+    LoongMaterialPermanentDetailResponse downloadFile(String id,
+                                                      HttpServletResponse response);
 
     LoongPageResponse<LoongMaterialPermanentListResponse> selectPage(LoongMaterialPermanentQueryPageRequest request);
 }

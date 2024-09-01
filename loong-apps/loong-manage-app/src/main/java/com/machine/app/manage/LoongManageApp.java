@@ -7,11 +7,11 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = {
-        "com.machine.client"
+        "com.machine.client",
 })
 @SpringBootApplication(scanBasePackages = {
+        "com.machine.starter",
         "com.machine.app.manage",
-        "com.machine.starter"
 })
 public class LoongManageApp {
 

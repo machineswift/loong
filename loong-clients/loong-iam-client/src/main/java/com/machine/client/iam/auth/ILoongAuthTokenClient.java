@@ -7,7 +7,7 @@ import com.machine.common.context.LoongFeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "loong-iam-service/loong-iam-service/serve/auth", configuration = LoongFeignConfig.class)
+@FeignClient(name = "loong-iam-service/loong-iam-service/server/auth", configuration = LoongFeignConfig.class)
 public interface ILoongAuthTokenClient {
 
     @PostMapping("add")
