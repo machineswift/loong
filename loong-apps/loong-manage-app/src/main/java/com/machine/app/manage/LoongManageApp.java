@@ -11,7 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 })
 @SpringBootApplication(scanBasePackages = {
         "com.machine.starter",
-        "com.machine.app.manage",
+        "com.machine.app.manage"
 })
 public class LoongManageApp {
 

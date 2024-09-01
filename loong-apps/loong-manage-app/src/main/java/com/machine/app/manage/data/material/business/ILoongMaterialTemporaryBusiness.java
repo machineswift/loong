@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ILoongMaterialTemporaryBusiness {
 
-//    String upload(DataMaterIalTypeEnum materIalType, MultipartFile file);
-//
-//    LoongMaterialTemporaryDetailResponse downloadFile(String id, HttpServletResponse response);
+    String upload(DataMaterIalTypeEnum materIalType, MultipartFile file);
+
+    LoongMaterialTemporaryDetailResponse downloadFile(String id, HttpServletResponse response);
 }

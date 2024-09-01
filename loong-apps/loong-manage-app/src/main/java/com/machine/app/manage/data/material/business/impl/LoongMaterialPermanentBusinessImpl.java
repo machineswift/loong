@@ -10,7 +10,6 @@ import com.machine.client.data.material.indto.LoongMaterialPermanentCreateInputD
 import com.machine.client.data.material.indto.LoongMaterialPermanentQueryPageInputVo;
 import com.machine.client.data.material.outdto.LoongMaterialPermanentDetailOutputDto;
 import com.machine.client.data.material.outdto.LoongMaterialPermanentListOutputDto;
-import com.machine.client.iam.department.ILoongDepartmentClient;
 import com.machine.common.envm.data.material.DataMaterIalTypeEnum;
 import com.machine.common.model.LoongPageResponse;
 import com.machine.starter.minio.LoongMinioUtil;
@@ -34,10 +33,7 @@ public class LoongMaterialPermanentBusinessImpl implements ILoongMaterialPermane
     private MinioClient minioClient;
 
     @Autowired
-    private ILoongDepartmentClient departmentClient;
-//
-//    @Autowired
-//    private ILoongMaterialPermanentClient materialPermanentClient;
+    private ILoongMaterialPermanentClient materialPermanentClient;
 
 
     @Override
@@ -47,14 +43,12 @@ public class LoongMaterialPermanentBusinessImpl implements ILoongMaterialPermane
         inputDto.setLength(file.getSize());
         inputDto.setName(file.getOriginalFilename());
         inputDto.setUrl(LoongMinioUtil.uploadFilePermanentMinio(minioClient, file));
-        //return materialPermanentClient.create(inputDto);
-        return null;
+        return materialPermanentClient.create(inputDto);
     }
 
     @Override
     public LoongMaterialPermanentDetailResponse downloadFile(String id, HttpServletResponse response) {
-       // LoongMaterialPermanentDetailOutputDto detailOutputDto = materialPermanentClient.detail(id);
-        LoongMaterialPermanentDetailOutputDto detailOutputDto =null;
+        LoongMaterialPermanentDetailOutputDto detailOutputDto = materialPermanentClient.detail(id);
         if (null == detailOutputDto) {
             return null;
         }
@@ -86,8 +80,7 @@ public class LoongMaterialPermanentBusinessImpl implements ILoongMaterialPermane
     @Override
     public LoongPageResponse<LoongMaterialPermanentListResponse> selectPage(LoongMaterialPermanentQueryPageRequest request) {
         LoongMaterialPermanentQueryPageInputVo inputVo = JSONUtil.toBean(JSONUtil.toJsonStr(request), LoongMaterialPermanentQueryPageInputVo.class);
-        //LoongPageResponse<LoongMaterialPermanentListOutputDto> page = materialPermanentClient.selectPage(inputVo);
-        LoongPageResponse<LoongMaterialPermanentListOutputDto> page =null;
+        LoongPageResponse<LoongMaterialPermanentListOutputDto> page = materialPermanentClient.selectPage(inputVo);
         return new LoongPageResponse<>(
                 page.getCurrent(),
                 page.getSize(),

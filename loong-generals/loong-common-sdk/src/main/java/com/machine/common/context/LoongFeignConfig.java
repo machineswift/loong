@@ -5,14 +5,13 @@ import feign.Logger;
 import feign.Request;
 import feign.RequestInterceptor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.security.InvalidParameterException;
 import java.util.concurrent.TimeUnit;
 
-@RefreshScope
+
 @Configuration
 public class LoongFeignConfig {
 
@@ -28,7 +27,6 @@ public class LoongFeignConfig {
             default -> throw new InvalidParameterException("未选择环境");
         };
     }
-
 
     @Bean
     public Request.Options options() {
