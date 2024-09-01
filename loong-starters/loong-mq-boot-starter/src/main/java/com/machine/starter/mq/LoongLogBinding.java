@@ -24,7 +24,6 @@ public class LoongLogBinding {
         };
     }
 
-
     @Bean
     public Consumer<Message<String>> loongLogConsumer() {
         return msgData -> log.info("consumer 接到消息:{}", msgData.getPayload());

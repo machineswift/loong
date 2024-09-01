@@ -7,12 +7,12 @@ spring:
     virtualHost: loong
   cloud:
     function:
-      definition: loongLogFunction;loongLogConsumer
+      definition: |
+        loongLogFunction;loongLogConsumer;
     stream:
       bindings:
         loongLogProducer:
           destination: loong-log-producer-topic
-        #代码中function的名称
         loongLogFunction-in-0:
           destination: loong-log-producer-topic
           group: loong-log-group
