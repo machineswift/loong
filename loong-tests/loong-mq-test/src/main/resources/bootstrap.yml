@@ -1,0 +1,28 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: loong
+    password: loong
+    virtualHost: loong
+  cloud:
+    stream:
+      bindings:
+        #代码中的生产者名称
+#        ss007AutoProducer-out-0:
+#          destination: ss007-auto-topic
+#          group: ss007-group
+        producerManaual:
+          destination: ss007-auto-topic
+        #代码中function的名称
+        ss007Function-in-0:
+          destination: ss007-auto-topic
+          group: ss007-group
+        ss007Function-out-0:
+          destination: ss007-func-topic
+        ss007AutoConsumer-in-0:
+          destination: ss007-func-topic
+          group: ss007-group
+    function:
+#      definition: ss007AutoProducer;ss007Function;ss007AutoConsumer
+      definition: ss007Function;ss007AutoConsumer
