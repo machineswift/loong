@@ -15,6 +15,7 @@
 	<modules>
 		<module>loong-gateway-server</module>
 		<module>loong-openapi-server</module>
+		<module>loong-xxljob-server</module>
 	</modules>
 
 	<dependencyManagement>
