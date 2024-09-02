@@ -15,10 +15,14 @@ spring:
           uri: lb://loong-xxljob-server
           predicates:
             - Path=/loong-xxljob-server/**
-        - id: loong-manage-app
-          uri: lb://loong-manage-app
+        - id: loong-openapi-server
+          uri: lb://loong-openapi-server
           predicates:
-            - Path=/loong-manage-app/**
+            - Path=/loong-openapi-server/**
+        - id: loong-iam-app
+          uri: lb://loong-iam-app
+          predicates:
+            - Path=/loong-iam-app/**
         - id: loong-manage-app
           uri: lb://loong-manage-app
           predicates:

@@ -16,5 +16,6 @@
         <module>loong-mq-boot-starter</module>
         <module>loong-minio-boot-starter</module>
         <module>loong-mybatis-boot-starter</module>
+        <module>loong-security-boot-starter</module>
     </modules>
 </project>

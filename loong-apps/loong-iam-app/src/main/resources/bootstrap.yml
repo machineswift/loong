@@ -27,3 +27,6 @@ spring:
         group: LOONG_GROUP
 
 
+logging:
+  level:
+    root: trace

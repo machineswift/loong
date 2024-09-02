@@ -33,7 +33,3 @@ spring:
     url: jdbc:mysql://${loong.datasource.host}:3306/loong_iam?useUnicode=true&autoReconnect=true&allowMultiQueries=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
     username: ${loong.datasource.username}
     password: ${loong.datasource.password}
-
-logging:
-  level:
-    root: DEBUG
