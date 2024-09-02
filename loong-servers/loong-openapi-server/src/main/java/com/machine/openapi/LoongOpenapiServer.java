@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LoongOpenapiServerApp {
+public class LoongOpenapiServer {
 
     public static void main(String[] args) {
-        SpringApplication.run(LoongOpenapiServerApp.class, args);
+        SpringApplication.run(LoongOpenapiServer.class, args);
     }
 
 }

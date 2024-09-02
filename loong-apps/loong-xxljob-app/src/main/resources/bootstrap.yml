@@ -8,7 +8,7 @@ spring:
   profiles:
     active: DEV
   application:
-    name: loong-manage-app
+    name: loong-xxljob-app
 
   cloud:
     nacos:
@@ -29,3 +29,28 @@ spring:
         password: nacos
         namespace: LOONG_${spring.profiles.active}
         group: LOONG_GROUP
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 9000000
+        readTimeout: 9000000
+
+xxl:
+  job:
+    admin:
+      addresses: http://localhost:8080/loong-xxljob-server
+    accessToken: default_token
+    executor:
+      appname: loong-xxljob-app
+      address:
+      ip:
+      port: 9999
+      logpath: /Users/machine/data/applogs/xxl-job/jobhandler
+      logretentiondays: 30
+
+
+logging:
+  level:
+    root: trace

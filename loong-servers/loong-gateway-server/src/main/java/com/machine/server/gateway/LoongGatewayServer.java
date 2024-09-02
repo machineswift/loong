@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-public class LoongGatewayServerApp {
+public class LoongGatewayServer {
 
     public static void main(String[] args) {
-        SpringApplication.run(LoongGatewayServerApp.class, args);
+        SpringApplication.run(LoongGatewayServer.class, args);
     }
 
 }

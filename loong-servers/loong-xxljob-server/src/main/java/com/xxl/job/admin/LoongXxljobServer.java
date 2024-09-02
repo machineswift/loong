@@ -6,10 +6,10 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @EnableDiscoveryClient
 @SpringBootApplication
-public class LoongXxljobServerApp {
+public class LoongXxljobServer {
 
     public static void main(String[] args) {
-        SpringApplication.run(LoongXxljobServerApp.class, args);
+        SpringApplication.run(LoongXxljobServer.class, args);
     }
 
 }
