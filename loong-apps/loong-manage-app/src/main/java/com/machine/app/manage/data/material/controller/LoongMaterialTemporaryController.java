@@ -13,24 +13,24 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 @Tag(name = "临时素材模块")
 @RestController
-@RequestMapping("material-temporary")
+@RequestMapping("data/material/temporary")
 public class LoongMaterialTemporaryController {
 
-//    @Autowired
-//    private ILoongMaterialTemporaryBusiness materialTemporaryBusiness;
-//
-//    @PostMapping("upload")
-//    public String upload(@RequestParam("materIalType") DataMaterIalTypeEnum materIalType,
-//                         @RequestParam("file") MultipartFile file) {
-//        log.info("上传临时素材 materIalType:{} fileName:{} length:{}",
-//                materIalType, file.getOriginalFilename(), file.getSize());
-//        return materialTemporaryBusiness.upload(materIalType,file);
-//    }
-//
-//    @GetMapping("download")
-//    public LoongMaterialTemporaryDetailResponse downloadFile(@RequestParam("id") String id,
-//                                                             HttpServletResponse response) {
-//        log.info("下载临时素材 id:{}", id);
-//        return materialTemporaryBusiness.downloadFile(id,response);
-//    }
+    @Autowired
+    private ILoongMaterialTemporaryBusiness materialTemporaryBusiness;
+
+    @PostMapping("upload")
+    public String upload(@RequestParam("materIalType") DataMaterIalTypeEnum materIalType,
+                         @RequestParam("file") MultipartFile file) {
+        log.info("上传临时素材 materIalType:{} fileName:{} length:{}",
+                materIalType, file.getOriginalFilename(), file.getSize());
+        return materialTemporaryBusiness.upload(materIalType,file);
+    }
+
+    @GetMapping("download")
+    public LoongMaterialTemporaryDetailResponse downloadFile(@RequestParam("id") String id,
+                                                             HttpServletResponse response) {
+        log.info("下载临时素材 id:{}", id);
+        return materialTemporaryBusiness.downloadFile(id,response);
+    }
 }
