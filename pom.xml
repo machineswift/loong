@@ -66,12 +66,6 @@
             </dependency>
 
             <dependency>
-                <groupId>com.xuxueli</groupId>
-                <artifactId>xxl-job-core</artifactId>
-                <version>2.4.1</version>
-            </dependency>
-
-            <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-extension</artifactId>
                 <version>3.5.7</version>
@@ -156,7 +150,6 @@
                 <artifactId>jedis-lock</artifactId>
                 <version>1.0.0</version>
             </dependency>
-
 
             <!-- 微信小程序  -->
             <dependency>
