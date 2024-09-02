@@ -1,18 +1,33 @@
+loong:
+  datasource:
+    host: 127.0.0.1
+    username: root
+    password: root
+  rabbitmq:
+    host: localhost
+    username: loong
+    password: loong
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: redis
+
+
 spring:
   data:
     redis:
-      host: 127.0.0.1
-      port: 6379
-      password: redis
+      host: ${loong.redis.host}
+      port: ${loong.redis.port}
+      password: ${loong.redis.password}
       database: 0
 
 wx:
   mp:
     useRedis: ture
     redisConfig:
-      host: 127.0.0.1
-      port: 6379
-      password: redis
+      host: ${loong.redis.host}
+      port: ${loong.redis.port}
+      password: ${loong.redis.password}
       timeout: 3000
     configs:
       - appId: 1111 # 第一个公众号的appid

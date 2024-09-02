@@ -26,9 +26,9 @@ spring:
 
     nacos:
       config:
-        server-addr: 127.0.0.1:8848
-        username: nacos
-        password: nacos
+        server-addr: ${loong.nacos.server-addr}
+        username: ${loong.nacos.username}
+        password: ${loong.nacos.password}
         file-extension: yaml
         namespace: LOONG_${spring.profiles.active}
         group: LOONG_GROUP
@@ -37,8 +37,8 @@ spring:
             group: LOONG_GROUP
             refresh: true
       discovery:
-        server-addr: 127.0.0.1:8848
-        username: nacos
-        password: nacos
+        server-addr: ${loong.nacos.server-addr}
+        username: ${loong.nacos.username}
+        password: ${loong.nacos.password}
         namespace: LOONG_${spring.profiles.active}
         group: LOONG_GROUP
