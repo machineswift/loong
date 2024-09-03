@@ -1,10 +1,21 @@
 server:
   port: 8080
+  servlet:
+    context-path: /${spring.application.name}
 spring:
+  main:
+    allow-bean-definition-overriding: true
   profiles:
     active: DEV
   application:
     name: loong-iam-app
+
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password: redis
+      database: 0
 
   cloud:
     nacos:
@@ -25,8 +36,3 @@ spring:
         password: ${loong.nacos.password}
         namespace: LOONG_${spring.profiles.active}
         group: LOONG_GROUP
-
-
-logging:
-  level:
-    root: trace

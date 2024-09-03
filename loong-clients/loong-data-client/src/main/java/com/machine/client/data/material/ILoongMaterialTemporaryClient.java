@@ -4,7 +4,7 @@ import com.machine.client.data.material.indto.LoongMaterialTemporaryCreateInputD
 import com.machine.client.data.material.indto.LoongMaterialTemporaryQueryPageInputVo;
 import com.machine.client.data.material.outdto.LoongMaterialTemporaryDetailOutputDto;
 import com.machine.client.data.material.outdto.LoongMaterialTemporaryListOutputDto;
-import com.machine.common.context.LoongFeignConfig;
+import com.machine.common.context.LoongOpenFeignConfig;
 import com.machine.common.model.LoongPageResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "loong-data-service/loong-data-service/server/material-temporary",
-        configuration = LoongFeignConfig.class)
+        configuration = LoongOpenFeignConfig.class)
 public interface ILoongMaterialTemporaryClient {
 
     @PostMapping("create")

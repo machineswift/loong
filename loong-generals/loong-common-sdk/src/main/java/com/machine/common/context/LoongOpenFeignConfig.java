@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 
 @Configuration
-public class LoongFeignConfig {
+public class LoongOpenFeignConfig {
 
     @Value("${spring.profiles.active}")
     private SystemEnvironmentEnum environmentEnum;

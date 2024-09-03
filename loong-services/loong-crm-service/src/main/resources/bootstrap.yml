@@ -1,5 +1,5 @@
 server:
-  port: 8901
+  port: 8080
   servlet:
     context-path: /${spring.application.name}
 spring:
@@ -8,7 +8,7 @@ spring:
   profiles:
     active: DEV
   application:
-    name: loong-data-service
+    name: loong-crm-service
   servlet:
     multipart:
       max-file-size: 2048MB
