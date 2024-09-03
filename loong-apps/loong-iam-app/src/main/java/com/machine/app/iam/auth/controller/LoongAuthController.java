@@ -2,7 +2,7 @@ package com.machine.app.iam.auth.controller;
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.google.code.kaptcha.Producer;
-import com.machine.app.iam.config.LoongCaptchaConfig;
+import com.machine.starter.security.LoongCaptchaConfig;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.ServletOutputStream;

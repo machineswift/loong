@@ -11,6 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
         "com.machine.client"
 })
 @SpringBootApplication(scanBasePackages = {
+        "com.machine.starter",
         "com.machine.app.iam"
 })
 public class LoongIamApp {

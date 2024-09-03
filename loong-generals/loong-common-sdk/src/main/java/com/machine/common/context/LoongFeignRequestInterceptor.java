@@ -38,8 +38,9 @@ public class LoongFeignRequestInterceptor implements RequestInterceptor {
     }
 
     private static final Set<String> IGNORE_SET = new HashSet<>(
-            List.of("loong-iam-service/loong-iam-service/serve/auth/getBySeries",
+            List.of("loong-iam-service/loong-iam-service/server/auth/getBySeries",
                     "loong-iam-service/loong-iam-service/server/user/auth_detail",
-                    "loong-iam-service/loong-iam-service/server/user/getByUserName"));
+                    "loong-iam-service/loong-iam-service/server/user/getByUserName"
+            ));
 
 }

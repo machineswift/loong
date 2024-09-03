@@ -54,7 +54,7 @@ public class LoongHandlerInterceptorAdapter implements HandlerInterceptor {
 
 
     private static final Set<String> IGNORE_SET = new HashSet<>(
-            List.of("/loong-iam-service/serve/auth/getBySeries",
+            List.of("/loong-iam-service/server/auth/getBySeries",
                     "/loong-iam-service/server/user/auth_detail",
                     "/loong-iam-service/server/user/getByUserName"));
 
