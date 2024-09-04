@@ -168,6 +168,13 @@
                 <version>1.0.0</version>
             </dependency>
 
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>0.12.6</version>
+            </dependency>
+
+
             <!-- 微信小程序  -->
             <dependency>
                 <groupId>com.github.binarywang</groupId>
