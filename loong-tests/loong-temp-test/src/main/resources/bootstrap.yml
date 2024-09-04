@@ -9,13 +9,4 @@ spring:
     active: DEV
   application:
     name: loong-temp-test
-  servlet:
-    multipart:
-      max-file-size: 2048MB
-      max-request-size: 4096MB
 
-
-
-logging:
-  level:
-    root: DEBUG
