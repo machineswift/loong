@@ -24,6 +24,7 @@ public class LoongMaterialPermanentDaoImpl implements ILoongMaterialPermanentDao
         return entity.getId();
     }
 
+
     @Override
     public MaterialPermanentEntity selectById(String id) {
         return loongMaterialPermanentMapper.selectById(id);
