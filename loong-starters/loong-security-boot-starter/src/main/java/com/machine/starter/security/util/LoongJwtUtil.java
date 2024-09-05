@@ -1,4 +1,4 @@
-package com.machine.starter.security;
+package com.machine.starter.security.util;
 
 import io.jsonwebtoken.*;
 import lombok.Data;
@@ -19,6 +19,8 @@ public class LoongJwtUtil {
 
     @Value("${loong.jwt.expire:7}")
     private long expire;
+
+    public static final String HEADER_STRING = "Authorization";
 
     private final String SECRET = "S/4AN9IsSRUC~{0c4]y#$F2XbV8^`#a14vawn<~Kr@(D%3TF-p1s/h{Y9k7y((rR";
     private final SecretKey key = Jwts.SIG.HS512.key().random(new SecureRandom(SECRET.getBytes(StandardCharsets.UTF_8))).build();

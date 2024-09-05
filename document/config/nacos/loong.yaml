@@ -12,7 +12,6 @@ loong:
     port: 6379
     password: redis
 
-
 spring:
   data:
     redis:
@@ -20,6 +19,9 @@ spring:
       port: ${loong.redis.port}
       password: ${loong.redis.password}
       database: 0
+  redis:
+    lettuce:
+      shutdown-timeout: 3000
 
 wx:
   mp:
