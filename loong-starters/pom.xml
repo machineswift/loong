@@ -19,5 +19,6 @@
         <module>loong-nacos-boot-starter</module>
         <module>loong-redis-boot-starter</module>
         <module>loong-security-boot-starter</module>
+        <module>loong-wechat-boot-starter</module>
     </modules>
 </project>
