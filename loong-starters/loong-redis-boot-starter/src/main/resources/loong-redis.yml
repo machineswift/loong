@@ -1,0 +1,10 @@
+spring:
+  data:
+    redis:
+      host: ${loong.redis.host}
+      port: ${loong.redis.port}
+      password: ${loong.redis.password}
+      database: 0
+  redis:
+    lettuce:
+      shutdown-timeout: 3000
