@@ -7,7 +7,7 @@ import com.machine.client.iam.user.dto.input.LoongUserCreateInputDto;
 import com.machine.client.iam.user.dto.input.LoongUserQueryPageInputVo;
 import com.machine.client.iam.user.dto.input.LoongUserUpdatePasswordInputDto;
 import com.machine.client.iam.user.dto.output.LoongUserListOutputDto;
-import com.machine.common.context.LoongOpenFeignConfig;
+import com.machine.common.config.LoongOpenFeignConfig;
 import com.machine.common.model.LoongPageResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;

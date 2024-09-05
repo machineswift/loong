@@ -1,5 +1,6 @@
-package com.machine.common.context;
+package com.machine.common.config;
 
+import com.machine.common.context.LoongHandlerInterceptorAdapter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -8,9 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class LoongWebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoongHandlerInterceptorAdapter())
-                .excludePathPatterns("/loong-iam-service/serve/auth/getBySeries",
-                        "/loong-iam-service/server/user/auth_detail",
-                        "/loong-iam-service/server/user/getByUserName");
+        registry.addInterceptor(new LoongHandlerInterceptorAdapter());
     }
 }

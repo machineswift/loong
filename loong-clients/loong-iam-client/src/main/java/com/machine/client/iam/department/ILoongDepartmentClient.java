@@ -3,7 +3,7 @@ package com.machine.client.iam.department;
 import com.machine.client.iam.department.dto.input.LoongDepartmentCreateInputDto;
 import com.machine.client.iam.department.dto.input.LoongDepartmentQueryListInputDto;
 import com.machine.client.iam.department.dto.output.LoongDepartmentListOutputDto;
-import com.machine.common.context.LoongOpenFeignConfig;
+import com.machine.common.config.LoongOpenFeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

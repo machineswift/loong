@@ -4,7 +4,7 @@ import com.machine.client.iam.permission.dto.input.LoongPermissionCreateInputDto
 import com.machine.client.iam.permission.dto.input.LoongPermissionQueryListInputDto;
 import com.machine.client.iam.permission.dto.output.LoongPermissionDetailOutputDto;
 import com.machine.client.iam.permission.dto.output.LoongPermissionListOutputDto;
-import com.machine.common.context.LoongOpenFeignConfig;
+import com.machine.common.config.LoongOpenFeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

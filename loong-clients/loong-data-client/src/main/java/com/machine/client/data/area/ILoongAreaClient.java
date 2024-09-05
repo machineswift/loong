@@ -1,6 +1,6 @@
 package com.machine.client.data.area;
 
-import com.machine.common.context.LoongOpenFeignConfig;
+import com.machine.common.config.LoongOpenFeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 

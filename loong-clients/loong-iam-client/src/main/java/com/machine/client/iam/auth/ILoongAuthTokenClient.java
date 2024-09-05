@@ -3,7 +3,7 @@ package com.machine.client.iam.auth;
 import com.machine.client.iam.auth.dto.LoongAuthTokenAddDto;
 import com.machine.client.iam.auth.dto.LoongAuthTokenDto;
 import com.machine.client.iam.auth.dto.LoongAuthTokenUpdateTokenDto;
-import com.machine.common.context.LoongOpenFeignConfig;
+import com.machine.common.config.LoongOpenFeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

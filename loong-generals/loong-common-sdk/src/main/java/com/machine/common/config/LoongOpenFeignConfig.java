@@ -1,5 +1,6 @@
-package com.machine.common.context;
+package com.machine.common.config;
 
+import com.machine.common.context.LoongFeignRequestInterceptor;
 import com.machine.common.envm.system.SystemEnvironmentEnum;
 import feign.Logger;
 import feign.Request;

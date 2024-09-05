@@ -4,7 +4,7 @@ import com.machine.client.data.material.indto.LoongMaterialPermanentCreateInputD
 import com.machine.client.data.material.indto.LoongMaterialPermanentQueryPageInputVo;
 import com.machine.client.data.material.outdto.LoongMaterialPermanentDetailOutputDto;
 import com.machine.client.data.material.outdto.LoongMaterialPermanentListOutputDto;
-import com.machine.common.context.LoongOpenFeignConfig;
+import com.machine.common.config.LoongOpenFeignConfig;
 import com.machine.common.model.LoongPageResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
