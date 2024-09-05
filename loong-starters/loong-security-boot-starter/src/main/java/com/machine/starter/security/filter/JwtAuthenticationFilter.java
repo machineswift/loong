@@ -52,7 +52,6 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         // 获取用户的权限等信息
         UserDetails userDetails = userDetailService.loadUserByUsername(username);
 
-        // 构建UsernamePasswordAuthenticationToken,这里密码为null，是因为提供了正确的JWT,实现自动登录
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, null, userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(token);
         chain.doFilter(request, response);

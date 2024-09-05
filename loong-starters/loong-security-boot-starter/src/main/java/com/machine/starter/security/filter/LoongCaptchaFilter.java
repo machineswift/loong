@@ -1,6 +1,5 @@
 package com.machine.starter.security.filter;
 
-import com.machine.starter.security.LoongSecurityConstant;
 import com.machine.starter.security.exception.CaptchaException;
 import com.machine.starter.security.handler.LoginFailureHandler;
 import io.lettuce.core.api.sync.RedisCommands;

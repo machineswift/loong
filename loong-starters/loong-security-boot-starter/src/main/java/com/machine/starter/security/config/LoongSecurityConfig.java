@@ -26,6 +26,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
@@ -63,10 +64,10 @@ public class LoongSecurityConfig {
     private LoongUserDetailsService userDetailsService;
 
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers(
@@ -82,7 +83,9 @@ public class LoongSecurityConfig {
                                 .authenticationEntryPoint(authenticationEntryPoint)
                                 .accessDeniedHandler(accessDeniedHandler)
                 )
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf((csrf) ->
+                        csrf.csrfTokenRepository(new CookieCsrfTokenRepository()).disable()
+                )
                 .formLogin(formLogin ->
                         formLogin.loginProcessingUrl(LOGIN_URL)
                                 .usernameParameter("username")

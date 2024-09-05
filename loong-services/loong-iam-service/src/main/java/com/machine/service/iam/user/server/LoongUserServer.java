@@ -44,6 +44,7 @@ public class LoongUserServer implements ILoongUserClient {
     }
 
     @Override
+    @GetMapping("auth_detail")
     public LoongUserAuthDetailDto authDetail(@RequestParam("userId") String userId) {
         return userService.authDetail(userId);
     }
