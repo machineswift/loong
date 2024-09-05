@@ -10,18 +10,6 @@ spring:
   application:
     name: loong-manage-app
 
-  data:
-    redis:
-      host: 127.0.0.1
-      port: 6379
-      password: redis
-      database: 0
-
-  rabbitmq:
-    host: ${loong.rabbitmq.host}
-    username: ${loong.rabbitmq.username}
-    password: ${loong.rabbitmq.password}
-
   cloud:
     nacos:
       config:

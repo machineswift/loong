@@ -11,5 +11,4 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = "classpath:loong-security.yml", factory = YamlPropertySourceFactory.class)
 @ConfigurationProperties(prefix = "loong.security")
 public class LoongSecurityProperties {
-    private String example;
 }

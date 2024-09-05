@@ -1,5 +1,8 @@
 spring:
   rabbitmq:
+    host: ${loong.rabbitmq.host}
+    username: ${loong.rabbitmq.username}
+    password: ${loong.rabbitmq.password}
     port: 5672
     virtualHost: loong
   cloud:
@@ -18,4 +21,3 @@ spring:
         loongLogConsumer-in-0:
           destination: loong-log-function-topic
           group: loong-log-group
-
