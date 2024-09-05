@@ -9,6 +9,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class LoongMaterialPermanentQueryPageRequest extends LoongPageRequest {
 
-    private DataMaterIalTypeEnum materIalType;
+    private DataMaterIalTypeEnum type;
 
 }
