@@ -11,6 +11,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.nio.charset.StandardCharsets;
 
 @Component
@@ -24,9 +25,11 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
         LoongAppResult<String> result;
         if (e instanceof CaptchaException) {
-            result = LoongAppResult.fail("验证码错误");
+            httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            result = LoongAppResult.fail(HttpURLConnection.HTTP_UNAUTHORIZED, "验证码错误");
         } else {
-            result = LoongAppResult.fail("用户名或密码错误");
+            httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            result = LoongAppResult.fail(HttpURLConnection.HTTP_UNAUTHORIZED, "用户名或密码错误");
         }
         outputStream.write(JSONUtil.toJsonStr(result).getBytes(StandardCharsets.UTF_8));
         outputStream.flush();

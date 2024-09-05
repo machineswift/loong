@@ -20,14 +20,14 @@ public class LoongFeignRequestInterceptor implements RequestInterceptor {
     public void apply(RequestTemplate template) {
         String userId = LoongAppContext.getContext().getUserId();
         if (null == userId || userId.trim().isEmpty()) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (null != authentication) {
-                Object object = authentication.getPrincipal();
-                Method method = authentication.getPrincipal().getClass().getMethod("getUserId");
-                userId = method.invoke(object).toString();
-                template.header(LoongContextConstant.HEAD_USER_ID, userId);
-                return;
-            }
+            //           Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//            if (null != authentication) {
+//                Object object = authentication.getPrincipal();
+//                Method method = authentication.getPrincipal().getClass().getMethod("getUserId");
+//                userId = method.invoke(object).toString();
+//                template.header(LoongContextConstant.HEAD_USER_ID, userId);
+//                return;
+//            }
             String feignMethod = template.feignTarget().name() + template.path();
             if (IGNORE_SET.contains(feignMethod)) {
                 return;

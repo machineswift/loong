@@ -1,18 +1,19 @@
 package com.machine.starter.security.util;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
-import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.security.SecureRandom;
+import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
-@Data
 @Component
 @RefreshScope
 public class LoongJwtUtil {
@@ -20,16 +21,26 @@ public class LoongJwtUtil {
     @Value("${loong.jwt.expire:7}")
     private long expire;
 
+    @Value("${loong.jwt.secret:QaxWsxRtueyibcjsckabajchhhyfhgvhg2@2glmhtUhgGNHvbbsdcsjhvGuyuhvgvhh}")
+    private String secret;
+
     public static final String HEADER_STRING = "Authorization";
 
-    private final String SECRET = "S/4AN9IsSRUC~{0c4]y#$F2XbV8^`#a14vawn<~Kr@(D%3TF-p1s/h{Y9k7y((rR";
-    private final SecretKey key = Jwts.SIG.HS512.key().random(new SecureRandom(SECRET.getBytes(StandardCharsets.UTF_8))).build();
 
     /**
      * 生成JWT
      */
     public String generateToken(String username) {
         return generateToken(username, null);
+    }
+
+    /**
+     * 生成JWT
+     */
+    public String generateToken(String username, String dataKey, String dataValue) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put(dataKey, dataValue);
+        return generateToken(username, claims);
     }
 
     /**
@@ -43,16 +54,20 @@ public class LoongJwtUtil {
      * 生成JWT
      */
     public String generateToken(String username, Map<String, Object> claims, long expire) {
+        if (null == KEY) {
+            KEY = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        }
+
         JwtBuilder builder = Jwts.builder();
         Date now = new Date();
         // 生成token
-        builder.id("rQRk$yN:7%*Bw}A_A-]M~4#;yGa:a_F{") //id 这个可以不填，但是建议填
+        builder.id(UUID.randomUUID().toString().replace("-", ""))
                 .claims(claims) //数据
                 .issuer("machine") //签发者
                 .subject(username) //主题
                 .issuedAt(now) //签发时间
                 .expiration(new Date(System.currentTimeMillis() + expire * 24 * 60 * 60 * 1000)) //过期时间
-                .signWith(key); //签名方式
+                .signWith(KEY); //签名方式
         builder.header().add("type", "JWT").add("alg", "HS512");
         return builder.compact();
     }
@@ -62,9 +77,14 @@ public class LoongJwtUtil {
      * 解析JWT
      */
     public Claims getClaimsByToken(String token) {
+        if (null == KEY) {
+            KEY = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        }
+
         try {
             return Jwts.parser()
-                    .verifyWith(key)
+                    .setSigningKey(KEY)
+                    //.verifyWith((SecretKey) KEY)
                     .build()
                     .parseSignedClaims(token)
                     .getPayload();
@@ -78,4 +98,6 @@ public class LoongJwtUtil {
             throw new RuntimeException("token解析失败");
         }
     }
+
+    private Key KEY;
 }

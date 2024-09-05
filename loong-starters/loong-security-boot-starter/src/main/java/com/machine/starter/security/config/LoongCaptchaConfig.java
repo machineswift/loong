@@ -1,4 +1,4 @@
-package com.machine.starter.security;
+package com.machine.starter.security.config;
 
 import com.google.code.kaptcha.Producer;
 import com.google.code.kaptcha.impl.DefaultKaptcha;

@@ -7,6 +7,8 @@ spring:
     active: DEV
   application:
     name: loong-gateway-server
+  main:
+    web-application-type: reactive
 
   cloud:
     gateway:

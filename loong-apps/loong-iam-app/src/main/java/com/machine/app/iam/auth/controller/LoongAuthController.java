@@ -4,7 +4,7 @@ import cn.hutool.core.codec.Base64;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.google.code.kaptcha.Producer;
 import com.machine.app.iam.auth.controller.vo.response.LoongAuthCaptchaResponseVo;
-import com.machine.starter.security.LoongCaptchaConfig;
+import com.machine.starter.security.config.LoongCaptchaConfig;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,8 +20,8 @@ import java.io.IOException;
 import java.util.UUID;
 
 @Slf4j
-@RestController
 @RefreshScope
+@RestController
 @Tag(name = "认证模块")
 @RequestMapping("auth")
 public class LoongAuthController {
@@ -36,16 +36,16 @@ public class LoongAuthController {
     @ApiOperationSupport(order = 10)
     @GetMapping("captcha")
     public LoongAuthCaptchaResponseVo getVerifyCode() throws IOException {
-
-        String captchaCode = producer.createText();
-        BufferedImage image = producer.createImage(captchaCode);
+        String captcha = producer.createText();
+        BufferedImage captchaImage = producer.createImage(captcha);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        ImageIO.write(image, "jpg", outputStream);
+        ImageIO.write(captchaImage, "jpg", outputStream);
         String base64Img = "data:image/jpeg;base64," + Base64.encode(outputStream.toByteArray());
 
         String userKey = LoongCaptchaConfig.CAPTCHA_KEY + "_" + UUID.randomUUID().toString().replace("-", "");
-        redisCommands.set(userKey, captchaCode);
+        redisCommands.set(userKey, captcha);
         redisCommands.expire(userKey, LoongCaptchaConfig.CAPTCHA_EXPIRATION_TIME);
+        log.info("获取验证码,userKey:{} captcha:{}", userKey, captcha);
         return new LoongAuthCaptchaResponseVo(userKey, base64Img);
     }
 

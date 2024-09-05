@@ -38,6 +38,10 @@ public class LoongAppResult<T> {
 
     private T data;
 
+    public static <T> LoongAppResult<T> success(String msg) {
+        return success(msg, null);
+    }
+
     public static <T> LoongAppResult<T> success(T data) {
         return success("操作成功", data);
     }
@@ -46,8 +50,12 @@ public class LoongAppResult<T> {
         return generate(HttpURLConnection.HTTP_OK, msg, data);
     }
 
-    public static <T> LoongAppResult<T> fail(T data) {
-        return fail("操作失败", data);
+    public static <T> LoongAppResult<T> fail(String msg) {
+        return fail(msg, null);
+    }
+
+    public static <T> LoongAppResult<T> fail(int status, String msg) {
+        return generate(status, msg, null);
     }
 
     public static <T> LoongAppResult<T> fail(String msg, T data) {
