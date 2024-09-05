@@ -2,6 +2,14 @@ loong:
   mybatis:
     example: 1000
 
+spring:
+  # DataSource Config
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${loong.datasource.host}:3306/${loong.datasource.schema}?useUnicode=true&autoReconnect=true&allowMultiQueries=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: ${loong.datasource.username}
+    password: ${loong.datasource.password}
+
 #mybatis-plus配置
 mybatis-plus:
   mapper-locations: classpath*:/com/machine/service/*/*/*Mapper.xml

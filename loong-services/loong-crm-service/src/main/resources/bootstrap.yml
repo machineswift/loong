@@ -14,15 +14,6 @@ spring:
       max-file-size: 2048MB
       max-request-size: 4096MB
 
-
-  # DataSource Config
+loong:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${loong.datasource.host}:3306/loong_crm?useUnicode=true&autoReconnect=true&allowMultiQueries=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
-    username: ${loong.datasource.username}
-    password: ${loong.datasource.password}
-
-
-logging:
-  level:
-    root: DEBUG
+    schema: loong_crm
