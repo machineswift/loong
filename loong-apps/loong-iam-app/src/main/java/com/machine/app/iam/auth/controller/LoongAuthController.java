@@ -19,6 +19,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
+import static com.machine.common.constant.LoongRedisPrefixConstant.Iam.IAM_AUTH_CAPTCHA;
+
+
 @Slf4j
 @RefreshScope
 @RestController
@@ -42,7 +45,7 @@ public class LoongAuthController {
         ImageIO.write(captchaImage, "jpg", outputStream);
         String base64Img = "data:image/jpeg;base64," + Base64.encode(outputStream.toByteArray());
 
-        String userKey = LoongCaptchaConfig.CAPTCHA_KEY + "_" + UUID.randomUUID().toString().replace("-", "");
+        String userKey = IAM_AUTH_CAPTCHA + UUID.randomUUID().toString().replace("-", "");
         redisCommands.set(userKey, captcha);
         redisCommands.expire(userKey, LoongCaptchaConfig.CAPTCHA_EXPIRATION_TIME);
         log.info("获取验证码,userKey:{} captcha:{}", userKey, captcha);

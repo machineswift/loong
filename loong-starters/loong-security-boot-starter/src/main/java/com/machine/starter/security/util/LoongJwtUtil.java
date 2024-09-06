@@ -24,7 +24,6 @@ public class LoongJwtUtil {
     @Value("${loong.jwt.secret:QaxWsxRtueyibcjsckabajchhhyfhgvhg2@2glmhtUhgGNHvbbsdcsjhvGuyuhvgvhh}")
     private String secret;
 
-    public static final String HEADER_STRING = "Authorization";
 
 
     /**

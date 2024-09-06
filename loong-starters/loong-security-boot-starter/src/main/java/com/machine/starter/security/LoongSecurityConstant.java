@@ -8,6 +8,8 @@ public class LoongSecurityConstant {
 
     public static final String LOGIN_URL = "/auth/login";
 
-    public static final String BARE_TOKEN = "Bearer ";
+    public static final String BEARER_TYPE = "Bearer ";
+
+    public static final String AUTH_HEADER = "Authorization";
 
 }

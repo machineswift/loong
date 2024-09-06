@@ -15,7 +15,9 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import static com.machine.starter.security.LoongSecurityConstant.BARE_TOKEN;
+import static com.machine.starter.security.LoongSecurityConstant.AUTH_HEADER;
+import static com.machine.starter.security.LoongSecurityConstant.BEARER_TYPE;
+
 
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
@@ -33,7 +35,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         ServletOutputStream outputStream = httpServletResponse.getOutputStream();
         // 生成JWT，并放置到请求头中
         String jwt = jwtUtils.generateToken(authentication.getName(),"userId",userDetails.getUserId());
-        httpServletResponse.setHeader(LoongJwtUtil.HEADER_STRING, BARE_TOKEN + jwt);
+        httpServletResponse.setHeader(AUTH_HEADER, BEARER_TYPE + jwt);
 
         LoongAppResult<String> result = LoongAppResult.success("登录成功");
         outputStream.write(JSONUtil.toJsonStr(result).getBytes(StandardCharsets.UTF_8));

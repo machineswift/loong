@@ -64,7 +64,6 @@ public class LoongSecurityConfig {
     private LoongUserDetailsService userDetailsService;
 
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -72,8 +71,7 @@ public class LoongSecurityConfig {
                 .authorizeHttpRequests(authorize ->
                         authorize.requestMatchers(
                                         "/auth/captcha", LOGIN_URL).permitAll()
-                                .anyRequest()
-                                .authenticated()
+                                .anyRequest().authenticated()
                 )
                 .logout(logout ->
                         logout.logoutUrl("/auth/logout").logoutSuccessHandler(logoutSuccessHandler)

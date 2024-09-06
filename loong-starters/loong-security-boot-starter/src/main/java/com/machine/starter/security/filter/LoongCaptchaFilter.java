@@ -1,6 +1,6 @@
 package com.machine.starter.security.filter;
 
-import com.machine.starter.security.exception.CaptchaException;
+import com.machine.starter.security.exception.CaptchaAuthenticationException;
 import com.machine.starter.security.handler.LoginFailureHandler;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.micrometer.common.util.StringUtils;
@@ -34,7 +34,7 @@ public class LoongCaptchaFilter extends OncePerRequestFilter {
             // 校验验证码
             try {
                 validate(httpServletRequest);
-            } catch (CaptchaException e) {
+            } catch (CaptchaAuthenticationException e) {
                 // 交给认证失败处理器
                 loginFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, e);
             }
@@ -48,11 +48,11 @@ public class LoongCaptchaFilter extends OncePerRequestFilter {
         String userKey = httpServletRequest.getParameter("userKey");
         if (StringUtils.isBlank(code) || StringUtils.isBlank(userKey)) {
             redisCommands.del(userKey);
-            throw new CaptchaException("验证码错误");
+            throw new CaptchaAuthenticationException("验证码错误");
         }
         if (!code.equals(redisCommands.get(userKey))) {
             redisCommands.del(userKey);
-            throw new CaptchaException("验证码错误");
+            throw new CaptchaAuthenticationException("验证码错误");
         }
         redisCommands.del(userKey);
     }

@@ -14,8 +14,6 @@ import java.util.Properties;
 @Configuration
 public class LoongCaptchaConfig {
 
-    public static final String CAPTCHA_KEY="captcha";
-
     // 验证码有效期为5分钟
     public static final long CAPTCHA_EXPIRATION_TIME = 300;
 
