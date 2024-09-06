@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class BusinessException extends RuntimeException {
 
-    private String code;
-
     public BusinessException(String message) {
         super(message);
     }
