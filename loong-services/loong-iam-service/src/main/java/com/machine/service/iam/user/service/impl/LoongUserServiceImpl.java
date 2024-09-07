@@ -22,7 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -47,13 +46,13 @@ public class LoongUserServiceImpl implements ILoongUserService {
         //验证用户名是否存在
         LoongUserEntity userNameEntity = userDao.getByUserName(inputDto.getUserName());
         if (null != userNameEntity) {
-            throw new InvalidParameterException("用户名已经存在");
+            throw new IllegalArgumentException("用户名已经存在");
         }
 
         //验证手机号是否存在
         LoongUserEntity phoneEntity = userDao.getByUserName(inputDto.getPhone());
         if (null != phoneEntity) {
-            throw new InvalidParameterException("手机号已经存在");
+            throw new IllegalArgumentException("手机号已经存在");
         }
 
         LoongUserEntity insertEntity = new LoongUserEntity();

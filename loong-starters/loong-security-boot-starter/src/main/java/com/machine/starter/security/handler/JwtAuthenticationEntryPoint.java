@@ -5,6 +5,7 @@ import com.machine.common.model.LoongAppResult;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -19,10 +20,10 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
                          HttpServletResponse httpServletResponse,
                          AuthenticationException e) throws IOException {
         httpServletResponse.setContentType("application/json;charset=UTF-8");
-        httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
         ServletOutputStream outputStream = httpServletResponse.getOutputStream();
 
-        LoongAppResult<String> result=LoongAppResult.fail(HttpServletResponse.SC_UNAUTHORIZED,e.getMessage());
+        LoongAppResult<String> result = LoongAppResult.fail(HttpServletResponse.SC_UNAUTHORIZED, "", e.getMessage());
         outputStream.write(JSONUtil.toJsonStr(result).getBytes(StandardCharsets.UTF_8));
         outputStream.flush();
         outputStream.close();

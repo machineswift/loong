@@ -4,10 +4,7 @@ import com.machine.common.constant.LoongContextConstant;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import lombok.SneakyThrows;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
-import java.lang.reflect.Method;
 import java.security.InvalidParameterException;
 import java.util.HashSet;
 import java.util.List;
@@ -20,14 +17,6 @@ public class LoongFeignRequestInterceptor implements RequestInterceptor {
     public void apply(RequestTemplate template) {
         String userId = LoongAppContext.getContext().getUserId();
         if (null == userId || userId.trim().isEmpty()) {
-            //           Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//            if (null != authentication) {
-//                Object object = authentication.getPrincipal();
-//                Method method = authentication.getPrincipal().getClass().getMethod("getUserId");
-//                userId = method.invoke(object).toString();
-//                template.header(LoongContextConstant.HEAD_USER_ID, userId);
-//                return;
-//            }
             String feignMethod = template.feignTarget().name() + template.path();
             if (IGNORE_SET.contains(feignMethod)) {
                 return;

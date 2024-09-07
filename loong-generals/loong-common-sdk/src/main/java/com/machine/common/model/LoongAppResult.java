@@ -2,17 +2,18 @@ package com.machine.common.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.net.HttpURLConnection;
+import org.springframework.http.HttpStatus;
 
 @Data
 @NoArgsConstructor
 public class LoongAppResult<T> {
 
     public LoongAppResult(int status,
+                          String code,
                           String message,
                           T data) {
         this.status = status;
+        this.code = code;
         this.message = message;
         this.timestamp = System.currentTimeMillis();
         this.data = data;
@@ -20,9 +21,14 @@ public class LoongAppResult<T> {
 
     /**
      * 状态码
-     * {@link HttpURLConnection}
+     * {@link HttpStatus}
      */
     private int status;
+
+    /**
+     * 错误码
+     */
+    private String code;
 
     /**
      * 消息内容
@@ -47,24 +53,33 @@ public class LoongAppResult<T> {
     }
 
     public static <T> LoongAppResult<T> success(String msg, T data) {
-        return generate(HttpURLConnection.HTTP_OK, msg, data);
+        return generate(HttpStatus.OK.value(), "SUCCESS", msg, data);
     }
 
-    public static <T> LoongAppResult<T> fail(String msg) {
-        return fail(msg, null);
+    public static <T> LoongAppResult<T> fail(String code,
+                                             String msg) {
+        return fail(HttpStatus.INTERNAL_SERVER_ERROR.value(), code, msg);
     }
 
-    public static <T> LoongAppResult<T> fail(int status, String msg) {
-        return generate(status, msg, null);
+    public static <T> LoongAppResult<T> fail(int status,
+                                             String code,
+                                             String msg) {
+        return fail(status, code, msg, null);
     }
 
-    public static <T> LoongAppResult<T> fail(String msg, T data) {
-        return generate(HttpURLConnection.HTTP_INTERNAL_ERROR, msg, data);
+    public static <T> LoongAppResult<T> fail(int status,
+                                             String code,
+                                             String msg,
+                                             T data) {
+        return generate(status, code, msg, data);
     }
 
 
-    public static <T> LoongAppResult<T> generate(int status, String msg, T data) {
-        return new LoongAppResult<>(status, msg, data);
+    public static <T> LoongAppResult<T> generate(int status,
+                                                 String code,
+                                                 String msg,
+                                                 T data) {
+        return new LoongAppResult<>(status, code, msg, data);
     }
 
 }

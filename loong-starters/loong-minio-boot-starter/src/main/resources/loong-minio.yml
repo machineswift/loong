@@ -1,5 +1,5 @@
-loong:
-  minio:
-    url: http://localhost:9000
-    accessKey: root
-    secretKey: root1234
+#loong:
+#  minio:
+#    url: http://localhost:9000
+#    accessKey: root
+#    secretKey: root1234

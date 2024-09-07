@@ -13,6 +13,12 @@
     <dependencies>
         <dependency>
             <groupId>com.machine</groupId>
+            <artifactId>loong-common-boot-starter</artifactId>
+            <version>${version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.machine</groupId>
             <artifactId>loong-nacos-boot-starter</artifactId>
             <version>${version}</version>
         </dependency>

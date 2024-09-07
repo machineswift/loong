@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableDiscoveryClient
+@EnableTransactionManagement
 @EnableFeignClients(basePackages = {
         "com.machine.client"
 })
@@ -16,8 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         "com.machine.starter",
         "com.machine.service.iam"
 })
-@Import(LoongWebMvcConfig.class)
-@EnableTransactionManagement
+@Import({LoongWebMvcConfig.class})
 public class LoongIamServiceApp {
 
     public static void main(String[] args) {

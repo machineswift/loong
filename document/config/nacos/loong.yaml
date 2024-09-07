@@ -11,6 +11,10 @@ loong:
     host: 127.0.0.1
     port: 6379
     password: redis
+  minio:
+    url: http://localhost:9000
+    accessKey: root
+    secretKey: root1234
 
 
 #logging:

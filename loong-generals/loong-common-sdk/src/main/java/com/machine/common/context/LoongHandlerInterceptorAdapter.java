@@ -20,7 +20,7 @@ public class LoongHandlerInterceptorAdapter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
-                             Object handler) throws Exception {
+                             Object handler) {
         String userId = request.getHeader(LoongContextConstant.HEAD_USER_ID);
         if (null == userId || userId.trim().isEmpty()) {
             String feignMethod = request.getRequestURI();

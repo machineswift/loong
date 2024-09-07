@@ -77,7 +77,7 @@ public class LoongLeafServiceImpl implements ILoongLeafService {
             entity.setRemark(remark);
             LoongLeafEntity leafAlloc = leafDao.updateMaxId(entity);
             if (null == leafAlloc) {
-                throw new DataBusinessException("leaf 取号失败");
+                throw new DataBusinessException("iam.data.leaf.fail","leaf 取号失败");
             }
 
             if (leafAlloc.getStep() > 1) {

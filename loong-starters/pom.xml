@@ -13,8 +13,9 @@
     <description>starter 集合</description>
 
     <modules>
-        <module>loong-mq-boot-starter</module>
+        <module>loong-common-boot-starter</module>
         <module>loong-minio-boot-starter</module>
+        <module>loong-mq-boot-starter</module>
         <module>loong-mybatis-boot-starter</module>
         <module>loong-nacos-boot-starter</module>
         <module>loong-redis-boot-starter</module>
