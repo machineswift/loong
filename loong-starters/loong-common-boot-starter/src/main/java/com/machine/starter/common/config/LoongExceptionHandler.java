@@ -4,6 +4,8 @@ import com.machine.common.exception.BusinessException;
 import com.machine.common.model.LoongAppResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,13 +17,24 @@ import java.util.Objects;
 public class LoongExceptionHandler {
 
     /**
-     * 参数异常处理
+     * 认证异常
      */
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(value = IllegalArgumentException.class)
-    private LoongAppResult<Objects> errorHandler(IllegalArgumentException exception) {
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(value = AuthenticationException.class)
+    private LoongAppResult<Objects> errorHandler(AuthenticationException exception) {
         log.error(exception.getMessage(), exception);
-        return LoongAppResult.fail(HttpStatus.INTERNAL_SERVER_ERROR.value(), "", exception.getMessage());
+        return LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "", exception.getMessage());
+    }
+
+
+    /**
+     * 权限异常
+     */
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(value = AccessDeniedException.class)
+    private LoongAppResult<Objects> errorHandler(AccessDeniedException exception) {
+        log.error(exception.getMessage(), exception);
+        return LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "", exception.getMessage());
     }
 
 
