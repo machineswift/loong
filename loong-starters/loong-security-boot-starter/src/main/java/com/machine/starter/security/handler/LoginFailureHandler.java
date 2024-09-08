@@ -16,6 +16,7 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 public class LoginFailureHandler implements AuthenticationFailureHandler {
+
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest,
                                         HttpServletResponse httpServletResponse,
@@ -29,10 +30,11 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
             result = LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "iam.auth.captcha", "验证码错误");
         } else {
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
-            result = LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "", "用户名或密码错误");
+            result = LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "", e.getMessage());
         }
         outputStream.write(JSONUtil.toJsonStr(result).getBytes(StandardCharsets.UTF_8));
         outputStream.flush();
         outputStream.close();
     }
+
 }

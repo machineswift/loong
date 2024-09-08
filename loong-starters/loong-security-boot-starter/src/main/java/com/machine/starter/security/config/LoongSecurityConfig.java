@@ -5,6 +5,7 @@ import com.machine.starter.security.LoongUserDetailsService;
 import com.machine.starter.security.filter.JwtAuthenticationFilter;
 import com.machine.starter.security.filter.LoongCaptchaFilter;
 import com.machine.starter.security.handler.*;
+import io.lettuce.core.api.sync.RedisCommands;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -56,10 +57,10 @@ public class LoongSecurityConfig {
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
-    private LoongCaptchaFilter captchaFilter;
+    private LoongUserDetailsService userDetailsService;
 
     @Autowired
-    private LoongUserDetailsService userDetailsService;
+    private RedisCommands<String, String> redisCommands;
 
 
     public static final String[] PERMIT_ALL_PATTERNS = {
@@ -86,16 +87,9 @@ public class LoongSecurityConfig {
                 .csrf((csrf) ->
                         csrf.csrfTokenRepository(new CookieCsrfTokenRepository()).disable()
                 )
-                .formLogin(formLogin ->
-                        formLogin.loginProcessingUrl(LOGIN_URL)
-                                .usernameParameter("username")
-                                .passwordParameter("password")
-                                .successHandler(loginSuccessHandler)
-                                .failureHandler(loginFailureHandler).permitAll()
-                )
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authenticationManager(authenticationManager())
-                .addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAt(captchaFilter(), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(jwtAuthenticationFilter(), LoongCaptchaFilter.class);
         return http.build();
     }
@@ -109,6 +103,16 @@ public class LoongSecurityConfig {
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter(authenticationManager());
     }
+
+    public LoongCaptchaFilter captchaFilter() {
+        LoongCaptchaFilter filter = new LoongCaptchaFilter(loginFailureHandler,redisCommands);
+        filter.setAuthenticationSuccessHandler(loginSuccessHandler);
+        filter.setAuthenticationFailureHandler(loginFailureHandler);
+        filter.setAuthenticationManager(authenticationManager());
+        filter.setFilterProcessesUrl(LOGIN_URL);
+        return filter;
+    }
+
 
     @Bean
     public AuthenticationManager authenticationManager() {

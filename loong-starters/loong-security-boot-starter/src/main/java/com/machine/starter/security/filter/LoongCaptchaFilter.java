@@ -1,56 +1,83 @@
 package com.machine.starter.security.filter;
 
+import cn.hutool.core.io.IoUtil;
+import cn.hutool.json.JSONUtil;
+import com.machine.starter.security.domain.LoginCredentialsDto;
 import com.machine.starter.security.exception.CaptchaAuthException;
 import com.machine.starter.security.handler.LoginFailureHandler;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.micrometer.common.util.StringUtils;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.web.filter.OncePerRequestFilter;
+import lombok.SneakyThrows;
+import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationServiceException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import java.io.IOException;
+import java.nio.charset.Charset;
 
-import static com.machine.starter.security.LoongSecurityConstant.*;
+public class LoongCaptchaFilter extends UsernamePasswordAuthenticationFilter {
 
-@Component
-public class LoongCaptchaFilter extends OncePerRequestFilter {
+    private final LoginFailureHandler loginFailureHandler;
 
-    @Autowired
-    private LoginFailureHandler loginFailureHandler;
+    private final RedisCommands<String, String> redisCommands;
 
-    @Autowired
-    private RedisCommands<String, String> redisCommands;
-
-    @Override
-    protected void doFilterInternal(HttpServletRequest httpServletRequest,
-                                    HttpServletResponse httpServletResponse,
-                                    FilterChain filterChain) throws ServletException, IOException {
-        String url = httpServletRequest.getRequestURI();
-        if ((httpServletRequest.getContextPath() + LOGIN_URL).equals(url) && httpServletRequest.getMethod().equals("POST")) {
-            // 校验验证码
-            try {
-                validate(httpServletRequest);
-            } catch (CaptchaAuthException e) {
-                // 交给认证失败处理器
-                loginFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, e);
-            }
-        }
-        filterChain.doFilter(httpServletRequest, httpServletResponse);
+    public LoongCaptchaFilter(LoginFailureHandler loginFailureHandler,
+                              RedisCommands<String, String> redisCommands) {
+        this.loginFailureHandler = loginFailureHandler;
+        this.redisCommands = redisCommands;
     }
 
-    // 校验验证码逻辑
-    private void validate(HttpServletRequest httpServletRequest) {
-        String code = httpServletRequest.getParameter("captcha");
-        String userKey = httpServletRequest.getParameter("userKey");
-        if (StringUtils.isBlank(code) || StringUtils.isBlank(userKey)) {
+    @Override
+    @SneakyThrows
+    public Authentication attemptAuthentication(HttpServletRequest request,
+                                                HttpServletResponse response) throws AuthenticationException {
+        if (!request.getMethod().equals("POST")
+                || !isJsonContentType(request)) {
+            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
+        }
+
+        LoginCredentialsDto credentials = JSONUtil.toBean(IoUtil.read(request.getInputStream(),
+                Charset.defaultCharset()), LoginCredentialsDto.class);
+
+        // 校验验证码
+        try {
+            validate(credentials.getCaptcha(), credentials.getUserKey());
+        } catch (CaptchaAuthException e) {
+            // 交给认证失败处理器
+            loginFailureHandler.onAuthenticationFailure(request, response, e);
+        }
+
+        //构建登录令牌
+        UsernamePasswordAuthenticationToken authRequest = UsernamePasswordAuthenticationToken.unauthenticated(
+                credentials.getUserName(), credentials.getPassword());
+
+        // Allow subclasses to set the "details" property
+        setDetails(request, authRequest);
+        return this.getAuthenticationManager().authenticate(authRequest);
+    }
+
+    private boolean isJsonContentType(HttpServletRequest request) {
+        String contentType = request.getContentType();
+        if (contentType == null) {
+            return false;
+        }
+        return contentType.equals(MediaType.APPLICATION_JSON_VALUE);
+    }
+
+    /**
+     * 校验验证码逻辑
+     */
+    private void validate(String captcha,
+                          String userKey) {
+        if (StringUtils.isBlank(captcha) || StringUtils.isBlank(userKey)) {
             redisCommands.del(userKey);
             throw new CaptchaAuthException("验证码错误");
         }
-        if (!code.equals(redisCommands.get(userKey))) {
+        if (!captcha.equals(redisCommands.get(userKey))) {
             redisCommands.del(userKey);
             throw new CaptchaAuthException("验证码错误");
         }
