@@ -62,7 +62,6 @@ public class LoongSecurityConfig {
     @Autowired
     private RedisCommands<String, String> redisCommands;
 
-
     public static final String[] PERMIT_ALL_PATTERNS = {
             "/auth/captcha",
             LOGIN_URL,
@@ -105,14 +104,13 @@ public class LoongSecurityConfig {
     }
 
     public LoongCaptchaFilter captchaFilter() {
-        LoongCaptchaFilter filter = new LoongCaptchaFilter(loginFailureHandler,redisCommands);
+        LoongCaptchaFilter filter = new LoongCaptchaFilter(loginFailureHandler, redisCommands, userDetailsService);
         filter.setAuthenticationSuccessHandler(loginSuccessHandler);
         filter.setAuthenticationFailureHandler(loginFailureHandler);
         filter.setAuthenticationManager(authenticationManager());
         filter.setFilterProcessesUrl(LOGIN_URL);
         return filter;
     }
-
 
     @Bean
     public AuthenticationManager authenticationManager() {

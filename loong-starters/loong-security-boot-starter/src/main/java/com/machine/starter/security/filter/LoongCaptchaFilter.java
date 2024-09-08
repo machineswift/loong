@@ -2,6 +2,9 @@ package com.machine.starter.security.filter;
 
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.json.JSONUtil;
+import com.machine.common.context.LoongAppContext;
+import com.machine.starter.security.LoongUserDetails;
+import com.machine.starter.security.LoongUserDetailsService;
 import com.machine.starter.security.domain.LoginCredentialsDto;
 import com.machine.starter.security.exception.CaptchaAuthException;
 import com.machine.starter.security.handler.LoginFailureHandler;
@@ -15,6 +18,7 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.nio.charset.Charset;
@@ -25,10 +29,14 @@ public class LoongCaptchaFilter extends UsernamePasswordAuthenticationFilter {
 
     private final RedisCommands<String, String> redisCommands;
 
+    private final LoongUserDetailsService userDetailsService;
+
     public LoongCaptchaFilter(LoginFailureHandler loginFailureHandler,
-                              RedisCommands<String, String> redisCommands) {
+                              RedisCommands<String, String> redisCommands,
+                              LoongUserDetailsService userDetailsService) {
         this.loginFailureHandler = loginFailureHandler;
         this.redisCommands = redisCommands;
+        this.userDetailsService = userDetailsService;
     }
 
     @Override
@@ -49,6 +57,11 @@ public class LoongCaptchaFilter extends UsernamePasswordAuthenticationFilter {
         } catch (CaptchaAuthException e) {
             // 交给认证失败处理器
             loginFailureHandler.onAuthenticationFailure(request, response, e);
+        }
+
+        LoongUserDetails userDetails = (LoongUserDetails) userDetailsService.loadUserByUsername(credentials.getUserName());
+        if (null != userDetails) {
+            LoongAppContext.getContext().setUserId(userDetails.getUserId());
         }
 
         //构建登录令牌

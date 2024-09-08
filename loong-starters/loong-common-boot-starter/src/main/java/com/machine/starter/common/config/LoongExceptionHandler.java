@@ -23,7 +23,7 @@ public class LoongExceptionHandler {
     @ExceptionHandler(value = AuthenticationException.class)
     private LoongAppResult<Objects> errorHandler(AuthenticationException exception) {
         log.error(exception.getMessage(), exception);
-        return LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "", exception.getMessage());
+        return LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "iam.auth.authentication", exception.getMessage());
     }
 
 
@@ -34,7 +34,7 @@ public class LoongExceptionHandler {
     @ExceptionHandler(value = AccessDeniedException.class)
     private LoongAppResult<Objects> errorHandler(AccessDeniedException exception) {
         log.error(exception.getMessage(), exception);
-        return LoongAppResult.fail(HttpStatus.FORBIDDEN.value(), "", exception.getMessage());
+        return LoongAppResult.fail(HttpStatus.FORBIDDEN.value(), "iam.auth.accessDenied", exception.getMessage());
     }
 
 

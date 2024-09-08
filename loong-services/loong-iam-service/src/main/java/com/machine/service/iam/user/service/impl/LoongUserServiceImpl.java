@@ -10,6 +10,7 @@ import com.machine.client.iam.user.dto.input.LoongUserCreateInputDto;
 import com.machine.client.iam.user.dto.input.LoongUserQueryPageInputVo;
 import com.machine.client.iam.user.dto.input.LoongUserUpdatePasswordInputDto;
 import com.machine.client.iam.user.dto.output.LoongUserListOutputDto;
+import com.machine.common.exception.BusinessException;
 import com.machine.service.iam.permission.dao.ILoongPermissionDao;
 import com.machine.service.iam.permission.dao.mapper.entity.LoongPermissionEntity;
 import com.machine.service.iam.role.dao.ILoongRoleDao;
@@ -46,7 +47,8 @@ public class LoongUserServiceImpl implements ILoongUserService {
         //验证用户名是否存在
         LoongUserEntity userNameEntity = userDao.getByUserName(inputDto.getUserName());
         if (null != userNameEntity) {
-            throw new IllegalArgumentException("用户名已经存在");
+            throw new BusinessException("90090","用户名已经存在");
+            //throw new IllegalArgumentException("用户名已经存在");
         }
 
         //验证手机号是否存在

@@ -27,10 +27,10 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         LoongAppResult<String> result;
         if (e instanceof CaptchaAuthException) {
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
-            result = LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "iam.auth.captcha", "验证码错误");
+            result = LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "iam.auth.authentication", e.getMessage());
         } else {
             httpServletResponse.setStatus(HttpStatus.UNAUTHORIZED.value());
-            result = LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "", e.getMessage());
+            result = LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "iam.auth.authentication", e.getMessage());
         }
         outputStream.write(JSONUtil.toJsonStr(result).getBytes(StandardCharsets.UTF_8));
         outputStream.flush();
