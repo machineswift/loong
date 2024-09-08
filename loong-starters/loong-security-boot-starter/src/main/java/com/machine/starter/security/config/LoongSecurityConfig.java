@@ -62,13 +62,17 @@ public class LoongSecurityConfig {
     private LoongUserDetailsService userDetailsService;
 
 
+    public static final String[] PERMIT_ALL_PATTERNS = {
+            "/auth/captcha",
+            LOGIN_URL,
+            "/error"};
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize ->
-                        authorize.requestMatchers(
-                                        "/auth/captcha", LOGIN_URL, "/error").permitAll()
+                        authorize.requestMatchers(PERMIT_ALL_PATTERNS).permitAll()
                                 .anyRequest().authenticated()
                 )
                 .logout(logout ->

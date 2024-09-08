@@ -30,7 +30,7 @@ public class LoongCaptchaFilter extends OncePerRequestFilter {
                                     HttpServletResponse httpServletResponse,
                                     FilterChain filterChain) throws ServletException, IOException {
         String url = httpServletRequest.getRequestURI();
-        if ((URL_SPLIT + IAM_APP_NAME + LOGIN_URL).equals(url) && httpServletRequest.getMethod().equals("POST")) {
+        if ((httpServletRequest.getContextPath() + LOGIN_URL).equals(url) && httpServletRequest.getMethod().equals("POST")) {
             // 校验验证码
             try {
                 validate(httpServletRequest);

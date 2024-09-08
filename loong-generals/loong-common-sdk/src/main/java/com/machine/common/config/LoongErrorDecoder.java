@@ -19,6 +19,10 @@ public class LoongErrorDecoder extends ErrorDecoder.Default {
         }
 
         FeignException feignException = (FeignException) exception;
+        String contentUTF8 = feignException.contentUTF8();
+        if(null == contentUTF8 || contentUTF8.trim().isEmpty()){
+            return feignException;
+        }
         LoongAppResult<Void> result = JSONUtil.toBean(feignException.contentUTF8(), LoongAppResult.class);
         return new BusinessException(result.getCode(), result.getMessage());
     }

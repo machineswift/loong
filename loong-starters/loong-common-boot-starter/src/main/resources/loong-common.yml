@@ -2,4 +2,4 @@ server:
   error:
     include-message: always
     include-exception: true
-    include-stacktrace: always
+#    include-stacktrace: always

@@ -30,11 +30,11 @@ public class LoongExceptionHandler {
     /**
      * 权限异常
      */
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(value = AccessDeniedException.class)
     private LoongAppResult<Objects> errorHandler(AccessDeniedException exception) {
         log.error(exception.getMessage(), exception);
-        return LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "", exception.getMessage());
+        return LoongAppResult.fail(HttpStatus.FORBIDDEN.value(), "", exception.getMessage());
     }
 
 

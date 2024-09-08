@@ -1,4 +1,4 @@
-package com.machine.common.tool.yaml;
+package com.machine.common.tool;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.*;
