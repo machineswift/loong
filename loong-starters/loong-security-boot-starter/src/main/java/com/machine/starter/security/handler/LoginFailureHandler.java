@@ -2,7 +2,7 @@ package com.machine.starter.security.handler;
 
 import cn.hutool.json.JSONUtil;
 import com.machine.common.model.LoongAppResult;
-import com.machine.starter.security.exception.CaptchaAuthenticationException;
+import com.machine.starter.security.exception.CaptchaAuthException;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,7 +24,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         ServletOutputStream outputStream = httpServletResponse.getOutputStream();
 
         LoongAppResult<String> result;
-        if (e instanceof CaptchaAuthenticationException) {
+        if (e instanceof CaptchaAuthException) {
             httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
             result = LoongAppResult.fail(HttpStatus.UNAUTHORIZED.value(), "", "验证码错误");
         } else {
