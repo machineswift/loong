@@ -145,8 +145,45 @@ CREATE TABLE IF NOT EXISTS `t_leaf_alloc` (
 ) COMMENT = 'leaf 表';
 
 
+DROP TABLE IF EXISTS `t_system_config`;
+CREATE TABLE `t_system_config` (
+    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
+    `category` varchar(32) NOT NULL DEFAULT '' COMMENT '分类',
+    `code` varchar(64) NOT NULL COMMENT '编码',
+    `content` text COMMENT '内容',
+    `create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
+    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
+    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
+    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_01` (`category`,`code`)
+) COMMENT='配置信息表';
+
+DROP TABLE IF EXISTS `t_store`;
+CREATE TABLE `t_store` (
+    `id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
+    `code` varchar(32)  NOT NULL COMMENT '编码',
+    `name` varchar(64)  NOT NULL COMMENT '名称',
+    `status` varchar(16)  NOT NULL COMMENT '状态',
+    `department_id` VARCHAR ( 32 ) NOT NULL COMMENT '所属部门',
+    `province` varchar(16)  DEFAULT NULL COMMENT '省',
+    `city` varchar(16)  DEFAULT NULL COMMENT '市',
+    `area` varchar(16)  DEFAULT NULL COMMENT '区',
+    `town` varchar(32)  DEFAULT NULL COMMENT '镇/街道',
+    `address` varchar(256)  DEFAULT NULL COMMENT '详细地址',
+    `longitude` decimal(13,10) DEFAULT NULL COMMENT '门店GPS定位经度',
+    `latitude` decimal(13,10) DEFAULT NULL COMMENT '门店GPS定位纬度',
+    `create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
+    `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
+    `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
+    `update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_01` (`code`)
+)  COMMENT='门店表';
+
 
 /*************************************************************************************************/
+/**************************************** XXL JOB ************************************************/
 /*************************************************************************************************/
 
 CREATE TABLE `xxl_job_info` (
@@ -261,4 +298,5 @@ INSERT INTO `xxl_job_user`(`id`, `username`, `password`, `role`, `permission`) V
 INSERT INTO `xxl_job_lock` ( `lock_name`) VALUES ( 'schedule_lock');
 
 /*************************************************************************************************/
+/**************************************** XXL JOB ************************************************/
 /*************************************************************************************************/
