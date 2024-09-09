@@ -3,12 +3,15 @@ package com.machine.service.data.area.dao.mapper.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.machine.starter.mybatis.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
 
 @Data
 @NoArgsConstructor
 @TableName("t_area")
-public class AreaEntity extends BaseEntity {
+@EqualsAndHashCode(callSuper = true)
+public class LoongAreaEntity extends BaseEntity {
 
     /**
      * 层级

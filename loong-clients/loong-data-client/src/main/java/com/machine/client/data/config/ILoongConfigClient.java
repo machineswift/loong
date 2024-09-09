@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "loong-data-service/loong-data-service/server/config", configuration = LoongOpenFeignConfig.class)
 public interface ILoongConfigClient {
 
-    @PostMapping("save")
-    void save(@Validated @RequestBody LoongConfigDto dto);
+    @PostMapping("create")
+    void create(@Validated @RequestBody LoongConfigDto dto);
 
-    @DeleteMapping("remove")
-    void remove(@Validated @RequestBody LoongConfigDto dto);
+    @DeleteMapping("delete")
+    void delete(@Validated @RequestBody LoongConfigDto dto);
 
     @PutMapping("update")
     void update(@Validated @RequestBody LoongConfigDto inputDto);

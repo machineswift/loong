@@ -3,14 +3,15 @@ package com.machine.service.data.config.dao.mapper.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.machine.starter.mybatis.BaseEntity;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @TableName("t_system_config")
-public class ConfigEntity extends BaseEntity {
+@EqualsAndHashCode(callSuper = true)
+public class SystemConfigEntity extends BaseEntity {
 
     /**
      * 分类
