@@ -172,7 +172,7 @@ CREATE TABLE `t_store` (
     `town` varchar(32)  DEFAULT NULL COMMENT '镇/街道',
     `address` varchar(256)  DEFAULT NULL COMMENT '详细地址',
     `longitude` decimal(13,10) DEFAULT NULL COMMENT '门店GPS定位经度',
-    `latitude` decimal(13,10) DEFAULT NULL COMMENT '门店GPS定位纬度',
+    `latitude` decimal(12,10) DEFAULT NULL COMMENT '门店GPS定位纬度',
     `create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
     `create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
     `update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
