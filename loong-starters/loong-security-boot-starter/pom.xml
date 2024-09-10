@@ -26,11 +26,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.penggle</groupId>
-            <artifactId>kaptcha</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.machine</groupId>
             <artifactId>loong-common-sdk</artifactId>
             <version>${version}</version>
