@@ -2,7 +2,7 @@
 <configuration>
     <!-- 日志输出格式 -->
     <property name="log.pattern"
-              value="%red(【%d{yyyy-MM-dd HH:mm:ss}】) %green(【%thread】) %boldMagenta(【%tid】) %highlight(【%-5level】) %green(【%logger{128}】) - %white(%msg%n)"/>
+              value="%green(【%d{yyyy-MM-dd HH:mm:ss}】) %highlight(【%-5level】) %green(【%thread】) %boldMagenta(【%tid】) %green(【%logger{128}】) - %white(%msg%n)"/>
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
