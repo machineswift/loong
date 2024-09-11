@@ -1,12 +1,17 @@
 package com.machine.common.model;
 
 import lombok.Data;
+import org.apache.skywalking.apm.toolkit.trace.TraceContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @Data
 @NoArgsConstructor
 public class LoongAppResult<T> {
+
+    private static final Logger log = LoggerFactory.getLogger(LoongAppResult.class);
 
     public LoongAppResult(int status,
                           String code,
@@ -16,6 +21,7 @@ public class LoongAppResult<T> {
         this.code = code;
         this.message = message;
         this.timestamp = System.currentTimeMillis();
+        this.traceId = TraceContext.traceId();
         this.data = data;
     }
 
