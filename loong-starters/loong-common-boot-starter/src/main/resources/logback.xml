@@ -2,7 +2,7 @@
 <configuration>
     <!-- 日志输出格式 -->
     <property name="log.pattern"
-              value="%red(%d{yyyy-MM-dd HH:mm:ss}) %green([%thread]) %boldMagenta([%sw_ctx]) %highlight(%-5level) %green(%logger{128}) - %white(%msg%n)"/>
+              value="%red(【%d{yyyy-MM-dd HH:mm:ss}】) %green(【%thread】) %boldMagenta([%sw_ctx]) %highlight(【%-5level】) %green(【%logger{128}】) - %white(%msg%n)"/>
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -30,7 +30,7 @@
         </encoder>
     </appender>
 
-    <root level="info">
+    <root level="trace">
         <appender-ref ref="console-async"/>
         <appender-ref ref="grpc-log"/>
     </root>
