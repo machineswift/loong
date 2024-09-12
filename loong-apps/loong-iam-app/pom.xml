@@ -39,12 +39,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.machine</groupId>
-            <artifactId>loong-mq-boot-starter</artifactId>
-            <version>${version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
