@@ -21,6 +21,10 @@ spring:
           uri: lb://loong-openapi-server
           predicates:
             - Path=/loong-openapi-server/**
+        - id: loong-camunda-server
+          uri: lb://loong-camunda-server
+          predicates:
+            - Path=/loong-camunda-server/**
         - id: loong-iam-app
           uri: lb://loong-iam-app
           predicates:

@@ -13,6 +13,7 @@
 	<description>服务集合</description>
 
 	<modules>
+		<module>loong-camunda-server</module>
 		<module>loong-gateway-server</module>
 		<module>loong-openapi-server</module>
 		<module>loong-xxljob-server</module>
