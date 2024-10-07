@@ -42,7 +42,3 @@ camunda:
       id: root
       password: root
 
-loong:
-  datasource:
-    schema: loong_camunda
-

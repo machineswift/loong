@@ -1,4 +1,4 @@
-package com.machine.starter.common.config;
+package com.machine.app.manage.config;
 
 import com.machine.common.model.LoongAppResult;
 import lombok.SneakyThrows;

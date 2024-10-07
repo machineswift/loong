@@ -140,6 +140,7 @@ public class LoongUserServiceImpl implements ILoongUserService {
 
         LoongUserDto dto = new LoongUserDto();
         dto.setUserId(entity.getId());
+        dto.setUserName(entity.getUserName());
         return dto;
     }
 
