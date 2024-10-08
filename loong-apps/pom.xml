@@ -15,6 +15,7 @@
     <modules>
         <module>loong-iam-app</module>
         <module>loong-manage-app</module>
+        <module>loong-customer-app</module>
         <module>loong-xxljob-app</module>
     </modules>
 
