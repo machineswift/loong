@@ -106,7 +106,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>33.2.1-jre</version>
+                <version>33.3.1-jre</version>
             </dependency>
 
             <dependency>
@@ -118,7 +118,7 @@
             <dependency>
                 <groupId>io.minio</groupId>
                 <artifactId>minio</artifactId>
-                <version>8.5.11</version>
+                <version>8.5.12</version>
             </dependency>
 
 
@@ -173,27 +173,21 @@
             </dependency>
 
             <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>33.3.0-jre</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson-spring-boot-starter</artifactId>
-                <version>3.35.0</version>
+                <version>3.37.0</version>
             </dependency>
 
             <dependency>
                 <groupId>org.redisson</groupId>
                 <artifactId>redisson</artifactId>
-                <version>3.35.0</version>
+                <version>3.37.0</version>
             </dependency>
 
             <dependency>
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
-                <version>5.1.5</version>
+                <version>5.2.0</version>
             </dependency>
 
             <dependency>
