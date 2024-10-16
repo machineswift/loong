@@ -51,10 +51,10 @@ public class LoongSecurityConfig {
     private JWTLogoutSuccessHandler logoutSuccessHandler;
 
     @Autowired
-    private JwtAccessDeniedHandler accessDeniedHandler;
+    private JwtUnAccessDeniedHandler accessDeniedHandler;
 
     @Autowired
-    private JwtAuthenticationEntryPoint authenticationEntryPoint;
+    private JwtUnAuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
     private LoongUserDetailsService userDetailsService;

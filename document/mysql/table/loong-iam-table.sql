@@ -252,3 +252,82 @@ CREATE TABLE `t_auth_token` (
 	UNIQUE KEY `uk_01` ( `series` ) USING BTREE,
 	KEY `idx_01` ( `user_name` ) USING BTREE
 ) COMMENT = '认证token表';
+
+
+DROP TABLE IF EXISTS `t_oauth2_registered_client`;
+CREATE TABLE `t_oauth2_registered_client` (
+	`id` VARCHAR ( 32 ) NOT NULL COMMENT 'ID',
+	`client_id` VARCHAR ( 64 ) NOT NULL COMMENT '客户端ID',
+	`client_id_issued_at` BIGINT UNSIGNED NOT NULL COMMENT '客户端ID发放时间',
+	`client_secret` VARCHAR ( 256 ) DEFAULT NULL COMMENT '客户端密钥',
+	`client_secret_expires_at` BIGINT UNSIGNED COMMENT '客户端密钥过期时间',
+	`client_name` VARCHAR ( 256 ) NOT NULL COMMENT '客户端名称',
+	`client_authentication_methods` VARCHAR ( 1024 ) NOT NULL COMMENT '客户端认证方法',
+	`authorization_grant_types` VARCHAR ( 1024 ) NOT NULL COMMENT '授权授予类型',
+	`redirect_uris` VARCHAR ( 1024 ) DEFAULT NULL COMMENT '重定向URI',
+	`post_logout_redirect_uris` VARCHAR ( 1024 ) DEFAULT NULL COMMENT '注销后重定向URI',
+	`scopes` VARCHAR ( 1024 ) NOT NULL COMMENT '作用域',
+	`client_settings` VARCHAR ( 4096 ) NOT NULL COMMENT '客户端设置',
+	`token_settings` VARCHAR ( 4096 ) NOT NULL COMMENT '令牌设置',
+	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
+	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
+	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
+	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
+PRIMARY KEY ( `id` ) USING BTREE
+) COMMENT = 'OAuth2 客户端注册信息表';
+
+
+DROP TABLE IF EXISTS `oauth2_authorization_consent`;
+CREATE TABLE `oauth2_authorization_consent` (
+	`registered_client_id` VARCHAR ( 64 ) NOT NULL COMMENT '注册客户端ID',
+	`principal_name` VARCHAR ( 256 ) NOT NULL COMMENT '主体名称',
+	`authorities` VARCHAR ( 1000 ) NOT NULL COMMENT '授权权限',
+	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
+	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
+	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
+	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
+PRIMARY KEY ( registered_client_id, principal_name )
+) COMMENT = 'OAuth2 授权同意信息表';
+
+
+DROP TABLE IF EXISTS `oauth2_authorization`;
+CREATE TABLE `oauth2_authorization` (
+	id VARCHAR ( 32 ) NOT NULL COMMENT '授权记录ID',
+	registered_client_id VARCHAR ( 128 ) NOT NULL COMMENT '注册客户端ID',
+	principal_name VARCHAR ( 256 ) NOT NULL COMMENT '主体名称',
+	authorization_grant_type VARCHAR ( 128 ) NOT NULL COMMENT '授权授予类型',
+	authorized_scopes VARCHAR ( 1024 ) DEFAULT NULL COMMENT '授权范围',
+	attributes BLOB DEFAULT NULL COMMENT '属性',
+	state VARCHAR ( 512 ) DEFAULT NULL COMMENT '状态',
+	authorization_code_value BLOB DEFAULT NULL COMMENT '授权码值',
+	authorization_code_issued_at BIGINT UNSIGNED DEFAULT NULL COMMENT '授权码发放时间',
+	authorization_code_expires_at BIGINT UNSIGNED DEFAULT NULL COMMENT '授权码过期时间',
+	authorization_code_metadata BLOB DEFAULT NULL COMMENT '授权码元数据',
+	access_token_value BLOB DEFAULT NULL COMMENT '访问令牌值',
+	access_token_issued_at BIGINT UNSIGNED DEFAULT NULL COMMENT '访问令牌发放时间',
+	access_token_expires_at BIGINT UNSIGNED DEFAULT NULL COMMENT '访问令牌过期时间',
+	access_token_metadata BLOB DEFAULT NULL COMMENT '访问令牌元数据',
+	access_token_type VARCHAR ( 128 ) DEFAULT NULL COMMENT '访问令牌类型',
+	access_token_scopes VARCHAR ( 1024 ) DEFAULT NULL COMMENT '访问令牌范围',
+	oidc_id_token_value BLOB DEFAULT NULL COMMENT 'OpenID Connect ID 令牌值',
+	oidc_id_token_issued_at BIGINT UNSIGNED DEFAULT NULL COMMENT 'OpenID Connect ID 令牌发放时间',
+	oidc_id_token_expires_at BIGINT UNSIGNED DEFAULT NULL COMMENT 'OpenID Connect ID 令牌过期时间',
+	oidc_id_token_metadata BLOB DEFAULT NULL COMMENT 'OpenID Connect ID 令牌元数据',
+	refresh_token_value BLOB DEFAULT NULL COMMENT '刷新令牌值',
+	refresh_token_issued_at BIGINT UNSIGNED DEFAULT NULL COMMENT '刷新令牌发放时间',
+	refresh_token_expires_at BIGINT UNSIGNED DEFAULT NULL COMMENT '刷新令牌过期时间',
+	refresh_token_metadata BLOB DEFAULT NULL COMMENT '刷新令牌元数据',
+	user_code_value BLOB DEFAULT NULL COMMENT '用户码值',
+	user_code_issued_at BIGINT UNSIGNED DEFAULT NULL COMMENT '用户码发放时间',
+	user_code_expires_at BIGINT UNSIGNED DEFAULT NULL COMMENT '用户码过期时间',
+	user_code_metadata BLOB DEFAULT NULL COMMENT '用户码元数据',
+	device_code_value BLOB DEFAULT NULL COMMENT '设备码值',
+	device_code_issued_at BIGINT UNSIGNED DEFAULT NULL COMMENT '设备码发放时间',
+	device_code_expires_at BIGINT UNSIGNED DEFAULT NULL COMMENT '设备码过期时间',
+	device_code_metadata BLOB DEFAULT NULL COMMENT '设备码元数据',
+	`create_by` VARCHAR ( 32 ) NOT NULL COMMENT '创建人',
+	`create_time` BIGINT UNSIGNED NOT NULL COMMENT '创建时间',
+	`update_by` VARCHAR ( 32 ) NOT NULL COMMENT '修改人',
+	`update_time` BIGINT UNSIGNED NOT NULL COMMENT '更新时间',
+PRIMARY KEY ( id )
+) COMMENT = 'OAuth2 授权信息表';

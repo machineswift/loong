@@ -5,7 +5,7 @@ import cn.hutool.json.JSONUtil;
 import com.machine.common.context.LoongAppContext;
 import com.machine.starter.security.LoongUserDetails;
 import com.machine.starter.security.LoongUserDetailsService;
-import com.machine.starter.security.domain.LoginCredentialsDto;
+import com.machine.starter.security.domain.LoginCredentialsRequest;
 import com.machine.starter.security.exception.CaptchaAuthException;
 import com.machine.starter.security.handler.LoginFailureHandler;
 import io.lettuce.core.api.sync.RedisCommands;
@@ -18,7 +18,6 @@ import org.springframework.security.authentication.AuthenticationServiceExceptio
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.nio.charset.Charset;
@@ -48,8 +47,8 @@ public class LoongCaptchaFilter extends UsernamePasswordAuthenticationFilter {
             throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
         }
 
-        LoginCredentialsDto credentials = JSONUtil.toBean(IoUtil.read(request.getInputStream(),
-                Charset.defaultCharset()), LoginCredentialsDto.class);
+        LoginCredentialsRequest credentials = JSONUtil.toBean(IoUtil.read(request.getInputStream(),
+                Charset.defaultCharset()), LoginCredentialsRequest.class);
 
         // 校验验证码
         try {

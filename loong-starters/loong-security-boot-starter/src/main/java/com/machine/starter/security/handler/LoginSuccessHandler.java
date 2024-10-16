@@ -3,6 +3,7 @@ package com.machine.starter.security.handler;
 import cn.hutool.json.JSONUtil;
 import com.machine.common.model.LoongAppResult;
 import com.machine.starter.security.LoongUserDetails;
+import com.machine.starter.security.domain.LoginResponse;
 import com.machine.starter.security.util.LoongJwtUtil;
 import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,9 +15,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-
-import static com.machine.starter.security.LoongSecurityConstant.AUTH_HEADER;
-import static com.machine.starter.security.LoongSecurityConstant.BEARER_TYPE;
 
 
 @Component
@@ -34,11 +32,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         httpServletResponse.setContentType("application/json;charset=UTF-8");
         ServletOutputStream outputStream = httpServletResponse.getOutputStream();
 
-        // 生成JWT，并放置到请求头中
-        String jwt = jwtUtils.generateToken(authentication.getName(),"userId",userDetails.getUserId());
-        httpServletResponse.setHeader(AUTH_HEADER, BEARER_TYPE + jwt);
+        // 生成JWT accessToken
+        String accessToken = jwtUtils.generateToken(authentication.getName(),"userId",userDetails.getUserId());
 
-        LoongAppResult<String> result = LoongAppResult.success("登录成功");
+        LoongAppResult<String> result = LoongAppResult.success(JSONUtil.toJsonStr(new LoginResponse(accessToken)));
         outputStream.write(JSONUtil.toJsonStr(result).getBytes(StandardCharsets.UTF_8));
         outputStream.flush();
         outputStream.close();
